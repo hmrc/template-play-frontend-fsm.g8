@@ -1,0 +1,30 @@
+# microservice specific routes
+
+->         /govuk-frontend                                          govuk.Routes
+->         /hmrc-frontend                                           hmrcfrontend.Routes 
+
+GET        /                                                        @$package$.controllers.$servicePrefixCamel$JourneyController.showStart
+GET        /new                                                     @$package$.controllers.$servicePrefixCamel$JourneyController.showStart
+GET        /new/declaration-details                                 @$package$.controllers.$servicePrefixCamel$JourneyController.showEnterDeclarationDetails
+POST       /new/declaration-details                                 @$package$.controllers.$servicePrefixCamel$JourneyController.submitDeclarationDetails
+GET        /new/export/request-type                                 @$package$.controllers.$servicePrefixCamel$JourneyController.showAnswerExampleQuestionsRequestType
+POST       /new/export/request-type                                 @$package$.controllers.$servicePrefixCamel$JourneyController.submitExampleQuestionsRequestTypeAnswer
+GET        /new/export/route-type                                   @$package$.controllers.$servicePrefixCamel$JourneyController.showAnswerExampleQuestionsRouteType
+POST       /new/export/route-type                                   @$package$.controllers.$servicePrefixCamel$JourneyController.submitExampleQuestionsRouteTypeAnswer
+GET        /new/export/check-your-answers                           @$package$.controllers.$servicePrefixCamel$JourneyController.showExampleQuestionsSummary
+
+POST       /new/create-case                                         @$package$.controllers.$servicePrefixCamel$JourneyController.createCase
+GET        /new/confirmation                                        @$package$.controllers.$servicePrefixCamel$JourneyController.show$servicePrefixCamel$Confirmation
+GET        /new/case-already-exists                                 @$package$.controllers.$servicePrefixCamel$JourneyController.showCaseAlreadyExists
+
+GET        /accessibility-statement                                 @$package$.controllers.AccessibilityStatementController.showPage
+
+GET        /timedout                                                @$package$.controllers.SessionController.showTimeoutPage
+GET        /keep-alive                                              @$package$.controllers.SessionController.keepAlive
+
+GET        /sign-out                                                @$package$.controllers.SignOutController.signOut(continueUrl: Option[String] ?= None)
+GET        /sign-out/timeout                                        @$package$.controllers.SignOutController.signOutTimeout
+GET        /sign-out-no-survey                                      @$package$.controllers.SignOutController.signOutNoSurvey
+
+GET        /language/:lang                                          @$package$.controllers.LanguageSwitchController.switchToLanguage(lang: String)
+GET        /assets/*file                                            controllers.Assets.versioned(path="/public", file: Asset)

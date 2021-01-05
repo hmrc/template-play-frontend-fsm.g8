@@ -1,0 +1,555 @@
+service.name = Send documents for a customs check
+# Site wide messages
+# ----------------------------------------------------------
+site.fullStop =.
+site.back = Back
+site.review = Review
+site.delete = Delete
+site.edit = Change
+site.hidden-delete = Delete {0}
+site.hidden-edit = Change {0}
+site.no = No
+site.yes = Yes
+site.continue = Continue
+site.confirm = Confirm
+site.saveAndContinue = Save and continue
+site.submitAndContinue = Submit and continue
+site.acceptAndContinue = Accept and continue
+site.confirmAndSubmit = Confirm and submit
+site.textarea.char_limit = (Limit is {0} characters)
+site.serviceName = Send documents for a customs check
+site.govuk = GOV.UK
+site.signOut = Sign out
+site.getHelpWithThisPage = Get help with this page
+site.notProvided = Not Provided
+site.incomplete = Incomplete
+site.warning = Warning:
+site.opensInNewWindowOrTab = (opens in new tab)
+site.change = Change
+site.logOut = log out
+site.youCan = You can:
+site.file.remove = Remove
+site.switchLanguage=Newid yr iaith ir Gymraeg
+
+site.Jan = January
+site.Feb = February
+site.March = March
+site.Apr = April
+site.May = May
+site.June = June
+site.July = July
+site.Aug = August
+site.Sept = September
+site.Oct = October
+site.Nov = November
+site.Dec = December
+
+# Validation errors
+error.summary.heading=There is a problem
+error.prefix=Error:
+error.email=Enter a valid email address
+error.date.required=Enter date the correct format
+error.date.invalid-format=Invalid date
+error.year.invalid-format=Enter a year
+error.day.invalid-format=Enter a day
+error.month.invalid-format=Enter a month
+
+button.continue=Continue
+button.submit=Submit
+
+# Global errors
+global.error.404.title=Page not found
+global.error.404.heading=Page not found
+global.error.404.line1=If you typed the web address, check it is correct.
+global.error.404.line2=If you pasted the web address, check you copied the entire address.
+global.error.404.line3=<a class="govuk-link" href="{0}">Send your documents for a customs check</a>
+
+external.error.500.title=Service unavailable
+external.error.500.heading=Sorry, the service is unavailable
+external.error.500.message=Try again later.
+external.error.500.listParagraph=This could be for a number of reasons, including:
+external.error.500.list-item1=An external service error
+external.error.500.list-item2=Too many users on the service
+
+internal.error.500.title=Sorry, there is a problem with the service
+internal.error.500.heading=Sorry, there is a problem with the service
+internal.error.500.line1=Try again later.
+internal.error.500.line2=Any answers you provided may not have been saved. When the service is available, you might have to start again.
+
+external.update.error.500.title=Sorry, something has gone wrong
+external.update.error.500.heading=Sorry, something has gone wrong
+external.update.error.500.line1=You may have entered some incorrect details.
+external.update.error.500.line2=Try to <a class="govuk-link" href="{0}">enter your case reference number</a> again.
+
+# Banner
+# ----------------------------------------------------------
+feedback.before = This is a new service - your
+feedback.link = feedback
+feedback.after = will help us to improve it.
+
+# Footer Links
+# -----------------------
+footer.cookies         = Cookies
+footer.privacy         = Privacy policy
+footer.termsConditions = Terms and conditions
+footer.govukHelp       = Help using GOV.UK
+footer.accessibilityStatement = Accessibility statement
+
+# Accessibility statement
+# -----------------------
+a11yStatement.title = Accessibility statement for $servicePrefix$
+a11yStatement.heading = Accessibility statement for $servicePrefix$
+a11yStatement.p1 = This accessibility statement explains how accessible this service is, what to do if you have difficulty using it, and how to report accessibility problems with the service.
+a11yStatement.p2.start = This service is part of the wider GOV.UK website. There is a separate
+a11yStatement.p2.link = accessibility statement
+a11yStatement.p2.end = for the main GOV.UK website.
+a11yStatement.p3 = This page only contains information about the $servicePrefix$ service, available at
+a11yStatement.p3.link = www.tax.service.gov.uk/coronavirus-statutory-sick-pay
+a11yStatement.usingThisService.h2 = Using this service
+a11yStatement.usingThisService.p1 = This service will reimburse small and medium employers Statutory Sick Pay that has already been paid to employees who have been off work because of coronavirus (COVID-19)
+a11yStatement.usingThisService.p2 = This service is run by HM Revenue and Customs (HMRC). We want as many people as possible to be able to use this service. This means you should be able to:
+a11yStatement.usingThisService.bullet1 = change colours, contrast levels and fonts
+a11yStatement.usingThisService.bullet2 = zoom in up to 300% without the text spilling off the screen
+a11yStatement.usingThisService.bullet3 = get from the start of the service to the end using just a keyboard
+a11yStatement.usingThisService.bullet4 = get from the start of the service to the end using speech recognition software
+a11yStatement.usingThisService.bullet5 = listen to the service using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
+a11yStatement.usingThisService.p3 = We have also made the text in the service as simple as possible to understand.
+a11yStatement.usingThisService.p4.link = AbilityNet
+a11yStatement.usingThisService.p4 = has advice on making your device easier to use if you have a disability.
+a11yStatement.howAccessible.h2 = How accessible this service is
+a11yStatement.howAccessible.p1 = This service is fully compliant with the
+a11yStatement.howAccessible.p1.link = Web Content Accessibility Guidelines version 2.1 AA standard
+a11yStatement.howAccessible.p2 = There are no known accessibility issues within this service.
+a11yStatement.reporting.h2 = Reporting accessibility problems with this service
+a11yStatement.reporting.p1 = We are always looking to improve the accessibility of this service. If you find any problems that are not listed on this page or think we are not meeting accessibility requirements, report the
+a11yStatement.reporting.p1.link = accessibility problem
+a11yStatement.complaints.h2 = What to do if you are not happy with how we respond to your complaint
+a11yStatement.complaints.p1.start = The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you are not happy with how we respond to your complaint,
+a11yStatement.complaints.p1.link1 = contact the Equality Advisory and Support Service (EASS)
+a11yStatement.complaints.p1.middle = or the
+a11yStatement.complaints.p1.link2 = Equality Commission for Northern Ireland (ECNI)
+a11yStatement.complaints.p1.end = if you live in Northern Ireland.
+a11yStatement.contact.h2 = Contacting us by phone or getting a visit from us in person
+a11yStatement.contact.p1 = We provide a text relay service if you are deaf, hearing impaired or have a speech impediment.
+a11yStatement.contact.p2 = We can provide a British Sign Language (BSL) interpreter, or you can arrange a visit from an HMRC advisor to help you complete the service.
+a11yStatement.contact.p3 = Find out how to
+a11yStatement.contact.p3.link = contact us
+a11yStatement.technical.h2 = Technical information about this service’s accessibility
+a11yStatement.technical.p1 = HMRC is committed to making this service accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
+a11yStatement.technical.p2 = This service is fully compliant with the
+a11yStatement.technical.p2.link = Web Content Accessibility Guidelines version 2.1 AA standard
+a11yStatement.testing.h2 = How we tested this service
+a11yStatement.testing.p1 = The service was last tested on 18 May 2020 and was checked for compliance with WCAG 2.1 AA.
+a11yStatement.testing.p2.start = The service was built using parts that were tested by the
+a11yStatement.testing.p2.link = Digital Accessibility Centre
+a11yStatement.testing.p2.end = The full service was tested by HMRC and included disabled users.
+a11yStatement.testing.p3 = This page was prepared on 26 May 2020. It was last updated on 26 May 2020.
+
+# Research Banner Content
+# ----------------------------------------------------------
+researchBanner.heading = Help improve GOV.UK
+researchBanner.inviteLink = Help improve digital services by joining the HMRC user panel (opens in a new window)
+researchBanner.closeLink = No thanks
+
+# Landing Page
+# ----------------------------------------------------------
+view.start.title=Use $servicePrefixLowercase$
+view.start.heading=Trader services
+view.start.pre-clearance.heading=Pre Clearance
+view.start.pre-clearance.description.1=Submit supporting documentation for a Route 1 declaration
+view.start.pre-clearance.description.2=Also use this for route 1-CAP, route 2, route 3, route 6, C1601, C1602, C1603.
+view.start.pre-clearance.link.text=Start a pre-clearance case
+view.start.pre-clearance-update.description=Add extra documents/info to an existing case. Text to explain that this can be used when we have requested information from them, as well as when they want.
+view.start.pre-clearance-update.link.text=Add documents or information
+view.start.pre-clearance-status.description=Check the status of a case
+view.start.pre-clearance-status.link.text=Check status
+view.start.overpayments.heading=Overpayments
+view.start.overpayments.description=Apply for a repayment/remission of import duty - (Form C285)
+view.start.overpayments.link.text=Apply for a refund
+view.start.underpayments.heading=Underpayments
+view.start.underpayments.description=Make a voluntary disclosure of underpayments arising on the import of goods - (Form C2001)
+view.start.underpayments.link.text=Disclose an underpayment
+view.start.securities.heading=Securities
+view.start.securities.description=Apply for a refund of Customs duty paid on deposit and Quota refunds
+view.start.securities.link.text=Apply for refund
+
+view.new-or-existing-case.title=What do you want to do?
+view.new-or-existing-case.heading=What do you want to do?
+view.new-or-existing-case.option.new=Send documents for a new customs check
+view.new-or-existing-case.option.new.hint=This includes sending C1601, C1602 and C1603 forms, or cancelling a case.
+view.new-or-existing-case.option.existing=Add more information to an already-submitted customs check
+view.new-or-existing-case.option.existing.hint=If you already have a case reference number, you can add more information to the case.
+error.newOrExistingCase.required=Select what you want to do
+error.newOrExistingCase.invalid-option=Select what you want to do
+view.new-or-existing-case.continue=Continue
+
+# Declaration Details Page
+# ----------------------------------------------------------
+view.declaration-details.title=What are your declaration details?
+view.declaration-details.heading=What are your declaration details?
+view.declaration-details.description=You can find these on your declaration.
+
+# Declaration Details Form
+# ----------------------------------------------------------
+form.declaration-details.epu=Entry Processing Unit (EPU) number
+form.declaration-details.entryNumber=Entry number
+form.declaration-details.entryDate=Date of entry
+form.declaration-details.entryDate.hint=For example, {0}
+form.declaration-details.continue=Continue
+error.epu.required=Enter an EPU number
+error.epu.invalid-length=EPU number must be 3 characters
+error.epu.invalid-only-digits=EPU number must only contain numbers
+error.epu.invalid-number=EPU number must be 700 or less
+error.entryNumber.required=Enter an entry number
+error.entryNumber.invalid-length=Entry number must be 7 characters
+error.entryNumber.invalid-only-digits-and-letters=Entry number must only contain numbers and letters
+error.entryNumber.invalid-ends-with-letter=Entry number must have a letter at the end
+error.entryNumber.invalid-letter-wrong-position=Entry number must have letters before and after the number only
+error.entryDate.all.required=Enter the entry date
+error.entryDate.year.required=Entry date must include a year
+error.entryDate.month.required=Entry date must include a month
+error.entryDate.day.required=Entry date must include a day
+error.entryDate.all.invalid-value=Entry date must be a real date
+error.entryDate.year.invalid-value=Entry date must be a real date
+error.entryDate.month.invalid-value=Entry date must be a real date
+error.entryDate.day.invalid-value=Entry date must be a real date
+error.entryDate.year.invalid-digits=Entry year must only contain numbers
+error.entryDate.month.invalid-digits=Entry month must only contain numbers
+error.entryDate.day.invalid-digits=Entry day must only contain numbers
+error.entryDate.all.invalid-value-future=Entry date must be today or in the past
+error.entryDate.all.invalid-value-past=Entry date must be within the past 6 months
+
+# Example Questions View
+# ----------------------------------------------------------
+view.export-questions.requestType.title=What type of export request is this?
+view.export-questions.requestType.heading=What type of export request is this?
+view.export-questions.routeType.title=Which route is this declaration for?
+view.export-questions.routeType.heading=Which route is this declaration for?
+view.export-questions.hasPriorityGoods.title=Are you exporting any priority goods?
+view.export-questions.hasPriorityGoods.heading=Are you exporting any priority goods?
+view.export-questions.hasPriorityGoods.description=Priority goods require exceptional treatment. These include:
+view.export-questions.hasPriorityGoods.list.ExplosivesOrFireworks=explosives or fireworks
+view.export-questions.hasPriorityGoods.list.HumanRemains=human remains
+view.export-questions.hasPriorityGoods.list.LiveAnimals=live animals
+view.export-questions.whichPriorityGoods.title=Which type of priority goods are you moving?
+view.export-questions.whichPriorityGoods.heading=Which type of priority goods are you moving?
+view.export-questions.freightType.title=Which type of transport are you using?
+view.export-questions.freightType.heading=Which type of transport are you using?
+view.export-questions.vessel-details.title=More details about your transport
+view.export-questions.vessel-details.heading=More details about your transport
+view.export-questions.contactInfo.title=What are your contact details?
+view.export-questions.contactInfo.heading=What are your contact details?
+view.export-questions.contactInfo.description=We will only use these details if we cannot contact you through CHIEF or your declaration software.
+view.export-questions.summary.title=Review your case details
+view.export-questions.summary.heading=Review your case details
+view.export-questions.summary.declaration-details.heading=Declaration information
+view.export-questions.summary.pre-clearance.heading=Customs information
+view.export-questions.summary.vessel-details.heading=Transport information
+view.export-questions.summary.contact-details.heading=Contact details
+
+# Import Questions View
+# ----------------------------------------------------------
+view.import-questions.requestType.title=What type of import request is this?
+view.import-questions.requestType.heading=What type of import request is this?
+view.import-questions.requestType=What type of request is this?
+view.import-questions.routeType.title=Which route is this declaration for?
+view.import-questions.routeType.heading=Which route is this declaration for?
+view.import-questions.hasPriorityGoods.title=Are you importing any priority goods?
+view.import-questions.hasPriorityGoods.heading=Are you importing any priority goods?
+view.import-questions.hasPriorityGoods.description=Priority goods require exceptional treatment. These include:
+view.import-questions.hasPriorityGoods.list.ExplosivesOrFireworks=explosives or fireworks
+view.import-questions.hasPriorityGoods.list.HumanRemains=human remains
+view.import-questions.hasPriorityGoods.list.LiveAnimals=live animals
+view.import-questions.contactInfo.description=We will only use these details if we cannot contact you through CHIEF or your declaration software.
+view.import-questions.whichPriorityGoods.title=Which type of priority goods are you moving?
+view.import-questions.whichPriorityGoods.heading=Which type of priority goods are you moving?
+view.import-questions.hasALVS.title=Do you use Defra’s Automatic Licence Verification System (ALVS)?
+view.import-questions.hasALVS.heading=Do you use Defra’s Automatic Licence Verification System (ALVS)?
+view.import-questions.hasALVS.hint=Defra’s ALVS regulates the import and export of plants, live animals, horticultural and animal products, and high risk food and feed products.
+view.import-questions.freightType.title=Which type of transport are you using?
+view.import-questions.freightType.heading=Which type of transport are you using?
+view.import-questions.vessel-details.title=More details about your transport
+view.import-questions.vessel-details.heading=More details about your transport
+view.import-questions.contactInfo.title=What are your contact details?
+view.import-questions.contactInfo.heading=What are your contact details?
+view.import-questions.summary.title=Review your case details
+view.import-questions.summary.heading=Review your case details
+view.import-questions.summary.declaration-details.heading=Declaration information
+view.import-questions.summary.pre-clearance.heading=Customs information
+view.import-questions.summary.vessel-details.heading=Transport information
+view.import-questions.summary.contact-details.heading=Contact details
+
+# Example Questions Form
+# ----------------------------------------------------------
+form.export-questions.requestType.New=New
+form.export-questions.requestType.Cancellation=Cancellation
+form.export-questions.requestType.WithdrawalOrReturn=Withdrawal
+form.export-questions.requestType.C1601=C1601 - Presentation of goods for export (arrival) 
+form.export-questions.requestType.C1602=C1602 - Notification of exit of goods (departure) 
+form.export-questions.requestType.C1603=C1603 - Retrospective notification of arrival 
+form.export-questions.routeType.Route1=Route 1
+form.export-questions.routeType.Route1Cap=Route 1 CAP
+form.export-questions.routeType.Route2=Route 2
+form.export-questions.routeType.Route3=Route 3
+form.export-questions.routeType.Route6=Route 6
+form.export-questions.routeType.Hold=Hold (for pre-lodged requests)
+form.export-questions.hasPriorityGoods.yes=Yes
+form.export-questions.hasPriorityGoods.no=No
+form.export-questions.priorityGoods.ExplosivesOrFireworks=Explosives or fireworks
+form.export-questions.priorityGoods.HumanRemains=Human remains
+form.export-questions.priorityGoods.LiveAnimals=Live animals
+form.export-questions.freightType.Maritime=Maritime
+form.export-questions.freightType.Air=Air
+form.export-questions.freightType.RORO=Rail, road, or roll-on, roll-off (RORO)
+form.export-questions.vessel-details.vesselName=Name of ship, vehicle or airline
+form.export-questions.vessel-details.dateOfArrival=Date of arrival
+form.export-questions.vessel-details.timeOfArrival=Estimated time of arrival
+form.export-questions.vessel-details.timeOfArrival.hint=For example, 14:30
+form.export-questions.vessel-details.vesselNameOptional=Name of ship, vehicle or airline (optional)
+form.export-questions.vessel-details.dateOfArrivalOptional=Date of arrival (optional)
+form.export-questions.vessel-details.timeOfArrivalOptional=Estimated time of arrival (optional)
+form.export-questions.vessel-details.timeOfArrivalOptional.hint=For example, 14:30
+form.export-questions.vessel-details.dateOfArrival.hint=For example, {0}
+form.export-questions.contactName=Full name (optional)
+form.export-questions.contactEmail=Email address
+form.export-questions.contactNumber=UK telephone number (optional)
+form.export-questions.contactNumber.hint=For example, 01632 960 001 or 07700 900 982
+form.export-questions.continue=Continue
+form.export-questions.summary.continue=Continue to file upload
+
+error.exportRequestType.required=Select the type of export request
+error.exportRouteType.required=Select the route
+error.exportHasPriorityGoods.required=Select yes if you’re exporting priority goods
+error.exportPriorityGoods.required=Select the type of priority goods
+error.exportFreightType.required=Select the type of transport you’re using
+error.vesselName.required=Enter the ship, vehicle or airline name
+error.vesselName.invalid-characters=Name must only include letters a to z, numbers, spaces, hyphens, ampersands, apostrophes and full stops
+error.vesselName.invalid-length=Name must be 128 characters or fewer
+error.dateOfArrival.all.required=Enter the date of arrival
+error.dateOfArrival.year.required=Date of arrival must include a year
+error.dateOfArrival.month.required=Date of arrival must include a month
+error.dateOfArrival.day.required=Date of arrival must include a day
+error.dateOfArrival.all.invalid-value=Date of arrival must be a real date
+error.dateOfArrival.year.invalid-value=Date of arrival must be a real date
+error.dateOfArrival.month.invalid-value=Date of arrival must be a real date
+error.dateOfArrival.day.invalid-value=Date of arrival must be a real date
+error.dateOfArrival.year.invalid-digits=Year of arrival must only contain numbers
+error.dateOfArrival.month.invalid-digits=Month of arrival must only contain numbers
+error.dateOfArrival.day.invalid-digits=Day of arrival must only contain numbers
+error.dateOfArrival.all.invalid-value-range=Date of arrival must be between {0} and {1}
+error.timeOfArrival.all.required=Enter the estimated time of arrival
+error.timeOfArrival.hour.required=Time of arrival must include an hour
+error.timeOfArrival.minutes.required=Time of arrival must include minutes
+error.timeOfArrival.period.required=Time of arrival must include period
+error.timeOfArrival.hour.invalid-digits=Hour of arrival must only contain numbers
+error.timeOfArrival.minutes.invalid-digits=Minutes of arrival must only contain numbers
+error.timeOfArrival.hour.invalid-value=Hours must be between 0 and 23
+error.timeOfArrival.minutes.invalid-value=Minutes must be between 00 and 59
+error.timeOfArrival.period.invalid-value=Period must be am or pm
+
+# Import Questions Form
+# ----------------------------------------------------------
+form.import-questions.requestType.New=New
+form.import-questions.requestType.Cancellation=Cancellation
+form.import-questions.requestType.ALVS=Automatic Licence Verification System (ALVS)
+form.import-questions.routeType.Route1=Route 1
+form.import-questions.routeType.Route1Cap=Route 1 CAP
+form.import-questions.routeType.Route2=Route 2
+form.import-questions.routeType.Route3=Route 3
+form.import-questions.routeType.Route6=Route 6
+form.import-questions.routeType.Hold=Hold (for pre-lodged requests)
+form.import-questions.hasPriorityGoods.yes=Yes
+form.import-questions.hasPriorityGoods.no=No
+form.import-questions.priorityGoods.ExplosivesOrFireworks=Explosives or fireworks
+form.import-questions.priorityGoods.HumanRemains=Human remains
+form.import-questions.priorityGoods.LiveAnimals=Live animals
+form.import-questions.hasALVS.yes=Yes
+form.import-questions.hasALVS.no=No
+form.import-questions.freightType.Maritime=Maritime
+form.import-questions.freightType.Air=Air
+form.import-questions.freightType.RORO=Rail, road, or roll-on, roll-off (RORO)
+form.import-questions.vessel-details.vesselName=Name of ship, vehicle or airline
+form.import-questions.vessel-details.dateOfArrival=Date of arrival
+form.import-questions.vessel-details.timeOfArrival=Estimated time of arrival
+form.import-questions.vessel-details.timeOfArrival.hint=For example, 14:30
+form.import-questions.vessel-details.vesselNameOptional=Name of ship, vehicle or airline (optional)
+form.import-questions.vessel-details.dateOfArrivalOptional=Date of arrival (optional)
+form.import-questions.vessel-details.timeOfArrivalOptional=Estimated time of arrival (optional)
+form.import-questions.vessel-details.timeOfArrivalOptional.hint=For example, 14:30
+form.import-questions.vessel-details.dateOfArrival.hint=For example, {0}
+form.import-questions.contactName=Full name (optional)
+form.import-questions.contactEmail=Email address
+form.import-questions.contactNumber=UK telephone number (optional)
+form.import-questions.contactNumber.hint=For example, 01632 960 001 or 07700 900 982
+form.import-questions.continue=Continue
+form.import-questions.summary.continue=Continue to file upload
+
+error.importRequestType.required=Select the type of import request
+error.importRouteType.required=Select the route
+error.importHasPriorityGoods.required=Select yes if you’re importing priority goods
+error.importPriorityGoods.required=Select the type of priority goods
+error.importFreightType.required=Select the type of transport you’re using
+error.transportationType.required=Tell us what type of freight transportation is being used
+error.importHasALVS.required=Select yes if you’re using an Automatic Licence Verification System (ALVS)
+error.contactName.invalid-length-short=Full name must be 2 characters or more
+error.contactName.invalid-length-long=Full name must be 128 characters or fewer
+error.contactName.invalid-characters=Full name must only include letters a to z, numbers, spaces, hyphens, ampersands, apostrophes and full stops
+error.contactNumber=Enter a telephone number in the correct format
+error.contactNumber.invalid-length=Enter an 11-digit telephone number, like 01632 960 001 or 07700 900 982
+error.contactEmail.invalid-length=Email address must be 128 characters or fewer
+error.contactEmail=Enter an email address in the correct format, like name@example.com
+error.contactEmail.required=Enter an email address
+error.contactName.required=Enter your full name
+
+# Summary messages
+# ----------------------------------------------------------
+summary.declaration-details.epu=EPU number
+summary.declaration-details.entryNumber=Entry number
+summary.declaration-details.entryDate=Entry date
+summary.import-questions.requestType=Type of import request
+summary.import-questions.routeType=Route
+summary.import-questions.hasPriorityGoods=Priority goods
+summary.import-questions.whichPriorityGoods=Type of priority goods
+summary.import-questions.hasALVS=ALVS
+summary.import-questions.freightType=Type of transport
+summary.export-questions.requestType=Type of export request
+summary.export-questions.routeType=Route
+summary.export-questions.hasPriorityGoods=Priority goods
+summary.export-questions.whichPriorityGoods=Type of priority goods
+summary.export-questions.freightType=Type of transport
+summary.vessel-details.vesselName=Name of ship, vehicle or airline
+summary.vessel-details.dateOfArrival=Date of arrival
+summary.vessel-details.timeOfArrival=Estimated time of arrival
+summary.contact-details=Contact details
+summary.contact-details.contactName=Full name
+summary.contact-details.contactEmail=Email address
+summary.contact-details.contactNumber=Phone number
+
+# File upload messages
+# ----------------------------------------------------------
+view.upload-file.first.title=Upload your first document
+view.upload-file.first.heading=Upload your first document
+view.upload-file.next.title=Upload another document
+view.upload-file.next.heading=Upload another document
+view.upload-file.waiting=Your document is being uploaded. You’ll be redirected once the file has been processed.
+view.upload-file.help.linkText=Help with documents
+view.upload-file.help.line1=You can upload up to 10 documents.
+view.upload-file.help.line2=Each document must be smaller than 10MB.
+view.upload-file.help.line3=These file types are allowed:
+view.upload-file.help.fileFormat1=JPG
+view.upload-file.help.fileFormat2=PNG
+view.upload-file.help.fileFormat3=PDF
+view.upload-file.help.fileFormat4=TIFF
+view.upload-file.help.fileFormat5=Microsoft Excel, Word and PowerPoint
+view.upload-file.help.fileFormat6=Open Document Format (ODF)
+view.upload-file.help.line4=You cannot upload zip files or documents that are password-protected.
+
+view.file-uploaded.singular.title=You’ve uploaded {0} document
+view.file-uploaded.singular.heading=You’ve uploaded {0} document
+view.file-uploaded.plural.title=You’ve uploaded {0} documents
+view.file-uploaded.plural.heading=You’ve uploaded {0} documents
+view.file-uploaded.uploadAnotherFile.heading=Do you want to upload another document?
+view.file-uploaded.list.heading=Documents you’ve uploaded
+view.file-uploaded.maximum=You’ve uploaded the maximum number of files and cannot add any more.
+
+form.upload-file.file=Upload a file
+form.upload-file.submit=Upload
+form.file-uploaded.uploadAnotherFile.yes=Yes
+form.file-uploaded.uploadAnotherFile.no=No
+form.file-uploaded.uploadAnotherFile.noConditional=By continuing, you will now submit all the documents you’ve uploaded
+form.file-uploaded.continue=Continue
+
+error.file-upload.required=Select a file
+error.file-upload.invalid-size-small=The selected file is empty
+error.file-upload.invalid-size-large=The selected file must be smaller than {0}MB
+error.file-upload.invalid-type=The selected file must be a JPG, PNG, PDF, TIFF, Open Document Format (ODF), or Microsoft Office format
+error.file-upload.quarantine=The selected file contains a virus - upload a different one
+error.file-upload.unknown=The selected file could not be uploaded
+error.file-upload.try-again=The selected file could not be uploaded - try again
+error.uploadAnotherFile.required=Select yes if you want to upload another document
+
+# Confirmation messages
+# ----------------------------------------------------------
+view.create-case-confirmation.title=You’ve submitted your documents
+view.create-case-confirmation.heading=You’ve submitted your documents
+view.create-case-confirmation.reference=Your case reference number:
+view.create-case-confirmation.date=Case submitted on:
+view.create-case-confirmation.save.heading=Save your case reference number
+view.create-case-confirmation.save.description=You’ll have to provide your case reference number if:
+view.create-case-confirmation.save.bullet1=you need to contact us with any queries
+view.create-case-confirmation.save.bullet2=we need further information from you
+view.create-case-confirmation.save.bullet3=you want to add more information or documents to this case
+view.create-case-confirmation.save.description2=Save your case reference number for your own records.
+view.create-case-confirmation.next.heading=Next steps
+view.create-case-confirmation.next.description=Once the document checks are complete, you’ll hear from us through CHIEF or your declaration software.
+view.create-case-confirmation.info.heading=If we need more information
+view.create-case-confirmation.info.description=We’ll contact you through CHIEF or your declaration software if we need more documents from you.
+view.create-case-confirmation.continue=Send documents for a customs check
+view.create-case-confirmation.footnote=View guidance on GOV.UK about <a class="govuk-link" href="#">Clearing goods entering, leaving or transiting the UK or EU</a> or <a class="govuk-link" href="#">C1601, C1602, C1603 forms</a>.
+
+view.case-already-exists.title=This case already exists
+view.case-already-exists.heading=This case already exists
+view.case-already-exists.description.1=We have not saved your answers or documents, because we’ve already received a case with these entry details.
+view.case-already-exists.description.2=You can <a class="govuk-link" href="{0}">add more information or documents to the existing case</a>. You’ll need to give your case reference number.
+
+# Amend journey
+# ----------------------------------------------------------
+view.case-reference-number.title=What’s the case reference number?
+view.case-reference-number.heading=What’s the case reference number?
+view.case-reference-number.hint=For example PC12010081330XGBNZJO04
+view.case-reference-number.continue=Continue
+view.case-reference-number.linkText=Help with case reference 
+view.case-reference-number.help.line1=You would have been given your case reference number when you submitted your first set of documents.
+view.case-reference-number.help.line2=Contact the <a class="govuk-link" href="https://www.gov.uk/government/organisations/hm-revenue-customs/contact/national-clearance-hub">National Clearance Hub</a> if you’re not sure what your number is.
+error.caseReferenceNumber.required=Enter the case reference number
+error.caseReferenceNumber.invalid-value=Case reference number must be 22 characters
+
+view.type-of-amendment.title=How do you want to send us more information?
+view.type-of-amendment.heading=How do you want to send us more information?
+view.type-of-amendment.continue=Continue
+form.typeOfAmendment.WriteResponse=Write a response to a question HMRC has asked
+form.typeOfAmendment.UploadDocuments=Upload more documents
+form.typeOfAmendment.WriteResponseAndUploadDocuments=Write a response and upload more documents
+error.typeOfAmendment.required=Select how you want to send us more information
+error.typeOfAmendment.invalid-option=Select how you want to send us more information
+
+view.write-response-text.title=Write a response to a query from HMRC
+view.write-response-text.heading=Write a response to a query from HMRC
+view.write-response-text.hint=Do not include personal or financial information, like credit cards or business account details.
+view.write-response-text.countMessage=You have [1000] characters remaining.
+view.write-response-text.continue=Continue
+error.responseText.required=Enter a response to a query from HMRC
+error.responseText.invalid-length=Response must be 1000 characters or fewer
+
+view.amend-case-confirmation.title=You’ve submitted your extra information
+view.amend-case-confirmation.heading=You’ve submitted your extra information
+view.amend-case-confirmation.reference=Your case reference number:
+view.amend-case-confirmation.date=Case updated on:
+view.amend-case-confirmation.save.heading=Save your case reference number
+view.amend-case-confirmation.save.description=You’ll need to use this case reference number for any further correspondence on this case.
+view.amend-case-confirmation.save.description2=It is the same case reference number that you were given when the case was first created.
+view.amend-case-confirmation.next.heading=Next steps
+view.amend-case-confirmation.next.description=Once the information checks are complete, you’ll hear from us through CHIEF or your declaration software. We’ll let you know if we need any further information from you.
+view.amend-case-confirmation.continue=Send documents for a customs check
+view.amend-case-confirmation.footnote=View guidance on GOV.UK about <a class="govuk-link" href="#">Clearing goods entering, leaving or transiting the UK or EU</a> or <a class="govuk-link" href="#">C1601, C1602, C1603 forms</a>.
+
+# Common form messages
+# ----------------------------------------------------------
+error.browser.title.prefix = Error:
+error.summary.title=There is a problem
+date.day = Day
+date.month = Month
+date.year = Year
+time.hour = Hour
+time.minutes = Minute
+time.period = am or pm
+time.period.none=
+time.period.am=am
+time.period.pm=pm
+
+# Timed Out messages
+# -----------------------------------------------------------
+view.timedout.title=For your security, we signed you out
+view.timedout.heading=For your security, we signed you out
+view.timedout.description=We did not save your answers.
+view.timedout.signIn=Sign in

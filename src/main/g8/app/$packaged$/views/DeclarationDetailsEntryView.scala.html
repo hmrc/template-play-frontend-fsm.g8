@@ -1,0 +1,80 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import $package$.models.DeclarationDetails
+@import $package$.controllers.DateFieldHelper
+@import java.time.LocalDate
+
+@this(
+        govukLayout: $package$.views.html.templates.GovukLayoutWrapper,
+        forms: $package$.views.components.forms,
+        html: $package$.views.components.html
+)
+
+@(form: Form[DeclarationDetails], postAction: Call, backLink: Call)(implicit request: Request[_], messages: Messages)
+
+@govukLayout(
+  pageTitle = pageTitle("view.declaration-details.title",form),
+  backLink = Some(backLink.url)) {
+
+  @forms.errorSummary(form.errors)
+
+  @forms.formWithCSRF(action = postAction, args = 'novalidate -> "novalidate") {
+
+    @forms.fieldset(
+      legend = messages("view.declaration-details.heading")
+    ) {
+      @forms.inputText(
+        form = form,
+        id = "epu",
+        name = "epu",
+        label = "form.declaration-details.epu",
+        isPageHeading = false,
+        isInFieldset = true,
+        classes = Some("govuk-input--width-3"),
+        attributes = Map(
+          "inputmode" -> "numeric",
+          "pattern" -> "[0-9]*"
+        )
+      )
+
+      @forms.inputText(
+        form = form,
+        id = "entryNumber",
+        name = "entryNumber",
+        label = "form.declaration-details.entryNumber",
+        isPageHeading = false,
+        isInFieldset = true,
+        classes = Some("govuk-input--width-10"),
+        attributes = Map("autocomplete" -> "off")
+      )
+
+      @forms.inputDate(
+        form = form,
+        id = "entryDate",
+        legendContent = "form.declaration-details.entryDate",
+        legendClasses = "",
+        legendAsPageHeading = false,
+        hintText = Some(messages("form.declaration-details.entryDate.hint", DateFieldHelper.getValidDateHint(LocalDate.now))),
+        attributesDay = Map("aria-label" -> "Day of entry date"),
+        attributesMonth = Map("aria-label" -> "Month of entry date"),
+        attributesYear = Map("aria-label" -> "Year of entry date")
+      )
+    }
+
+    @html.button("form.declaration-details.continue")
+  }
+}
