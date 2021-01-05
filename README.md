@@ -1,7 +1,8 @@
-A [Giter8](http://www.foundweekends.org/giter8/) template for creating A Giter8 template for creating HMRC Digital Scala Play 2.7 Stateful Frontend Microservice
+A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital Scala Play 2.7 Stateful Frontend Microservice
+==
 
 How to create a new project based on the template?
-==
+--
 
 * Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Go to the directory where you want to create the template
@@ -23,14 +24,14 @@ and then
     
 
 How to test the template and generate an example project?
-==
+--
 
 * Run `./test.sh` 
 
 An example project will be then created and tested in `target/sandbox/trader-services-route-one-frontend`
 
 How to modify the template?
-==
+--
 
  * review template sources in `/src/main/g8`
  * modify files as you need, but be careful about placeholders, paths and so on
@@ -47,7 +48,7 @@ or (safer) ...
 * run `./test.sh` again to validate your changes
 
 What is in the template?
-==
+--
 
 Assuming the command above 
 the template will supply the following values for the placeholders:
