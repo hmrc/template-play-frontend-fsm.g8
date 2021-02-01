@@ -53,6 +53,12 @@ trait AuthActions extends AuthorisedFunctions with AuthRedirects {
       }
       .recover(handleFailure)
 
+  protected def authorisedWithoutEnrolment[A](
+    body: Option[String] => Future[Result]
+  )(implicit request: Request[A], hc: HeaderCarrier, ec: ExecutionContext): Future[Result] =
+    authorised(AuthProviders(GovernmentGateway))(body(None))
+      .recover(handleFailure)
+
   def handleFailure(implicit request: Request[_]): PartialFunction[Throwable, Result] = {
 
     case InsufficientEnrolments(_) =>

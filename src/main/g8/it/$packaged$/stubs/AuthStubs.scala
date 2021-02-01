@@ -121,6 +121,42 @@ trait AuthStubs {
     this
   }
 
+  def givenAuthorised[A]: AuthStubs = {
+    stubFor(
+      post(urlEqualTo("/auth/authorise"))
+        .atPriority(1)
+        .withRequestBody(
+          equalToJson(
+            s"""
+               |{
+               |  "authorise": [
+               |    { "authProviders": ["GovernmentGateway"] }
+               |  ]
+               |}
+           """.stripMargin,
+            true,
+            true
+          )
+        )
+        .willReturn(
+          aResponse()
+            .withStatus(200)
+            .withBody(s"""{}""".stripMargin)
+        )
+    )
+
+    stubFor(
+      post(urlEqualTo("/auth/authorise"))
+        .atPriority(2)
+        .willReturn(
+          aResponse()
+            .withStatus(401)
+            .withHeader("WWW-Authenticate", "MDTP detail=\\"InsufficientEnrolments\\"")
+        )
+    )
+    this
+  }
+
   def verifyAuthoriseAttempt(): Unit =
     verify(1, postRequestedFor(urlEqualTo("/auth/authorise")))
 

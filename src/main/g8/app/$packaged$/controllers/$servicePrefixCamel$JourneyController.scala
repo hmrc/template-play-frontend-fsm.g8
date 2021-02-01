@@ -59,11 +59,17 @@ class $servicePrefixCamel$JourneyController @Inject() (
   }
 
   /** Base authorized action builder */
-  final val whenAuthorisedAsUser = actions.whenAuthorised(AsUser)
+  final val whenAuthorisedAsUser =
+    actions.whenAuthorisedWithRetrievals[String](AsUser)
 
   /** Dummy action to use only when developing to fill loose-ends. */
-  private val actionNotYetImplemented = Action(NotImplemented)
+  final val actionNotYetImplemented = Action(NotImplemented)
 
+  // Dummy URL to use when developing the journey
+  final val workInProgresDeadEndCall =
+    Call("GET", "/$serviceUrlPrefixHyphen$/work-in-progress")
+
+  // Redirection to the enrolment subscription journey
   final def toSubscriptionJourney(continueUrl: String): Result =
     Redirect(
       appConfig.subscriptionJourneyUrl,
@@ -71,9 +77,6 @@ class $servicePrefixCamel$JourneyController @Inject() (
         "continue" -> Seq(continueUrl)
       )
     )
-
-  // Dummy URL to use when developing the journey
-  final val workInProgresDeadEndCall = Call("GET", "/$serviceUrlPrefixHyphen$/work-in-progress")
 
   // GET /
   final val showStart: Action[AnyContent] =

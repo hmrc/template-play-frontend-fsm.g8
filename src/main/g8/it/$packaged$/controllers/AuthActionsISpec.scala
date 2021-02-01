@@ -14,12 +14,11 @@ import scala.concurrent.Future
 class AuthActionsISpec extends AuthActionISpecSetup {
 
   "withAuthorisedWithStrideGroup" should {
-
     "call body with a valid authProviderId" in {
 
       givenAuthorisedForStride("TBC", "StrideUserId")
 
-      val result = TestController.withAuthorisedWithStrideGroup("TBC")
+      val result = TestController.testAuthorisedWithStrideGroup("TBC")
 
       status(result) shouldBe 200
       bodyOf(result) should include("StrideUserId")
@@ -28,7 +27,7 @@ class AuthActionsISpec extends AuthActionISpecSetup {
     "redirect to log in page when user not enrolled for the service" in {
       givenAuthorisedForStride("TBC", "StrideUserId")
 
-      val result = TestController.withAuthorisedWithStrideGroup("OTHER")
+      val result = TestController.testAuthorisedWithStrideGroup("OTHER")
       status(result) shouldBe 303
       redirectLocation(result).get should include("/stride/sign-in")
     }
@@ -36,7 +35,7 @@ class AuthActionsISpec extends AuthActionISpecSetup {
     "redirect to log in page when user not authenticated" in {
       givenRequestIsNotAuthorised("SessionRecordNotFound")
 
-      val result = TestController.withAuthorisedWithStrideGroup("TBC")
+      val result = TestController.testAuthorisedWithStrideGroup("TBC")
       status(result) shouldBe 303
       redirectLocation(result).get should include("/stride/sign-in")
     }
@@ -44,30 +43,73 @@ class AuthActionsISpec extends AuthActionISpecSetup {
     "redirect to log in page when user authenticated with different provider" in {
       givenRequestIsNotAuthorised("UnsupportedAuthProvider")
 
-      val result = TestController.withAuthorisedWithStrideGroup("TBC")
+      val result = TestController.testAuthorisedWithStrideGroup("TBC")
       status(result) shouldBe 303
       redirectLocation(result).get should include("/stride/sign-in")
     }
 
     "redirect to login page when stride group is 'Any'" in {
       givenAuthorisedForStride("ANY", "StrideUserId")
-      val result = TestController.withAuthorisedWithStrideGroup("ANY")
+      val result = TestController.testAuthorisedWithStrideGroup("ANY")
       status(result) shouldBe 303
       redirectLocation(result).get should include("/stride/sign-in")
     }
 
     "redirect to subscription journey when insufficient enrollments" in {
       givenRequestIsNotAuthorised("InsufficientEnrolments")
-      val result = TestController.withAuthorisedEnrolment("serviceName", "serviceKey")
+      val result = TestController.testAuthorizedWithEnrolment("serviceName", "serviceKey")
       status(result) shouldBe 303
       redirectLocation(result).get should include("/subscription")
     }
 
     "redirect to government gateway login when authorization fails" in {
       givenRequestIsNotAuthorised("IncorrectCredentialStrength")
-      val result = TestController.withAuthorisedEnrolment("serviceName", "serviceKey")
+      val result = TestController.testAuthorizedWithEnrolment("serviceName", "serviceKey")
       status(result) shouldBe 303
-      redirectLocation(result).get should include("/gg/sign-in")
+      redirectLocation(result).get should include("/bas-gateway/sign-in")
+    }
+  }
+
+  "authorisedWithEnrolment" should {
+    "authorize when enrolment granted" in {
+      givenAuthorisedForEnrolment(Enrolment("serviceName", "serviceKey", "serviceIdentifierFoo"))
+      val result = TestController.testAuthorizedWithEnrolment("serviceName", "serviceKey")
+      status(result) shouldBe 200
+      bodyOf(result) should be("serviceIdentifierFoo")
+    }
+
+    "redirect to subscription journey when insufficient enrollments" in {
+      givenRequestIsNotAuthorised("InsufficientEnrolments")
+      val result = TestController.testAuthorizedWithEnrolment("serviceName", "serviceKey")
+      status(result) shouldBe 303
+      redirectLocation(result).get should include("/subscription")
+    }
+
+    "redirect to government gateway login when authorization fails" in {
+      givenRequestIsNotAuthorised("IncorrectCredentialStrength")
+      val result = TestController.testAuthorizedWithEnrolment("serviceName", "serviceKey")
+      status(result) shouldBe 303
+      redirectLocation(result).get should include(
+        "/bas-gateway/sign-in?continue_url=%2F&origin=$serviceNameHyphen$"
+      )
+    }
+  }
+
+  "authorisedWithoutEnrolment" should {
+    "authorize even when insufficient enrollments" in {
+      givenAuthorised
+      val result = TestController.testAuhorizedWithoutEnrolment
+      status(result) shouldBe 200
+      bodyOf(result) should be("none")
+    }
+
+    "redirect to government gateway login when authorization fails" in {
+      givenRequestIsNotAuthorised("IncorrectCredentialStrength")
+      val result = TestController.testAuhorizedWithoutEnrolment
+      status(result) shouldBe 303
+      redirectLocation(result).get should include(
+        "/bas-gateway/sign-in?continue_url=%2F&origin=$serviceNameHyphen$"
+      )
     }
   }
 }
@@ -89,15 +131,21 @@ trait AuthActionISpecSetup extends AppISpec {
     implicit val hc: HeaderCarrier = HeaderCarrier()
     implicit val request = FakeRequest().withSession(SessionKeys.authToken -> "Bearer XYZ")
 
-    def withAuthorisedWithStrideGroup[A](group: String): Result =
+    def testAuthorisedWithStrideGroup[A](group: String): Result =
       await(super.authorisedWithStrideGroup(group) { pid =>
         Future.successful(Ok(pid))
       })
 
-    def withAuthorisedEnrolment[A](serviceName: String, identifierKey: String): Result =
+    def testAuthorizedWithEnrolment[A](serviceName: String, identifierKey: String): Result =
       await(super.authorisedWithEnrolment(serviceName, identifierKey) { res =>
         Future.successful(Ok(res))
       })
+
+    def testAuhorizedWithoutEnrolment[A]: Result =
+      await(super.authorisedWithoutEnrolment { res =>
+        Future.successful(Ok(res.getOrElse("none")))
+      })
+
     override def toSubscriptionJourney(continueUrl: String): Result = Redirect("/subscription")
   }
 

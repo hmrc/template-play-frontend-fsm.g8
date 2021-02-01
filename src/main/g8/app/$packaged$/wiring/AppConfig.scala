@@ -121,7 +121,7 @@ class AppConfigImpl @Inject() (config: ServicesConfig) extends AppConfig {
 
   private val exitSurveyBaseUrl =
     config.getString("feedback-frontend.host") + config.getString("feedback-frontend.url")
-  override val exitSurveyUrl = s"\$exitSurveyBaseUrl/\$contactFormServiceIdentifier"
+  override val exitSurveyUrl = s"\$exitSurveyBaseUrl\$contactFormServiceIdentifier"
 
   override val signOutUrl: String = config.getString("urls.signOut")
   override val researchBannerUrl: String = config.getString("urls.researchBanner")
