@@ -1,7 +1,7 @@
 template-play-27-frontend-fsm
 ===
 
-A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital Scala Play 2.7 Stateful Frontend Microservice
+A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital Scala Play 2.7 Stateful Frontend Microservice using [play-fsm](https://github.com/hmrc/play-fsm).
 
 How to create a new project based on the template?
 ---
