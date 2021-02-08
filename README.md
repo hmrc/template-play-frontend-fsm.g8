@@ -1,17 +1,16 @@
-template-play-27-frontend-fsm
-===
+A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital Scala Play 2.7 Stateful Frontend Microservice
 
-A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital Scala Play 2.7 Stateful Frontend Microservice using [play-fsm](https://github.com/hmrc/play-fsm).
+
 
 How to create a new project based on the template?
----
+==
 
 * Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Go to the directory where you want to create the template
 * Decide your service name (the hardest part :))
 * Run the command
 
-    `g8 hmrc/template-play-27-frontend-fsm --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
+    `g8 {GITHUB_USER}/template-play-27-frontend-fsm --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
     
 and then
     
@@ -26,14 +25,14 @@ and then
     
 
 How to test the template and generate an example project?
----
+==
 
 * Run `./test.sh` 
 
 An example project will be then created and tested in `target/sandbox/trader-services-route-one-frontend`
 
 How to modify the template?
----
+==
 
  * review template sources in `/src/main/g8`
  * modify files as you need, but be careful about placeholders, paths and so on
@@ -50,7 +49,7 @@ or (safer) ...
 * run `./test.sh` again to validate your changes
 
 What is in the template?
----
+==
 
 Assuming the command above 
 the template will supply the following values for the placeholders:
@@ -136,10 +135,7 @@ the template will supply the following values for the placeholders:
 
 and produce the folders and files as shown below:
 
-    ├── .bsp
-	│   └── sbt.json
-	│
-	├── .description
+    ├── .description
 	├── .gitignore
 	├── .scalafmt.conf
 	├── app
@@ -317,9 +313,7 @@ and produce the folders and files as shown below:
 	│                   │   ├── SummaryListRowHelper.scala
 	│                   │   ├── templates
 	│                   │   │   ├── ErrorTemplate.scala.html
-	│                   │   │   ├── GovukLayout2.scala.html
 	│                   │   │   ├── GovukLayoutWrapper.scala.html
-	│                   │   │   ├── GovukLayoutWrapper2.scala.html
 	│                   │   │   ├── GtmBodySnippet.scala.html
 	│                   │   │   └── GtmHeadSnippet.scala.html
 	│                   │   │
@@ -380,30 +374,8 @@ and produce the folders and files as shown below:
 	│
 	├── LICENSE
 	├── project
-	│   ├── .bloop
-	│   │   ├── bloop.settings.json
-	│   │   ├── trader-services-route-one-frontend-build
-	│   │   │   └── bloop-internal-classes
-	│   │   │       └── classes-Metals--GoC2wJPSmmNMDrHsqA4uQ==-HiaMRpXKS8WZBK7y_Wwwkg==
-	│   │   │           ├── JavaScriptBuild$.class
-	│   │   │           ├── JavaScriptBuild.class
-	│   │   │           ├── META-INF
-	│   │   │           │   └── semanticdb
-	│   │   │           │       ├── JavaScriptBuild.scala.semanticdb
-	│   │   │           │       ├── Npm.scala.semanticdb
-	│   │   │           │       └── Webpack.scala.semanticdb
-	│   │   │           │
-	│   │   │           ├── Npm$.class
-	│   │   │           ├── Npm.class
-	│   │   │           ├── Webpack$.class
-	│   │   │           ├── Webpack$WebpackProcess$1$.class
-	│   │   │           └── Webpack.class
-	│   │   │
-	│   │   └── trader-services-route-one-frontend-build.json
-	│   │
 	│   ├── build.properties
 	│   ├── JavaScriptBuild.scala
-	│   ├── metals.sbt
 	│   ├── Npm.scala
 	│   ├── plugins.sbt
 	│   └── Webpack.scala

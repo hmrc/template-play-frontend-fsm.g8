@@ -17,17 +17,16 @@
 @import $package$.models.DeclarationDetails
 
 @this(
-        govukLayout2: $package$.views.html.templates.GovukLayoutWrapper2,
+        govukLayout: $package$.views.html.templates.GovukLayoutWrapper,
         forms: $package$.views.components.forms,
         html: $package$.views.components.html
 )
 
 @(form: Form[String], postAction: Call, backLink: Call)(implicit request: Request[_], messages: Messages)
 
-@govukLayout2(
+@govukLayout(
   pageTitle("view.write-response-text.title",form),
-  backLink = Some(backLink.url),
-  mainContentClasses = "govuk-grid-column-full") {
+  backLink = Some(backLink.url)) {
 
   @forms.errorSummary(form.errors)
 

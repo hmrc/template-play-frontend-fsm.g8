@@ -41,9 +41,10 @@ class $servicePrefixCamel$JourneyController @Inject() (
   $servicePrefixcamel$ApiConnector: $servicePrefixCamel$ApiConnector,
   val authConnector: FrontendAuthConnector,
   val env: Environment,
-  override val journeyService: $servicePrefixCamel$JourneyServiceWithHeaderCarrier,
   controllerComponents: MessagesControllerComponents,
-  views: $package$.views.$servicePrefixCamel$Views
+  views: $package$.views.$servicePrefixCamel$Views,
+  override val journeyService: $servicePrefixCamel$JourneyServiceWithHeaderCarrier,
+  override val actionBuilder: DefaultActionBuilder
 )(implicit val config: Configuration, ec: ExecutionContext)
     extends FrontendController(controllerComponents) with I18nSupport with AuthActions
     with JourneyController[HeaderCarrier] with JourneyIdSupport[HeaderCarrier] {
