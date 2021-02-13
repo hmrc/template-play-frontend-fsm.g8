@@ -56,80 +56,18 @@ the template will supply the following values for the placeholders:
 
     $packaged$ -> uk/gov/hmrc/traderservices
 	$package$ -> uk.gov.hmrc.traderservices
-	$serviceNameCamel$ -> TraderServicesRouteOneFrontend
-	$serviceNamecamel$ -> traderServicesRouteOneFrontend
-	$serviceNameNoSpaceLowercase$ -> traderservicesrouteonefrontend
-	$serviceNameNoSpaceUppercase$ -> TRADERSERVICESROUTEONEFRONTEND
-	$serviceNamesnake$ -> trader_services_route_one_frontend
 	$serviceNameSnake$ -> TRADER_SERVICES_ROUTE_ONE_FRONTEND
-	$serviceNamePackage$ -> Trader.Services.Route.One.Frontend
-	$serviceNamePackageLowercase$ -> trader.services.route.one.frontend
-	$serviceNamePackaged$ -> Trader/Services/Route/One/Frontend
-	$serviceNamePackagedLowercase$ -> trader/services/route/one/frontend
 	$serviceNameHyphen$ -> trader-services-route-one-frontend
-	$serviceNameLowercase$ -> trader services route one frontend
-	$serviceNameUppercase$ -> TRADER SERVICES ROUTE ONE FRONTEND
 	$serviceName$ -> Trader Services Route One Frontend
-	$serviceUrlPrefixCamel$ -> SendDocumentsForCustomsCheck
-	$serviceUrlPrefixcamel$ -> sendDocumentsForCustomsCheck
-	$serviceUrlPrefixNoSpaceLowercase$ -> senddocumentsforcustomscheck
-	$serviceUrlPrefixNoSpaceUppercase$ -> SENDDOCUMENTSFORCUSTOMSCHECK
-	$serviceUrlPrefixsnake$ -> send_documents_for_customs_check
-	$serviceUrlPrefixSnake$ -> SEND_DOCUMENTS_FOR_CUSTOMS_CHECK
-	$serviceUrlPrefixPackage$ -> send.documents.for.customs.check
-	$serviceUrlPrefixPackageLowercase$ -> send.documents.for.customs.check
-	$serviceUrlPrefixPackaged$ -> send/documents/for/customs/check
-	$serviceUrlPrefixPackagedLowercase$ -> send/documents/for/customs/check
 	$serviceUrlPrefixHyphen$ -> send-documents-for-customs-check
-	$serviceUrlPrefixLowercase$ -> send documents for customs check
-	$serviceUrlPrefixUppercase$ -> SEND DOCUMENTS FOR CUSTOMS CHECK
 	$serviceUrlPrefix$ -> send-documents-for-customs-check
-	$serviceTitleCamel$ -> SendDocumentsForCustomsCheck
-	$serviceTitlecamel$ -> sendDocumentsForCustomsCheck
-	$serviceTitleNoSpaceLowercase$ -> senddocumentsforcustomscheck
-	$serviceTitleNoSpaceUppercase$ -> SENDDOCUMENTSFORCUSTOMSCHECK
-	$serviceTitlesnake$ -> send_documents_for_customs_check
-	$serviceTitleSnake$ -> SEND_DOCUMENTS_FOR_CUSTOMS_CHECK
-	$serviceTitlePackage$ -> Send.Documents.For.Customs.Check
-	$serviceTitlePackageLowercase$ -> send.documents.for.customs.check
-	$serviceTitlePackaged$ -> Send/Documents/For/Customs/Check
-	$serviceTitlePackagedLowercase$ -> send/documents/for/customs/check
-	$serviceTitleHyphen$ -> send-documents-for-customs-check
-	$serviceTitleLowercase$ -> send documents for customs check
-	$serviceTitleUppercase$ -> SEND DOCUMENTS FOR CUSTOMS CHECK
-	$serviceTitle$ -> Send Documents For Customs Check
 	$servicePrefixCamel$ -> TraderServices
 	$servicePrefixcamel$ -> traderServices
-	$servicePrefixNoSpaceLowercase$ -> traderservices
-	$servicePrefixNoSpaceUppercase$ -> TRADERSERVICES
-	$servicePrefixsnake$ -> trader_services
 	$servicePrefixSnake$ -> TRADER_SERVICES
-	$servicePrefixPackage$ -> Trader.Services
-	$servicePrefixPackageLowercase$ -> trader.services
-	$servicePrefixPackaged$ -> Trader/Services
-	$servicePrefixPackagedLowercase$ -> trader/services
 	$servicePrefixHyphen$ -> trader-services
 	$servicePrefixLowercase$ -> trader services
-	$servicePrefixUppercase$ -> TRADER SERVICES
 	$servicePrefix$ -> Trader Services
-	$authorisedServiceNameCamel$ -> HmrcCusOrg
-	$authorisedServiceNamecamel$ -> hmrcCusOrg
-	$authorisedServiceNameNoSpaceLowercase$ -> hmrccusorg
-	$authorisedServiceNameNoSpaceUppercase$ -> HMRCCUSORG
-	$authorisedServiceNamesnake$ -> hmrc_cus_org
-	$authorisedServiceNameSnake$ -> HMRC_CUS_ORG
-	$authorisedServiceNamePackage$ -> HMRC.CUS.ORG
-	$authorisedServiceNamePackageLowercase$ -> hmrc.cus.org
-	$authorisedServiceNamePackaged$ -> HMRC/CUS/ORG
-	$authorisedServiceNamePackagedLowercase$ -> hmrc/cus/org
-	$authorisedServiceNameHyphen$ -> hmrc-cus-org
-	$authorisedServiceNameLowercase$ -> hmrc cus org
-	$authorisedServiceNameUppercase$ -> HMRC CUS ORG
 	$authorisedServiceName$ -> HMRC-CUS-ORG
-	$authorisedIdentifierKeyCamel$ -> Eorinumber
-	$authorisedIdentifierKeycamel$ -> eorinumber
-	$authorisedIdentifierKeyLowercase$ -> eorinumber
-	$authorisedIdentifierKeyUppercase$ -> EORINUMBER
 	$authorisedIdentifierKey$ -> EORINumber
 	$serviceTargetPort$ -> 9379
 

@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
-if [[ -f ./build.sbt ]] && [[ -d ./src/main/g8 ]]; then
+if [[ -d ./src/main/g8 ]]; then
+
+   if ! command -v git &> /dev/null
+   then
+     echo "[ERROR] git command cannot be found, please install git first"
+     exit -1
+   fi
+
+   if ! command -v sbt &> /dev/null
+   then
+     echo "[ERROR] sbt command cannot be found, please install sbt first"
+     exit -1
+   fi
 
    mkdir -p target
    cd target
@@ -13,11 +25,14 @@ if [[ -f ./build.sbt ]] && [[ -d ./src/main/g8 ]]; then
         cd .makeitg8
    fi
 
-   sbt "run --noclear --source ../../target/sandbox/trader-services-route-one-frontend --target ../.. --name template-play-27-frontend-fsm --package uk.gov.hmrc.traderservices --description HMRC+Digital+Scala+Play+2.7+Stateful+Frontend+Microservice  -K serviceName=Trader+Services+Route+One+Frontend serviceUrlPrefix=send-documents-for-customs-check serviceTargetPort=9379 authorisedIdentifierKey=EORINumber serviceTitle=Send+Documents+For+Customs+Check authorisedServiceName=HMRC-CUS-ORG servicePrefix=Trader+Services" -Dbuild.test.command="sbt test it:test" 
+   sbt "run --noclear --force --source ../../target/sandbox/trader-services-route-one-frontend --target ../.. --name template-play-27-frontend-fsm  --package uk.gov.hmrc.traderservices --description HMRC+Digital+Scala+Play+2.7+Stateful+Frontend+Microservice  -K serviceName=Trader+Services+Route+One+Frontend serviceUrlPrefix=send-documents-for-customs-check serviceTargetPort=9379 authorisedIdentifierKey=EORINumber serviceTitle=Send+Documents+For+Customs+Check authorisedServiceName=HMRC-CUS-ORG servicePrefix=Trader+Services" -Dbuild.test.command="sbt test it:test" 
+
+   echo "Done, updated the template based on target/sandbox/trader-services-route-one-frontend"
+   exit 0
 
 else
 
-    echo "WARNING: run the script ./update-g8.sh in the template root folder"
+    echo "[ERROR] run the script ./update-g8.sh in the template's root folder"
     exit -1
 
 fi
