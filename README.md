@@ -12,7 +12,7 @@ How to create a new project based on the template?
 * Decide your project name (the hardest part :))
 * Run the command
 
-    `sbt new {GITHUB_USER}/template-play-27-frontend-fsm`
+    `sbt new hmrc/template-play-27-frontend-fsm`
 
 or    
 
