@@ -41,7 +41,7 @@ class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[S
   "$servicePrefixCamel$JourneyModel" when {
     "at state Start" should {
       "stay at Start when start" in {
-        given(Start) when start(eoriNumber) should thenGo(Start)
+        given(Start) when start should thenGo(Start)
       }
 
       "fail if any other transition requested" in {
@@ -163,7 +163,7 @@ class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[S
             completeExampleQuestionsAnswers,
             $servicePrefixCamel$Result("A1234567890", generatedAt)
           )
-        ) when start(eoriNumber) should thenGo(Start)
+        ) when start should thenGo(Start)
       }
 
       "go to clean EnterDeclarationDetails when going back" in {
@@ -173,7 +173,7 @@ class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[S
             completeExampleQuestionsAnswers,
             $servicePrefixCamel$Result("A1234567890", generatedAt)
           )
-        ) when backToEnterDeclarationDetails(eoriNumber) should thenGo(EnterDeclarationDetails())
+        ) when backToEnterDeclarationDetails should thenGo(EnterDeclarationDetails())
       }
     }
 
@@ -181,13 +181,13 @@ class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[S
       "go to Start when start" in {
         given(
           CaseAlreadyExists("A1234567890")
-        ) when start(eoriNumber) should thenGo(Start)
+        ) when start should thenGo(Start)
       }
 
       "go to clean EnterDeclarationDetails when going back" in {
         given(
           CaseAlreadyExists("A1234567890")
-        ) when backToEnterDeclarationDetails(eoriNumber) should thenGo(EnterDeclarationDetails())
+        ) when backToEnterDeclarationDetails should thenGo(EnterDeclarationDetails())
       }
     }
   }
@@ -216,7 +216,7 @@ class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[S
 
 trait TestData {
 
-  val eoriNumber = "foo"
+  val eoriNumber = Some("foo")
   val correlationId = "123"
   val generatedAt = java.time.LocalDateTime.of(2018, 12, 11, 10, 20, 0)
 

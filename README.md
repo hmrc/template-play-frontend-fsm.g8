@@ -12,7 +12,7 @@ How to create a new project based on the template?
 * Decide your project name (the hardest part :))
 * Run the command
 
-    `sbt new hmrc/template-play-27-frontend-fsm`
+    `sbt new {GITHUB_USER}/template-play-27-frontend-fsm`
 
 or    
 
@@ -158,10 +158,6 @@ and produce the folders and files as shown below:
 	│                   │   ├── Time12FieldHelper.scala
 	│                   │   ├── Time24FieldHelper.scala
 	│                   │   └── TraderServicesJourneyController.scala
-	│                   │
-	│                   ├── filters
-	│                   │   ├── AuditFilter.scala
-	│                   │   └── CustomFrontendFilters.scala
 	│                   │
 	│                   ├── journeys
 	│                   │   ├── TraderServicesJourneyModel.scala

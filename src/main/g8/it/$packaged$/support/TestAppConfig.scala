@@ -2,11 +2,16 @@ package $package$.support
 
 import $package$.wiring.AppConfig
 
-case class TestAppConfig(wireMockBaseUrl: String, wireMockPort: Int) extends AppConfig {
+case class TestAppConfig(
+  wireMockBaseUrl: String,
+  wireMockPort: Int
+) extends AppConfig {
 
-  override val appName: String = "$servicePrefixHyphen$-frontend"
-  override val baseInternalCallbackUrl: String = s"http://baseInternalCallbackUrl"
-  override val baseExternalCallbackUrl: String = s"http://baseExternalCallbackUrl"
+  override val appName: String = "$servicePrefixHyphen$-route-one"
+
+  override val baseInternalCallbackUrl: String = wireMockBaseUrl
+  override val baseExternalCallbackUrl: String = wireMockBaseUrl
+
   override val authBaseUrl: String = wireMockBaseUrl
   override val $servicePrefixcamel$ApiBaseUrl: String = wireMockBaseUrl
   override val upscanInitiateBaseUrl: String = wireMockBaseUrl
@@ -15,7 +20,6 @@ case class TestAppConfig(wireMockBaseUrl: String, wireMockPort: Int) extends App
   override val updateCaseApiPath: String = "/update-case"
 
   override val mongoSessionExpiryTime: Int = 3600
-  override val authorisedStrideGroup: String = "TBC"
 
   override val gtmContainerId: Option[String] = None
   override val contactHost: String = wireMockBaseUrl

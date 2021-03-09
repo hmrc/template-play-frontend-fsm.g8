@@ -61,7 +61,7 @@ trait $servicePrefixCamel$ApiConnectorISpecSetup extends AppISpec with $serviceP
     $servicePrefixCamel$$servicePrefixCamel$Request(
       declarationDetails = TestData.exportDeclarationDetails,
       questionsAnswers = TestData.fullExampleQuestions(),
-      eori = "GB123456789012345"
+      eori = Some("GB123456789012345")
     )
 
 }

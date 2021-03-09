@@ -134,12 +134,12 @@ object $servicePrefixCamel$JourneyModel extends JourneyModel {
   object Transitions {
     import State._
 
-    final def start(user: String) =
+    final val start =
       Transition {
         case _ => goto(Start)
       }
 
-    final def backToEnterDeclarationDetails(user: String) =
+    final val backToEnterDeclarationDetails =
       Transition {
         case s: ExampleQuestionsState =>
           goto(
@@ -153,7 +153,7 @@ object $servicePrefixCamel$JourneyModel extends JourneyModel {
           goto(EnterDeclarationDetails())
       }
 
-    final def submittedDeclarationDetails(user: String)(declarationDetails: DeclarationDetails) =
+    final def submittedDeclarationDetails(user: Option[String])(declarationDetails: DeclarationDetails) =
       Transition {
         case EnterDeclarationDetails(_, exportQuestionsOpt) =>
           gotoSummaryIfCompleteOr(
@@ -166,26 +166,26 @@ object $servicePrefixCamel$JourneyModel extends JourneyModel {
           )
       }
 
-    final def backToAnswerExampleQuestionsRequestType(user: String) =
+    final val backToAnswerExampleQuestionsRequestType =
       Transition {
         case s: ExampleQuestionsState if s.model.exportQuestionsAnswers.requestType.isDefined =>
           goto(AnswerExampleQuestionsRequestType(s.model))
       }
 
-    final def submittedExampleQuestionsAnswerRequestType(user: String)(exportRequestType: ExampleRequestType) =
+    final def submittedExampleQuestionsAnswerRequestType(user: Option[String])(exportRequestType: ExampleRequestType) =
       Transition {
         case AnswerExampleQuestionsRequestType(model) =>
           val updatedExampleQuestions = model.exportQuestionsAnswers.copy(requestType = Some(exportRequestType))
           gotoSummaryIfCompleteOr(AnswerExampleQuestionsRouteType(model.updated(updatedExampleQuestions)))
       }
 
-    final def backToAnswerExampleQuestionsRouteType(user: String) =
+    final val backToAnswerExampleQuestionsRouteType =
       Transition {
         case s: ExampleQuestionsState if s.model.exportQuestionsAnswers.routeType.isDefined =>
           goto(AnswerExampleQuestionsRouteType(s.model))
       }
 
-    final def submittedExampleQuestionsAnswerRouteType(user: String)(exportRouteType: ExampleRouteType) =
+    final def submittedExampleQuestionsAnswerRouteType(user: Option[String])(exportRouteType: ExampleRouteType) =
       Transition {
         case AnswerExampleQuestionsRouteType(model) =>
           gotoSummaryIfCompleteOr(
@@ -197,7 +197,7 @@ object $servicePrefixCamel$JourneyModel extends JourneyModel {
 
     type $servicePrefixCamel$Api = $servicePrefixCamel$$servicePrefixCamel$Request => Future[$servicePrefixCamel$CaseResponse]
 
-    final def createCase(createCaseApi: $servicePrefixCamel$Api)(eori: String)(implicit ec: ExecutionContext) =
+    final def createCase(createCaseApi: $servicePrefixCamel$Api)(eori: Option[String])(implicit ec: ExecutionContext) =
       Transition {
         case state: ExampleQuestionsSummary =>
           val request =

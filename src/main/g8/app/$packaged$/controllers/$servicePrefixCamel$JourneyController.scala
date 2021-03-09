@@ -55,13 +55,16 @@ class $servicePrefixCamel$JourneyController @Inject() (
   import $package$.journeys.$servicePrefixCamel$JourneyModel._
 
   /** AsUser authorisation request */
-  final val AsUser: WithAuthorised[String] = { implicit request =>
+  final val AsUser: WithAuthorised[Option[String]] = { implicit request =>
     authorisedWithEnrolment(appConfig.authorisedServiceName, appConfig.authorisedIdentifierKey)
   }
 
   /** Base authorized action builder */
   final val whenAuthorisedAsUser =
-    actions.whenAuthorisedWithRetrievals[String](AsUser)
+    actions.whenAuthorised(AsUser)
+
+  final val whenAuthorisedAsUserWithEori =
+    actions.whenAuthorisedWithRetrievals(AsUser)
 
   /** Dummy action to use only when developing to fill loose-ends. */
   final val actionNotYetImplemented = Action(NotImplemented)
@@ -94,7 +97,7 @@ class $servicePrefixCamel$JourneyController @Inject() (
 
   // POST /new/declaration-details
   final val submitDeclarationDetails: Action[AnyContent] =
-    whenAuthorisedAsUser
+    whenAuthorisedAsUserWithEori
       .bindForm(DeclarationDetailsForm)
       .apply(Transitions.submittedDeclarationDetails)
 
@@ -108,7 +111,7 @@ class $servicePrefixCamel$JourneyController @Inject() (
 
   // POST /new/export/request-type
   final val submitExampleQuestionsRequestTypeAnswer: Action[AnyContent] =
-    whenAuthorisedAsUser
+    whenAuthorisedAsUserWithEori
       .bindForm(ExampleRequestTypeForm)
       .apply(Transitions.submittedExampleQuestionsAnswerRequestType)
 
@@ -120,7 +123,7 @@ class $servicePrefixCamel$JourneyController @Inject() (
 
   // POST /new/export/route-type
   final val submitExampleQuestionsRouteTypeAnswer: Action[AnyContent] =
-    whenAuthorisedAsUser
+    whenAuthorisedAsUserWithEori
       .bindForm(ExampleRouteTypeForm)
       .apply(Transitions.submittedExampleQuestionsAnswerRouteType)
 
@@ -133,7 +136,7 @@ class $servicePrefixCamel$JourneyController @Inject() (
 
   // POST /new/create-case
   final def createCase: Action[AnyContent] =
-    whenAuthorisedAsUser
+    whenAuthorisedAsUserWithEori
       .applyWithRequest { implicit request =>
         Transitions.createCase($servicePrefixcamel$ApiConnector.createCase(_))
       }

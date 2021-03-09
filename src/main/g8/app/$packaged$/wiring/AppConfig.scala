@@ -36,6 +36,7 @@ trait AppConfig {
   val appName: String
   val baseInternalCallbackUrl: String
   val baseExternalCallbackUrl: String
+
   val authBaseUrl: String
   val $servicePrefixcamel$ApiBaseUrl: String
   val upscanInitiateBaseUrl: String
@@ -46,7 +47,6 @@ trait AppConfig {
   val mongoSessionExpiryTime: Int
   val authorisedServiceName: String
   val authorisedIdentifierKey: String
-  val authorisedStrideGroup: String
   val subscriptionJourneyUrl: String
 
   val languageMap: Map[String, Lang] = Map(
@@ -65,8 +65,11 @@ trait AppConfig {
   def requestUri(implicit request: RequestHeader): String =
     SafeRedirectUrl(baseExternalCallbackUrl + request.uri).encodedUrl
 
-  def feedbackUrl(implicit request: RequestHeader): String =
+  def betaFeedbackUrl(implicit request: RequestHeader): String =
     s"\$contactHost/contact/beta-feedback?service=\$contactFormServiceIdentifier&backUrl=\$requestUri"
+
+  def reportProblemUrl(implicit request: RequestHeader): String =
+    s"\$contactHost/contact/problem_reports_nonjs?newTab=true&service=\$contactFormServiceIdentifier&backUrl=\$requestUri"
 
   val signOutUrl: String
 
@@ -85,6 +88,7 @@ class AppConfigImpl @Inject() (config: ServicesConfig) extends AppConfig {
 
   override val baseExternalCallbackUrl: String = config.getString("urls.callback.external")
   override val baseInternalCallbackUrl: String = config.getString("urls.callback.internal")
+
   override val authBaseUrl: String = config.baseUrl("auth")
   override val $servicePrefixcamel$ApiBaseUrl: String = config.baseUrl("$servicePrefixHyphen$-api")
   override val upscanInitiateBaseUrl: String = config.baseUrl("upscan-initiate")
@@ -110,9 +114,7 @@ class AppConfigImpl @Inject() (config: ServicesConfig) extends AppConfig {
   override val authorisedServiceName: String = config.getString("authorisedServiceName")
   override val authorisedIdentifierKey: String = config.getString("authorisedIdentifierKey")
 
-  override val authorisedStrideGroup: String = config.getString("authorisedStrideGroup")
-
-  override val subscriptionJourneyUrl: String = config.getString("subscriptionJourneyUrl")
+  override val subscriptionJourneyUrl: String = config.getString("urls.subscriptionJourney")
 
   override val gtmContainerId: Option[String] = Try(config.getString("gtm.containerId")).toOption
 
@@ -121,7 +123,8 @@ class AppConfigImpl @Inject() (config: ServicesConfig) extends AppConfig {
 
   private val exitSurveyBaseUrl =
     config.getString("feedback-frontend.host") + config.getString("feedback-frontend.url")
-  override val exitSurveyUrl = s"\$exitSurveyBaseUrl\$contactFormServiceIdentifier"
+
+  override val exitSurveyUrl = s"\$exitSurveyBaseUrl/\$contactFormServiceIdentifier"
 
   override val signOutUrl: String = config.getString("urls.signOut")
   override val researchBannerUrl: String = config.getString("urls.researchBanner")
@@ -131,8 +134,8 @@ class AppConfigImpl @Inject() (config: ServicesConfig) extends AppConfig {
 
   val fileFormats: AppConfig.FileFormats = AppConfig.FileFormats(
     maxFileSizeMb = config.getInt("file-formats.max-file-size-mb"),
-    approvedFileTypes = config.getString("file-formats.approved-file-extensions"),
-    approvedFileExtensions = config.getString("file-formats.approved-file-types")
+    approvedFileExtensions = config.getString("file-formats.approved-file-extensions"),
+    approvedFileTypes = config.getString("file-formats.approved-file-types")
   )
 
   override val traceFSM: Boolean = config.getBoolean("trace.fsm")

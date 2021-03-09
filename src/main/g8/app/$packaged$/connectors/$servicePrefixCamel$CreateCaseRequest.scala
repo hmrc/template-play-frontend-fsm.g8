@@ -62,7 +62,7 @@ import $package$.models._
 case class $servicePrefixCamel$$servicePrefixCamel$Request(
   declarationDetails: DeclarationDetails,
   questionsAnswers: QuestionsAnswers,
-  eori: String
+  eori: Option[String]
 )
 
 object $servicePrefixCamel$$servicePrefixCamel$Request {
