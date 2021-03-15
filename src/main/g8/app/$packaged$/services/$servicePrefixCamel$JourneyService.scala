@@ -18,12 +18,13 @@ package $package$.services
 
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Format
-import uk.gov.hmrc.cache.repository.CacheMongoRepository
 import uk.gov.hmrc.crypto.ApplicationCrypto
 import $package$.journeys.{$servicePrefixCamel$JourneyModel, $servicePrefixCamel$JourneyStateFormats}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.fsm.PersistentJourneyService
 import $package$.wiring.AppConfig
+import $package$.repository.CacheRepository
+import akka.actor.ActorSystem
 
 trait $servicePrefixCamel$JourneyService[RequestContext] extends PersistentJourneyService[RequestContext] {
 
@@ -34,16 +35,17 @@ trait $servicePrefixCamel$JourneyService[RequestContext] extends PersistentJourn
   // do not keep errors or transient states in the journey history
   override val breadcrumbsRetentionStrategy: Breadcrumbs => Breadcrumbs =
     _.filterNot(s => s.isInstanceOf[model.IsError] || s.isInstanceOf[model.IsTransient])
-      .take(2) // retain last 3 states as a breadcrumbs
+      .take(1) // retain last 2 states as a breadcrumbs
 }
 
 trait $servicePrefixCamel$JourneyServiceWithHeaderCarrier extends $servicePrefixCamel$JourneyService[HeaderCarrier]
 
 @Singleton
 case class MongoDBCached$servicePrefixCamel$JourneyService @Inject() (
-  cacheMongoRepository: CacheMongoRepository,
+  cacheRepository: CacheRepository,
   applicationCrypto: ApplicationCrypto,
-  appConfig: AppConfig
+  appConfig: AppConfig,
+  actorSystem: ActorSystem
 ) extends MongoDBCachedJourneyService[HeaderCarrier] with $servicePrefixCamel$JourneyServiceWithHeaderCarrier {
 
   override val stateFormats: Format[model.State] =

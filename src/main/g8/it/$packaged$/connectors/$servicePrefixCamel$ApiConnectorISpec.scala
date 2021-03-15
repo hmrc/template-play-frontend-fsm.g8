@@ -20,6 +20,8 @@ class $servicePrefixCamel$ApiConnectorISpec extends $servicePrefixCamel$ApiConne
 
         result.result shouldBe Some($servicePrefixCamel$Result("A1234567890", generatedAt))
         result.error shouldBe None
+
+        verifyCreateCaseRequestHappened(1)
       }
 
       "return error code and message if failure" in {
@@ -34,6 +36,8 @@ class $servicePrefixCamel$ApiConnectorISpec extends $servicePrefixCamel$ApiConne
 
         result.result shouldBe None
         result.error shouldBe Some(ApiError("555", Some("Foo Bar")))
+
+        verifyCreateCaseRequestHappened(3)
       }
 
       "throw exception if returns 500" in {
@@ -42,6 +46,8 @@ class $servicePrefixCamel$ApiConnectorISpec extends $servicePrefixCamel$ApiConne
         an[$servicePrefixCamel$ApiError] shouldBe thrownBy {
           await(connector.createCase(createCaseRequest))
         }
+
+        verifyCreateCaseRequestHappened(3)
       }
     }
   }

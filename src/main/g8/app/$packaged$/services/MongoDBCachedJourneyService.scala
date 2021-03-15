@@ -17,12 +17,13 @@
 package $package$.services
 
 import play.api.libs.json.{Format, Json}
-import uk.gov.hmrc.cache.repository.{CacheMongoRepository, CacheRepository}
 import uk.gov.hmrc.crypto.json.{JsonDecryptor, JsonEncryptor}
 import uk.gov.hmrc.crypto.{ApplicationCrypto, CompositeSymmetricCrypto, Protected}
 import uk.gov.hmrc.play.fsm.PersistentJourneyService
 
 import scala.concurrent.{ExecutionContext, Future}
+import $package$.repository.CacheRepository
+import akka.actor.ActorSystem
 
 /**
   * Journey persistence service mixin,
@@ -30,11 +31,14 @@ import scala.concurrent.{ExecutionContext, Future}
   */
 trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyService[RequestContext] {
 
-  val cacheMongoRepository: CacheMongoRepository
+  val actorSystem: ActorSystem
+  val cacheRepository: CacheRepository
   val applicationCrypto: ApplicationCrypto
   val stateFormats: Format[model.State]
   def getJourneyId(context: RequestContext): Option[String]
   val traceFSM: Boolean = false
+
+  private val self = this
 
   case class PersistentState(state: model.State, breadcrumbs: List[model.State])
 
@@ -46,17 +50,50 @@ trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyServi
   implicit lazy val encryptionFormat: JsonEncryptor[PersistentState] = new JsonEncryptor()
   implicit lazy val decryptionFormat: JsonDecryptor[PersistentState] = new JsonDecryptor()
 
-  final val cache = new SessionCache[Protected[PersistentState], RequestContext] {
+  final val cache = new JourneyCache[Protected[PersistentState], RequestContext] {
 
-    override lazy val sessionName: String = journeyKey
-    override lazy val cacheRepository: CacheRepository = cacheMongoRepository
+    override lazy val actorSystem: ActorSystem = self.actorSystem
+    override lazy val journeyKey: String = self.journeyKey
+    override lazy val cacheRepository: CacheRepository = self.cacheRepository
+    override lazy val format: Format[Protected[PersistentState]] = implicitly[Format[Protected[PersistentState]]]
 
-    // uses journeyId as a sessionId to persist state and breadcrumbs
-    override def getSessionId(implicit requestContext: RequestContext): Option[String] =
-      getJourneyId(requestContext)
+    override def getJourneyId(implicit requestContext: RequestContext): Option[String] =
+      self.getJourneyId(requestContext)
   }
 
-  override protected def fetch(implicit
+  final override def apply(
+    transition: model.Transition
+  )(implicit rc: RequestContext, ec: ExecutionContext): Future[StateAndBreadcrumbs] =
+    cache
+      .modify(Protected(PersistentState(model.root, Nil))) { protectedEntry =>
+        val entry = protectedEntry.decryptedValue
+        val (state, breadcrumbs) = (entry.state, entry.breadcrumbs)
+        transition.apply
+          .applyOrElse(
+            state,
+            (_: model.State) => model.fail(model.TransitionNotAllowed(state, breadcrumbs, transition))
+          )
+          .map { endState =>
+            Protected(
+              PersistentState(
+                endState,
+                if (endState == state) breadcrumbs
+                else state :: breadcrumbsRetentionStrategy(breadcrumbs)
+              )
+            )
+          }
+      }
+      .map { protectedEntry =>
+        val entry = protectedEntry.decryptedValue
+        val stateAndBreadcrumbs = (entry.state, entry.breadcrumbs)
+        if (traceFSM) {
+          println("-" + stateAndBreadcrumbs._2.length + "-" * 32)
+          println(stateAndBreadcrumbs._1)
+        }
+        stateAndBreadcrumbs
+      }
+
+  final override protected def fetch(implicit
     requestContext: RequestContext,
     ec: ExecutionContext
   ): Future[Option[StateAndBreadcrumbs]] =
@@ -66,23 +103,23 @@ trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyServi
         (entry.state, entry.breadcrumbs)
       })
 
-  override protected def save(
-    state: StateAndBreadcrumbs
+  final override protected def save(
+    stateAndBreadcrumbs: StateAndBreadcrumbs
   )(implicit requestContext: RequestContext, ec: ExecutionContext): Future[StateAndBreadcrumbs] = {
-    val entry = PersistentState(state._1, state._2)
+    val entry = PersistentState(stateAndBreadcrumbs._1, stateAndBreadcrumbs._2)
     val protectedEntry = Protected(entry)
     cache
       .save(protectedEntry)
       .map { _ =>
         if (traceFSM) {
-          println("-" + state._2.length + "-" * 32)
-          println(state._1)
+          println("-" + stateAndBreadcrumbs._2.length + "-" * 32)
+          println(stateAndBreadcrumbs._1)
         }
-        state
+        stateAndBreadcrumbs
       }
   }
 
-  override def clear(implicit requestContext: RequestContext, ec: ExecutionContext): Future[Unit] =
-    cache.delete().map(_ => ())
+  final override def clear(implicit requestContext: RequestContext, ec: ExecutionContext): Future[Unit] =
+    cache.clear()
 
 }

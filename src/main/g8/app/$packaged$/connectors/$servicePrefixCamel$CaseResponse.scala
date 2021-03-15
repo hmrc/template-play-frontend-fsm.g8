@@ -19,6 +19,9 @@ package $package$.connectors
 import play.api.libs.json.{Format, Json}
 
 import java.time.LocalDateTime
+import scala.util.Success
+import scala.util.Failure
+import scala.util.Try
 
 case class $servicePrefixCamel$Result(caseId: String, generatedAt: LocalDateTime)
 
@@ -38,4 +41,14 @@ case class $servicePrefixCamel$CaseResponse(
 object $servicePrefixCamel$CaseResponse {
   implicit val formats: Format[$servicePrefixCamel$CaseResponse] =
     Json.format[$servicePrefixCamel$CaseResponse]
+
+  final def shouldRetry(response: Try[$servicePrefixCamel$CaseResponse]): Boolean =
+    response match {
+      case Success(result) if result.error.map(_.errorCode).exists(_.matches("5\\\\d\\\\d")) => true
+      case Failure($servicePrefixCamel$ApiError(e))                                            => true
+      case _                                                                             => false
+    }
+
+  final def errorMessage(response: $servicePrefixCamel$CaseResponse): String =
+    s"\${response.error.map(_.errorCode).getOrElse("")} \${response.error.flatMap(_.errorMessage).getOrElse("")}"
 }

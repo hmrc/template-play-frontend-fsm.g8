@@ -23,15 +23,21 @@ import com.kenshoo.play.metrics.Metrics
 import javax.inject.{Inject, Singleton}
 import $package$.wiring.AppConfig
 import uk.gov.hmrc.http._
+import scala.concurrent.duration._
 
 import scala.concurrent.{ExecutionContext, Future}
+import akka.actor.ActorSystem
 
 /**
   * Connects to the backend $servicePrefixHyphen$-route-one service API.
   */
 @Singleton
-class $servicePrefixCamel$ApiConnector @Inject() (appConfig: AppConfig, http: HttpGet with HttpPost, metrics: Metrics)
-    extends ReadSuccessOrFailure[$servicePrefixCamel$CaseResponse] with HttpAPIMonitor {
+class $servicePrefixCamel$ApiConnector @Inject() (
+  appConfig: AppConfig,
+  http: HttpGet with HttpPost,
+  metrics: Metrics,
+  val actorSystem: ActorSystem
+) extends ReadSuccessOrFailure[$servicePrefixCamel$CaseResponse] with HttpAPIMonitor with Retries {
 
   val baseUrl: String = appConfig.$servicePrefixcamel$ApiBaseUrl
   val createCaseApiPath = appConfig.createCaseApiPath
@@ -42,16 +48,18 @@ class $servicePrefixCamel$ApiConnector @Inject() (appConfig: AppConfig, http: Ht
   def createCase(
     request: $servicePrefixCamel$$servicePrefixCamel$Request
   )(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[$servicePrefixCamel$CaseResponse] =
-    monitor(s"ConsumedAPI-$servicePrefixHyphen$-create-case-api-POST") {
-      http
-        .POST[$servicePrefixCamel$$servicePrefixCamel$Request, $servicePrefixCamel$CaseResponse](
-          new URL(baseUrl + createCaseApiPath).toExternalForm,
-          request
-        )
-        .recoverWith {
-          case e: Throwable =>
-            Future.failed($servicePrefixCamel$ApiError(e))
-        }
+    retry(1.second, 2.seconds)($servicePrefixCamel$CaseResponse.shouldRetry, $servicePrefixCamel$CaseResponse.errorMessage) {
+      monitor(s"ConsumedAPI-$servicePrefixHyphen$-create-case-api-POST") {
+        http
+          .POST[$servicePrefixCamel$$servicePrefixCamel$Request, $servicePrefixCamel$CaseResponse](
+            new URL(baseUrl + createCaseApiPath).toExternalForm,
+            request
+          )
+          .recoverWith {
+            case e: Throwable =>
+              Future.failed($servicePrefixCamel$ApiError(e))
+          }
+      }
     }
 
 }

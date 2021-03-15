@@ -2,7 +2,6 @@ package $package$.controllers
 
 import play.api.libs.json.Format
 import play.api.mvc.Session
-import uk.gov.hmrc.cache.repository.CacheMongoRepository
 import uk.gov.hmrc.crypto.{ApplicationCrypto, PlainText}
 import $package$.connectors.$servicePrefixCamel$Result
 import $package$.journeys.$servicePrefixCamel$JourneyStateFormats
@@ -15,6 +14,8 @@ import java.time.LocalDate
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.libs.ws.DefaultWSCookie
 import java.time.LocalDateTime
+import akka.actor.ActorSystem
+import $package$.repository.CacheRepository
 class $servicePrefixCamel$JourneyISpec extends $servicePrefixCamel$JourneyISpecSetup with $servicePrefixCamel$ApiStubs {
 
   import journey.model.State._
@@ -327,7 +328,8 @@ trait $servicePrefixCamel$JourneyISpecSetup extends ServerISpec {
   lazy val journey = new TestJourneyService[JourneyId]
     with $servicePrefixCamel$JourneyService[JourneyId] with MongoDBCachedJourneyService[JourneyId] {
 
-    override lazy val cacheMongoRepository = app.injector.instanceOf[CacheMongoRepository]
+    override lazy val actorSystem: ActorSystem = app.injector.instanceOf[ActorSystem]
+    override lazy val cacheRepository = app.injector.instanceOf[CacheRepository]
     override lazy val applicationCrypto = app.injector.instanceOf[ApplicationCrypto]
 
     override val stateFormats: Format[model.State] =
@@ -336,7 +338,7 @@ trait $servicePrefixCamel$JourneyISpecSetup extends ServerISpec {
     override def getJourneyId(journeyId: JourneyId): Option[String] = Some(journeyId.value)
   }
 
-  def request(path: String)(implicit journeyId: JourneyId) = {
+  final def request(path: String)(implicit journeyId: JourneyId) = {
     val sessionCookie = sessionCookieBaker.encodeAsCookie(Session(Map(journey.journeyKey -> journeyId.value)))
 
     wsClient
