@@ -22,8 +22,8 @@ lazy val compileDeps = Seq(
   "uk.gov.hmrc"                  %% "domain"                     % "5.10.0-play-27",
   "uk.gov.hmrc.mongo"            %% "hmrc-mongo-play-27"         % "0.47.0",
   "uk.gov.hmrc"                  %% "json-encryption"            % "4.8.0-play-27",
-  "uk.gov.hmrc"                  %% "play-frontend-govuk"        % "0.65.0-play-27",
-  "uk.gov.hmrc"                  %% "play-frontend-hmrc"         % "0.49.0-play-27",
+  "uk.gov.hmrc"                  %% "play-frontend-govuk"        % "0.71.0-play-27",
+  "uk.gov.hmrc"                  %% "play-frontend-hmrc"         % "0.60.0-play-27",
   "com.googlecode.libphonenumber" % "libphonenumber"             % "8.12.19",
   "com.sun.mail"                  % "javax.mail"                 % "1.6.2"
 )
@@ -51,12 +51,6 @@ lazy val root = (project in file("."))
       "$package$.views.ViewHelpers._"
     ),
     PlayKeys.playRunHooks += Webpack(javaScriptDirectory.value),
-    resolvers := Seq(
-      Resolver.bintrayRepo("hmrc", "releases"),
-      Resolver.bintrayRepo("hmrc", "release-candidates"),
-      Resolver.typesafeRepo("releases"),
-      Resolver.jcenterRepo
-    ),
     libraryDependencies ++= compileDeps ++ testDeps("test") ++ testDeps("it"),
     publishingSettings,
     javaScriptSettings,
