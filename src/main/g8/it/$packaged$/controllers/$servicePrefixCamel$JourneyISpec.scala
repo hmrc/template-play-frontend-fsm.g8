@@ -13,14 +13,14 @@ import $package$.support.{ServerISpec, TestData, TestJourneyService}
 import java.time.LocalDate
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.libs.ws.DefaultWSCookie
-import java.time.LocalDateTime
 import akka.actor.ActorSystem
 import $package$.repository.CacheRepository
 class $servicePrefixCamel$JourneyISpec extends $servicePrefixCamel$JourneyISpecSetup with $servicePrefixCamel$ApiStubs {
 
   import journey.model.State._
 
-  val dateTime = LocalDateTime.now()
+  val today = LocalDate.now
+  val (y, m, d) = (today.getYear(), today.getMonthValue(), today.getDayOfMonth())
 
   "$servicePrefixCamel$JourneyController" when {
     "GET /" should {
@@ -83,9 +83,9 @@ class $servicePrefixCamel$JourneyISpec extends $servicePrefixCamel$JourneyISpecS
         givenAuthorisedForEnrolment(Enrolment("HMRC-XYZ", "$authorisedIdentifierKey$", "foo"))
 
         val payload = Map(
-          "entryDate.year"  -> "2020",
-          "entryDate.month" -> "09",
-          "entryDate.day"   -> "23",
+          "entryDate.year"  -> s"\$y",
+          "entryDate.month" -> f"\$m%02d",
+          "entryDate.day"   -> f"\$d%02d",
           "epu"             -> "235",
           "entryNumber"     -> "A11111X"
         )
@@ -97,7 +97,7 @@ class $servicePrefixCamel$JourneyISpec extends $servicePrefixCamel$JourneyISpecS
         result.body should include(htmlEscapedMessage("view.export-questions.requestType.heading"))
         journey.getState shouldBe AnswerExampleQuestionsRequestType(
           ExampleQuestionsStateModel(
-            DeclarationDetails(EPU(235), EntryNumber("A11111X"), LocalDate.parse("2020-09-23")),
+            DeclarationDetails(EPU(235), EntryNumber("A11111X"), today),
             ExampleQuestions()
           )
         )
