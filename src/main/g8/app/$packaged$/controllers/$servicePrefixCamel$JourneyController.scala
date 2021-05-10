@@ -161,25 +161,25 @@ class $servicePrefixCamel$JourneyController @Inject() (
   final override def getCallFor(state: State)(implicit request: Request[_]): Call =
     state match {
       case Start =>
-        controller.showStart()
+        controller.showStart
 
       case _: EnterDeclarationDetails =>
-        controller.showEnterDeclarationDetails()
+        controller.showEnterDeclarationDetails
 
       case _: AnswerExampleQuestionsRequestType =>
-        controller.showAnswerExampleQuestionsRequestType()
+        controller.showAnswerExampleQuestionsRequestType
 
       case _: AnswerExampleQuestionsRouteType =>
-        controller.showAnswerExampleQuestionsRouteType()
+        controller.showAnswerExampleQuestionsRouteType
 
       case _: ExampleQuestionsSummary =>
-        controller.showExampleQuestionsSummary()
+        controller.showExampleQuestionsSummary
 
       case _: $servicePrefixCamel$Confirmation =>
-        controller.show$servicePrefixCamel$Confirmation()
+        controller.show$servicePrefixCamel$Confirmation
 
       case _: CaseAlreadyExists =>
-        controller.showCaseAlreadyExists()
+        controller.showCaseAlreadyExists
 
       case _ =>
         workInProgresDeadEndCall
@@ -204,7 +204,7 @@ class $servicePrefixCamel$JourneyController @Inject() (
         Ok(
           views.declarationDetailsEntryView(
             formWithErrors.or(DeclarationDetailsForm, declarationDetailsOpt),
-            controller.submitDeclarationDetails(),
+            controller.submitDeclarationDetails,
             controller.showStart
           )
         )
@@ -213,8 +213,8 @@ class $servicePrefixCamel$JourneyController @Inject() (
         Ok(
           views.exportQuestionsRequestTypeView(
             formWithErrors.or(ExampleRequestTypeForm, model.exportQuestionsAnswers.requestType),
-            controller.submitExampleQuestionsRequestTypeAnswer(),
-            controller.showEnterDeclarationDetails()
+            controller.submitExampleQuestionsRequestTypeAnswer,
+            controller.showEnterDeclarationDetails
           )
         )
 
@@ -222,8 +222,8 @@ class $servicePrefixCamel$JourneyController @Inject() (
         Ok(
           views.exportQuestionsRouteTypeView(
             formWithErrors.or(ExampleRouteTypeForm, model.exportQuestionsAnswers.routeType),
-            controller.submitExampleQuestionsRouteTypeAnswer(),
-            controller.showAnswerExampleQuestionsRequestType()
+            controller.submitExampleQuestionsRouteTypeAnswer,
+            controller.showAnswerExampleQuestionsRequestType
           )
         )
 
@@ -242,14 +242,14 @@ class $servicePrefixCamel$JourneyController @Inject() (
           views.createCaseConfirmationView(
             caseReferenceId,
             generatedAt.ddMMYYYYAtTimeFormat,
-            controller.showStart()
+            controller.showStart
           )
         )
 
       case CaseAlreadyExists(_) =>
         Ok(
           views.caseAlreadyExistsView(
-            routes.$servicePrefixCamel$JourneyController.showStart()
+            routes.$servicePrefixCamel$JourneyController.showStart
           )
         )
 

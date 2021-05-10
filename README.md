@@ -1,7 +1,7 @@
-HMRC Digital Scala Play 2.7 Stateful Frontend Microservice
+HMRC Digital Scala Play 2.8 Stateful Frontend Microservice
 ===
 
-A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital Scala Play 2.7 Stateful Frontend Microservice
+A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital Scala Play 2.8 Stateful Frontend Microservice
 
 
 
