@@ -25,7 +25,7 @@ if [[ -d ./src/main/g8 ]]; then
         cd .makeitg8
    fi
 
-   sbt "run --noclear --force --source ../../target/sandbox/trader-services-route-one-frontend --target ../.. --name template-play-27-frontend-fsm  --package uk.gov.hmrc.traderservices --description HMRC+Digital+Scala+Play+2.8+Stateful+Frontend+Microservice  -K serviceName=Trader+Services+Route+One+Frontend serviceUrlPrefix=send-documents-for-customs-check serviceTargetPort=9379 authorisedIdentifierKey=EORINumber serviceTitle=Send+Documents+For+Customs+Check authorisedServiceName=HMRC-CUS-ORG servicePrefix=Trader+Services" -Dbuild.test.command="sbt test it:test" 
+   sbt "run --noclear --force --source ../../target/sandbox/trader-services-route-one-frontend --target ../.. --name template-play-frontend-fsm.g8  --package uk.gov.hmrc.traderservices --description HMRC+Digital+Scala+Play+2.8+Stateful+Frontend+Microservice  -K serviceName=Trader+Services+Route+One+Frontend serviceUrlPrefix=send-documents-for-customs-check serviceTargetPort=9379 authorisedIdentifierKey=EORINumber serviceTitle=Send+Documents+For+Customs+Check authorisedServiceName=HMRC-CUS-ORG servicePrefix=Trader+Services" -Dbuild.test.command="sbt test it:test" 
 
    echo "Done, updated the template based on target/sandbox/trader-services-route-one-frontend"
    exit 0
