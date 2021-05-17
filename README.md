@@ -65,17 +65,16 @@ the template will supply the following values for the placeholders:
 
     $packaged$ -> uk/gov/hmrc/traderservices
 	$package$ -> uk.gov.hmrc.traderservices
+	$serviceName$ -> Trader Services Route One Frontend
 	$serviceNameSnake$ -> TRADER_SERVICES_ROUTE_ONE_FRONTEND
 	$serviceNameHyphen$ -> trader-services-route-one-frontend
-	$serviceName$ -> Trader Services Route One Frontend
-	$serviceUrlPrefixHyphen$ -> send-documents-for-customs-check
 	$serviceUrlPrefix$ -> send-documents-for-customs-check
+	$servicePrefix$ -> Trader Services
 	$servicePrefixCamel$ -> TraderServices
 	$servicePrefixcamel$ -> traderServices
 	$servicePrefixSnake$ -> TRADER_SERVICES
 	$servicePrefixHyphen$ -> trader-services
 	$servicePrefixLowercase$ -> trader services
-	$servicePrefix$ -> Trader Services
 	$authorisedServiceName$ -> HMRC-CUS-ORG
 	$authorisedIdentifierKey$ -> EORINumber
 	$serviceTargetPort$ -> 9379

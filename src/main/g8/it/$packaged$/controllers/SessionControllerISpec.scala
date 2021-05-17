@@ -52,7 +52,7 @@ trait SessionControllerISpecSetup extends ServerISpec {
       get(urlPathEqualTo("/dummy-sign-out-url"))
         .withQueryParam(
           "continue",
-          matching(s"\$wireMockBaseUrlAsString/$serviceUrlPrefixHyphen$/timedout")
+          matching(s"\$wireMockBaseUrlAsString/$serviceUrlPrefix$/timedout")
         )
         .willReturn(
           aResponse()

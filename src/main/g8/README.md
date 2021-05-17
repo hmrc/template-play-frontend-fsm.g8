@@ -20,7 +20,7 @@ HMRC Digital frontend microservice.
 
 It should then be listening on port $serviceTargetPort$
 
-    browse http://localhost:$serviceTargetPort$/$serviceUrlPrefixHyphen$
+    browse http://localhost:$serviceTargetPort$/$serviceUrlPrefix$
 
 ### License
 

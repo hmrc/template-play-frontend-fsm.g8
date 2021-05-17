@@ -308,7 +308,7 @@ class $servicePrefixCamel$JourneyISpec extends $servicePrefixCamel$JourneyISpecS
       }
     }
 
-    "GET /$serviceUrlPrefixHyphen$/foo" should {
+    "GET /$serviceUrlPrefix$/foo" should {
       "return an error page not found" in {
         implicit val journeyId: JourneyId = JourneyId()
         givenAuthorisedForEnrolment(Enrolment("HMRC-XYZ", "$authorisedIdentifierKey$", "foo"))

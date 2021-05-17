@@ -71,7 +71,7 @@ class $servicePrefixCamel$JourneyController @Inject() (
 
   // Dummy URL to use when developing the journey
   final val workInProgresDeadEndCall =
-    Call("GET", "/$serviceUrlPrefixHyphen$/work-in-progress")
+    Call("GET", "/$serviceUrlPrefix$/work-in-progress")
 
   // Redirection to the enrolment subscription journey
   final def toSubscriptionJourney(continueUrl: String): Result =
