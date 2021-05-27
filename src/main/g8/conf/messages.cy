@@ -1,4 +1,4 @@
-service.name = Send documents for a customs check
+service.name = New Shiny Service
 
 # Sitewide Messages
 # ----------------------------------------------------------

@@ -1,4 +1,4 @@
-service.name = Send documents for a customs check
+service.name = New Shiny Service
 # Site wide messages
 # ----------------------------------------------------------
 site.fullStop =.
@@ -17,7 +17,7 @@ site.submitAndContinue = Submit and continue
 site.acceptAndContinue = Accept and continue
 site.confirmAndSubmit = Confirm and submit
 site.textarea.char_limit = (Limit is {0} characters)
-site.serviceName = Send documents for a customs check
+site.serviceName = New Shiny Service
 site.govuk = GOV.UK
 site.signOut = Sign out
 site.getHelpWithThisPage = Get help with this page
@@ -62,7 +62,7 @@ global.error.404.title=Page not found
 global.error.404.heading=Page not found
 global.error.404.line1=If you typed the web address, check it is correct.
 global.error.404.line2=If you pasted the web address, check you copied the entire address.
-global.error.404.line3=<a class="govuk-link" href="{0}">Send your documents for a customs check</a>
+global.error.404.line3=<a class="govuk-link" href="{0}">New Shiny Service</a>
 
 global.error.500.title=Service unavailable
 global.error.500.heading=Sorry, the service is unavailable
