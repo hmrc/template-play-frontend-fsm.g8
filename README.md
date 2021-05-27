@@ -12,14 +12,14 @@ How to create a new project based on the template?
 * Decide your project name (the hardest part :))
 * Run the command
 
-    `sbt new hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="New Shiny Frontend" --serviceUrlPrefix="new-shiny-service" --serviceTargetPort="9379" --authorisedIdentifierKey="FooNumber" --authorisedServiceName="HMRC-NEW-SHINY" --servicePrefix="NewShiny" --package="uk.gov.hmrc.newshiny" -o new-shiny-frontend`
+    `sbt new hmrc/template-play-frontend-fsm.g8 --branch master --serviceName="New Shiny Frontend" --serviceUrlPrefix="new-shiny-service" --serviceTargetPort="9379" --authorisedIdentifierKey="FooNumber" --authorisedServiceName="HMRC-NEW-SHINY" --servicePrefix="NewShiny" --package="uk.gov.hmrc.newshiny" -o new-shiny-frontend`
 
 or    
 
 * Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Run the command
 
-    `g8 hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="New Shiny Frontend" --serviceUrlPrefix="new-shiny-service" --serviceTargetPort="9379" --authorisedIdentifierKey="FooNumber" --authorisedServiceName="HMRC-NEW-SHINY" --servicePrefix="NewShiny" --package="uk.gov.hmrc.newshiny" -o new-shiny-frontend`
+    `g8 hmrc/template-play-frontend-fsm.g8 --branch master --serviceName="New Shiny Frontend" --serviceUrlPrefix="new-shiny-service" --serviceTargetPort="9379" --authorisedIdentifierKey="FooNumber" --authorisedServiceName="HMRC-NEW-SHINY" --servicePrefix="NewShiny" --package="uk.gov.hmrc.newshiny" -o new-shiny-frontend`
     
 and then
     
