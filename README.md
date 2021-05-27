@@ -153,15 +153,8 @@ and produce the folders and files as shown below:
 	│                   │   └── NewShinyJourneyStateFormats.scala
 	│                   │
 	│                   ├── models
-	│                   │   ├── DeclarationDetails.scala
-	│                   │   ├── EntryNumber.scala
 	│                   │   ├── EnumerationFormats.scala
-	│                   │   ├── EPU.scala
-	│                   │   ├── ExampleQuestions.scala
-	│                   │   ├── ExampleQuestionsStateModel.scala
-	│                   │   ├── ExampleRequestType.scala
-	│                   │   ├── ExampleRouteType.scala
-	│                   │   ├── QuestionsAnswers.scala
+	│                   │   ├── ExampleEnum.scala
 	│                   │   ├── SealedTraitFormats.scala
 	│                   │   ├── SimpleDecimalFormat.scala
 	│                   │   └── SimpleStringFormat.scala
@@ -254,7 +247,6 @@ and produce the folders and files as shown below:
 	│                       ├── Port.scala
 	│                       ├── ServerISpec.scala
 	│                       ├── TestAppConfig.scala
-	│                       ├── TestData.scala
 	│                       ├── TestJourneyService.scala
 	│                       ├── UnitSpec.scala
 	│                       └── WireMockSupport.scala
@@ -285,8 +277,7 @@ and produce the folders and files as shown below:
 	                    │   └── NewShinyJourneyStateFormatsSpec.scala
 	                    │
 	                    ├── model
-	                    │   ├── DeclarationDetailsSpec.scala
-	                    │   └── ExampleQuestionsFormatSpec.scala
+	                    │   └── ExampleEnumFormatSpec.scala
 	                    │
 	                    └── support
 	                        ├── CallOpsSpec.scala

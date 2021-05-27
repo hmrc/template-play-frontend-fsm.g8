@@ -6,7 +6,7 @@ import uk.gov.hmrc.crypto.{ApplicationCrypto, PlainText}
 import $package$.journeys.$servicePrefix$JourneyStateFormats
 import $package$.models._
 import $package$.services.{MongoDBCachedJourneyService, $servicePrefix$JourneyService}
-import $package$.support.{ServerISpec, TestData, TestJourneyService}
+import $package$.support.{ServerISpec, TestJourneyService}
 
 import java.time.LocalDate
 import scala.concurrent.ExecutionContext.Implicits.global

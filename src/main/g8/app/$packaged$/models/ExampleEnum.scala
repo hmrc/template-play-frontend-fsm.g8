@@ -16,18 +16,16 @@
 
 package $package$.models
 
-import java.time.LocalDate
+sealed trait ExampleEnum
 
-import play.api.libs.json.{Format, Json}
+object ExampleEnum extends EnumerationFormats[ExampleEnum] {
 
-case class DeclarationDetails(epu: EPU, entryNumber: EntryNumber, entryDate: LocalDate) {
+  case object A extends ExampleEnum
+  case object B extends ExampleEnum
+  case object C extends ExampleEnum
+  case object D1 extends ExampleEnum
+  case object D2 extends ExampleEnum
+  case object D3 extends ExampleEnum
 
-  val isExampleDeclaration: Boolean =
-    entryNumber.value.headOption.forall(_.isLetter) && entryNumber.value.lastOption.forall(_.isLetter)
-  val isImportDeclaration: Boolean =
-    entryNumber.value.headOption.forall(_.isDigit) && entryNumber.value.lastOption.forall(_.isLetter)
-}
-
-object DeclarationDetails {
-  implicit val formats: Format[DeclarationDetails] = Json.format[DeclarationDetails]
+  val values = Set(A, B, C, D1, D2, D3)
 }
