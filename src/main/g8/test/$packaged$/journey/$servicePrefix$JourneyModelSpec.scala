@@ -16,10 +16,10 @@
 
 package $package$.journey
 
-import $package$.journeys.$servicePrefixCamel$JourneyModel.State._
-import $package$.journeys.$servicePrefixCamel$JourneyModel.Transitions._
-import $package$.journeys.$servicePrefixCamel$JourneyModel.{start => _, _}
-import $package$.services.$servicePrefixCamel$JourneyService
+import $package$.journeys.$servicePrefix$JourneyModel.State._
+import $package$.journeys.$servicePrefix$JourneyModel.Transitions._
+import $package$.journeys.$servicePrefix$JourneyModel.{start => _, _}
+import $package$.services.$servicePrefix$JourneyService
 import $package$.support.InMemoryStore
 import $package$.support.StateMatchers
 import $package$.support.UnitSpec
@@ -28,7 +28,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.reflect.ClassTag
 import scala.util.Try
 
-class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[State] {
+class $servicePrefix$JourneyModelSpec extends UnitSpec with StateMatchers[State] {
 
   import scala.concurrent.duration._
   override implicit val defaultTimeout: FiniteDuration = 60 seconds
@@ -36,7 +36,7 @@ class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[S
   case class DummyContext()
   implicit val dummyContext: DummyContext = DummyContext()
 
-  "$servicePrefixCamel$JourneyModel" when {
+  "$servicePrefix$JourneyModel" when {
     "at state Start" should {
       "stay at Start when start" in {
         given(Start) when start should thenGo(Start)
@@ -46,7 +46,7 @@ class $servicePrefixCamel$JourneyModelSpec extends UnitSpec with StateMatchers[S
   }
 
   case class given[S <: State: ClassTag](initialState: S)
-      extends $servicePrefixCamel$JourneyService[DummyContext] with InMemoryStore[(State, List[State]), DummyContext] {
+      extends $servicePrefix$JourneyService[DummyContext] with InMemoryStore[(State, List[State]), DummyContext] {
 
     await(save((initialState, Nil)))
 

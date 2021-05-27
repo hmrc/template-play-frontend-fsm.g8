@@ -4,7 +4,7 @@ import com.github.tomakehurst.wiremock.client.WireMock._
 import org.scalatest.concurrent.Eventually
 import org.scalatest.time.{Millis, Seconds, Span}
 import play.api.libs.json.Json
-import $package$.services.$servicePrefixCamel$FrontendEvent.$servicePrefixCamel$FrontendEvent
+import $package$.services.$serviceNameCamel$Event.$serviceNameCamel$Event
 import $package$.support.WireMockSupport
 
 trait DataStreamStubs extends Eventually {
@@ -15,7 +15,7 @@ trait DataStreamStubs extends Eventually {
 
   def verifyAuditRequestSent(
     count: Int,
-    event: $servicePrefixCamel$FrontendEvent,
+    event: $serviceNameCamel$Event,
     tags: Map[String, String] = Map.empty,
     detail: Map[String, String] = Map.empty
   ): Unit =
@@ -24,7 +24,7 @@ trait DataStreamStubs extends Eventually {
         count,
         postRequestedFor(urlPathEqualTo(auditUrl))
           .withRequestBody(similarToJson(s"""{
-          |  "auditSource": "$servicePrefixHyphen$-frontend",
+          |  "auditSource": "$serviceNameHyphen$",
           |  "auditType": "\$event",
           |  "tags": \${Json.toJson(tags)},
           |  "detail": \${Json.toJson(detail)}
@@ -32,13 +32,13 @@ trait DataStreamStubs extends Eventually {
       )
     }
 
-  def verifyAuditRequestNotSent(event: $servicePrefixCamel$FrontendEvent): Unit =
+  def verifyAuditRequestNotSent(event: $serviceNameCamel$Event): Unit =
     eventually {
       verify(
         0,
         postRequestedFor(urlPathEqualTo(auditUrl))
           .withRequestBody(similarToJson(s"""{
-          |  "auditSource": "$servicePrefixHyphen$-frontend",
+          |  "auditSource": "$serviceNameHyphen$",
           |  "auditType": "\$event"
           |}"""))
       )

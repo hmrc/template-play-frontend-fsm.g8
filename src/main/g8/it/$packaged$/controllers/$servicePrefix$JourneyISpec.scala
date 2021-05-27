@@ -3,10 +3,10 @@ package $package$.controllers
 import play.api.libs.json.Format
 import play.api.mvc.Session
 import uk.gov.hmrc.crypto.{ApplicationCrypto, PlainText}
-import $package$.journeys.$servicePrefixCamel$JourneyStateFormats
+import $package$.journeys.$servicePrefix$JourneyStateFormats
 import $package$.models._
-import $package$.services.{MongoDBCachedJourneyService, $servicePrefixCamel$JourneyService}
-import $package$.stubs.$servicePrefixCamel$ApiStubs
+import $package$.services.{MongoDBCachedJourneyService, $servicePrefix$JourneyService}
+import $package$.stubs.$servicePrefix$ApiStubs
 import $package$.support.{ServerISpec, TestData, TestJourneyService}
 
 import java.time.LocalDate
@@ -14,14 +14,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.libs.ws.DefaultWSCookie
 import akka.actor.ActorSystem
 import $package$.repository.CacheRepository
-class $servicePrefixCamel$JourneyISpec extends $servicePrefixCamel$JourneyISpecSetup with $servicePrefixCamel$ApiStubs {
+class $servicePrefix$JourneyISpec extends $servicePrefix$JourneyISpecSetup with $servicePrefix$ApiStubs {
 
   import journey.model.State._
 
   val today = LocalDate.now
   val (y, m, d) = (today.getYear(), today.getMonthValue(), today.getDayOfMonth())
 
-  "$servicePrefixCamel$JourneyController" when {
+  "$servicePrefix$JourneyController" when {
     "GET /" should {
       "show the start page" in {
         implicit val journeyId: JourneyId = JourneyId()
@@ -37,17 +37,17 @@ class $servicePrefixCamel$JourneyISpec extends $servicePrefixCamel$JourneyISpecS
   }
 }
 
-trait $servicePrefixCamel$JourneyISpecSetup extends ServerISpec {
+trait $servicePrefix$JourneyISpecSetup extends ServerISpec {
 
   lazy val journey = new TestJourneyService[JourneyId]
-    with $servicePrefixCamel$JourneyService[JourneyId] with MongoDBCachedJourneyService[JourneyId] {
+    with $servicePrefix$JourneyService[JourneyId] with MongoDBCachedJourneyService[JourneyId] {
 
     override lazy val actorSystem: ActorSystem = app.injector.instanceOf[ActorSystem]
     override lazy val cacheRepository = app.injector.instanceOf[CacheRepository]
     override lazy val applicationCrypto = app.injector.instanceOf[ApplicationCrypto]
 
     override val stateFormats: Format[model.State] =
-      $servicePrefixCamel$JourneyStateFormats.formats
+      $servicePrefix$JourneyStateFormats.formats
 
     override def getJourneyId(journeyId: JourneyId): Option[String] = Some(journeyId.value)
   }

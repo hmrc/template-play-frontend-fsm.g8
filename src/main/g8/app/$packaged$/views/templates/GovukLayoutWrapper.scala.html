@@ -24,7 +24,7 @@
 @import views.html.helper.CSPNonce
 @import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import $package$.controllers.routes.SignOutController
-@import $package$.controllers.routes.$servicePrefixCamel$JourneyController
+@import $package$.controllers.routes.$servicePrefix$JourneyController
 @import uk.gov.hmrc.hmrcfrontend.views.Aliases.UserResearchBanner
 
 @this(
@@ -98,7 +98,7 @@ beforeContentBlock = Some(beforeContentBlock),
 bodyEndBlock = None,
 scriptsBlock = Some(scripts),
 headerBlock = Some(hmrcStandardHeader(
-  serviceUrl = Some($servicePrefixCamel$JourneyController.showStart.url),
+  serviceUrl = Some($servicePrefix$JourneyController.showStart.url),
   signOutUrl = if(timeout) Some(SignOutController.signOut().url) else None,
   phaseBanner = Some(standardBetaBanner(url = appConfig.betaFeedbackUrl)),
   userResearchBanner = Some(UserResearchBanner(url = appConfig.researchBannerUrl)),

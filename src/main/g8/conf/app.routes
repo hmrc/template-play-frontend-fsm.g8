@@ -3,7 +3,7 @@
 ->         /govuk-frontend                                          govuk.Routes
 ->         /hmrc-frontend                                           hmrcfrontend.Routes 
 
-GET        /                                                        @$package$.controllers.$servicePrefixCamel$JourneyController.showStart
+GET        /                                                        @$package$.controllers.$servicePrefix$JourneyController.showStart
 
 GET        /accessibility-statement                                 @$package$.controllers.AccessibilityStatementController.showPage
 

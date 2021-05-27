@@ -17,11 +17,11 @@
 package $package$.journeys
 
 import play.api.libs.json._
-import $package$.journeys.$servicePrefixCamel$JourneyModel.State
-import $package$.journeys.$servicePrefixCamel$JourneyModel.State._
+import $package$.journeys.$servicePrefix$JourneyModel.State
+import $package$.journeys.$servicePrefix$JourneyModel.State._
 import uk.gov.hmrc.play.fsm.JsonStateFormats
 
-object $servicePrefixCamel$JourneyStateFormats extends JsonStateFormats[State] {
+object $servicePrefix$JourneyStateFormats extends JsonStateFormats[State] {
 
   override val serializeStateProperties: PartialFunction[State, JsValue] = {
     case _ => JsNull

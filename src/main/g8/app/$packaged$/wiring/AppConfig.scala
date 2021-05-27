@@ -39,7 +39,7 @@ trait AppConfig {
   val baseExternalCallbackUrl: String
 
   val authBaseUrl: String
-  val $servicePrefixcamel$ApiBaseUrl: String
+  val $servicePrefixNoSpaceLowercase$ApiBaseUrl: String
   val upscanInitiateBaseUrl: String
 
   val createCaseApiPath: String
@@ -92,7 +92,7 @@ class AppConfigImpl @Inject() (config: ServicesConfig) extends AppConfig {
   override val baseInternalCallbackUrl: String = config.getString("urls.callback.internal")
 
   override val authBaseUrl: String = config.baseUrl("auth")
-  override val $servicePrefixcamel$ApiBaseUrl: String = config.baseUrl("$servicePrefixHyphen$-api")
+  override val $servicePrefixNoSpaceLowercase$ApiBaseUrl: String = config.baseUrl("$servicePrefixHyphen$-api")
   override val upscanInitiateBaseUrl: String = config.baseUrl("upscan-initiate")
 
   override val createCaseApiPath: String =

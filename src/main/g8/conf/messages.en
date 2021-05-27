@@ -84,13 +84,13 @@ footer.accessibilityStatement = Accessibility statement
 
 # Accessibility statement
 # -----------------------
-a11yStatement.title = Accessibility statement for $servicePrefix$
-a11yStatement.heading = Accessibility statement for $servicePrefix$
+a11yStatement.title = Accessibility statement for New Shiny
+a11yStatement.heading = Accessibility statement for New Shiny
 a11yStatement.p1 = This accessibility statement explains how accessible this service is, what to do if you have difficulty using it, and how to report accessibility problems with the service.
 a11yStatement.p2.start = This service is part of the wider GOV.UK website. There is a separate
 a11yStatement.p2.link = accessibility statement
 a11yStatement.p2.end = for the main GOV.UK website.
-a11yStatement.p3 = This page only contains information about the $servicePrefix$ service, available at
+a11yStatement.p3 = This page only contains information about the New Shiny service, available at
 a11yStatement.p3.link = www.tax.service.gov.uk/coronavirus-statutory-sick-pay
 a11yStatement.usingThisService.h2 = Using this service
 a11yStatement.usingThisService.p1 = This service will reimburse small and medium employers Statutory Sick Pay that has already been paid to employees who have been off work because of coronavirus (COVID-19)

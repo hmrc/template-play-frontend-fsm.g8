@@ -26,31 +26,31 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.play.fsm.{JourneyController, JourneyIdSupport}
 import $package$.connectors._
-import $package$.journeys.$servicePrefixCamel$JourneyModel.State._
+import $package$.journeys.$servicePrefix$JourneyModel.State._
 import $package$.models._
-import $package$.services.$servicePrefixCamel$JourneyServiceWithHeaderCarrier
+import $package$.services.$servicePrefix$JourneyServiceWithHeaderCarrier
 import $package$.wiring.AppConfig
 
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class $servicePrefixCamel$JourneyController @Inject() (
+class $servicePrefix$JourneyController @Inject() (
   appConfig: AppConfig,
   override val messagesApi: MessagesApi,
   val authConnector: FrontendAuthConnector,
   val env: Environment,
   controllerComponents: MessagesControllerComponents,
   views: $package$.views.Views,
-  override val journeyService: $servicePrefixCamel$JourneyServiceWithHeaderCarrier,
+  override val journeyService: $servicePrefix$JourneyServiceWithHeaderCarrier,
   override val actionBuilder: DefaultActionBuilder
 )(implicit val config: Configuration, ec: ExecutionContext)
     extends FrontendController(controllerComponents) with I18nSupport with AuthActions
     with JourneyController[HeaderCarrier] with JourneyIdSupport[HeaderCarrier] {
 
-  final val controller = routes.$servicePrefixCamel$JourneyController
+  final val controller = routes.$servicePrefix$JourneyController
 
-  import $servicePrefixCamel$JourneyController._
-  import $package$.journeys.$servicePrefixCamel$JourneyModel._
+  import $servicePrefix$JourneyController._
+  import $package$.journeys.$servicePrefix$JourneyModel._
 
   /** AsUser authorisation request */
   final val AsUser: WithAuthorised[Option[String]] = { implicit request =>
@@ -126,4 +126,4 @@ class $servicePrefixCamel$JourneyController @Inject() (
     headerCarrier.withExtraHeaders(key -> value)
 }
 
-object $servicePrefixCamel$JourneyController {}
+object $servicePrefix$JourneyController {}

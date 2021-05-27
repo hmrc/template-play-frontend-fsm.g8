@@ -7,15 +7,15 @@ import $package$.support.WireMockSupport
 
 import java.time.LocalDateTime
 
-trait $servicePrefixCamel$ApiStubs {
+trait $servicePrefix$ApiStubs {
   me: WireMockSupport =>
 
-  def validRequestOf$servicePrefixCamel$Api(): String =
-    requestBodyOf$servicePrefixCamel$Api
+  def validRequestOf$servicePrefix$Api(): String =
+    requestBodyOf$servicePrefix$Api
 
   lazy val generatedAt = LocalDateTime.of(2020, 2, 29, 15, 29, 28)
 
-  val requestBodyOf$servicePrefixCamel$Api: String =
+  val requestBodyOf$servicePrefix$Api: String =
     s"""{
        |"declarationDetails":{},
        |"questionsAnswers":{},
@@ -40,13 +40,13 @@ trait $servicePrefixCamel$ApiStubs {
        |  } 
        |}""".stripMargin
 
-  def given$servicePrefixCamel$ApiRequestSucceeds(): StubMapping =
-    given$servicePrefixCamel$ApiStub(200, validRequestOf$servicePrefixCamel$Api(), caseApiSuccessResponseBody())
+  def given$servicePrefix$ApiRequestSucceeds(): StubMapping =
+    given$servicePrefix$ApiStub(200, validRequestOf$servicePrefix$Api(), caseApiSuccessResponseBody())
 
   def givenAnExternalServiceError(): StubMapping =
-    given$servicePrefixCamel$ApiErrorStub(500, validRequestOf$servicePrefixCamel$Api())
+    given$servicePrefix$ApiErrorStub(500, validRequestOf$servicePrefix$Api())
 
-  def given$servicePrefixCamel$ApiStub(httpResponseCode: Int, requestBody: String, responseBody: String): StubMapping =
+  def given$servicePrefix$ApiStub(httpResponseCode: Int, requestBody: String, responseBody: String): StubMapping =
     stubFor(
       post(urlEqualTo(s"/create-case"))
         .withHeader(HeaderNames.CONTENT_TYPE, containing("application/json"))
@@ -59,7 +59,7 @@ trait $servicePrefixCamel$ApiStubs {
         )
     )
 
-  def given$servicePrefixCamel$ApiErrorStub(httpResponseCode: Int, requestBody: String): StubMapping =
+  def given$servicePrefix$ApiErrorStub(httpResponseCode: Int, requestBody: String): StubMapping =
     stubFor(
       post(urlEqualTo(s"/create-case"))
         .withHeader(HeaderNames.CONTENT_TYPE, containing("application/json"))

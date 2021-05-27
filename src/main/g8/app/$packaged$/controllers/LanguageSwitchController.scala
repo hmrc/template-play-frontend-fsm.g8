@@ -28,7 +28,7 @@ class LanguageSwitchController @Inject() (
   controllerComponents: MessagesControllerComponents
 ) extends FrontendController(controllerComponents) with I18nSupport {
 
-  private def fallbackURL: String = routes.$servicePrefixCamel$JourneyController.showStart.url
+  private def fallbackURL: String = routes.$servicePrefix$JourneyController.showStart.url
 
   private def languageMap: Map[String, Lang] = appConfig.languageMap
 

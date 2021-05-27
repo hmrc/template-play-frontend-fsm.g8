@@ -18,18 +18,18 @@ package $package$.journey
 
 import java.time.LocalDate
 import play.api.libs.json.{Format, JsResultException, Json}
-import $package$.journeys.$servicePrefixCamel$JourneyModel.State
-import $package$.journeys.$servicePrefixCamel$JourneyStateFormats
+import $package$.journeys.$servicePrefix$JourneyModel.State
+import $package$.journeys.$servicePrefix$JourneyStateFormats
 import $package$.models._
 import $package$.support.UnitSpec
 import $package$.support.JsonFormatTest
 
-class $servicePrefixCamel$JourneyStateFormatsSpec extends UnitSpec {
+class $servicePrefix$JourneyStateFormatsSpec extends UnitSpec {
 
-  implicit val formats: Format[State] = $servicePrefixCamel$JourneyStateFormats.formats
+  implicit val formats: Format[State] = $servicePrefix$JourneyStateFormats.formats
   val generatedAt = java.time.LocalDateTime.of(2018, 12, 11, 10, 20, 30)
 
-  "$servicePrefixCamel$JourneyStateFormats" should {
+  "$servicePrefix$JourneyStateFormats" should {
     "serialize and deserialize state" in new JsonFormatTest[State](info) {
       validateJsonFormat("""{"state":"Start"}""", State.Start)
     }

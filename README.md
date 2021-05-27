@@ -12,18 +12,18 @@ How to create a new project based on the template?
 * Decide your project name (the hardest part :))
 * Run the command
 
-    `sbt new hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
+    `sbt new hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="New Shiny Frontend" --serviceUrlPrefix="new-shiny-service" --serviceTargetPort="9379" --authorisedIdentifierKey="FooNumber" --authorisedServiceName="HMRC-NEW-SHINY" --servicePrefix="NewShiny" --package="uk.gov.hmrc.newshiny" -o new-shiny-frontend`
 
 or    
 
 * Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Run the command
 
-    `g8 hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
+    `g8 hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="New Shiny Frontend" --serviceUrlPrefix="new-shiny-service" --serviceTargetPort="9379" --authorisedIdentifierKey="FooNumber" --authorisedServiceName="HMRC-NEW-SHINY" --servicePrefix="NewShiny" --package="uk.gov.hmrc.newshiny" -o new-shiny-frontend`
     
 and then
     
-    cd trader-services-route-one-frontend
+    cd new-shiny-frontend
     git init
 	git add .
 	git commit -m start
@@ -38,7 +38,7 @@ How to test the template and generate an example project?
 
 * Run `./test.sh` 
 
-An example project will be then created and tested in `target/sandbox/trader-services-route-one-frontend`
+An example project will be then created and tested in `target/sandbox/new-shiny-frontend`
 
 How to modify the template?
 ---
@@ -50,7 +50,7 @@ How to modify the template?
 or (safer) ...
 
 * run `./test.sh` first
-* open `target/sandbox/trader-services-route-one-frontend` in your preferred IDE, 
+* open `target/sandbox/new-shiny-frontend` in your preferred IDE, 
 * modify the generated example project as you wish, 
 * build and test it as usual, you can run `sbt test it:test`,
 * when you are done switch back to the template root
@@ -63,19 +63,19 @@ What is in the template?
 Assuming the command above 
 the template will supply the following values for the placeholders:
 
-    $packaged$ -> uk/gov/hmrc/traderservices
-	$package$ -> uk.gov.hmrc.traderservices
-	$serviceName$ -> Trader Services Route One Frontend
-	$serviceNameSnake$ -> TRADER_SERVICES_ROUTE_ONE_FRONTEND
-	$serviceNameHyphen$ -> trader-services-route-one-frontend
-	$serviceUrlPrefix$ -> send-documents-for-customs-check
-	$servicePrefix$ -> Trader Services
-	$servicePrefixCamel$ -> TraderServices
-	$servicePrefixcamel$ -> traderServices
-	$servicePrefixSnake$ -> TRADER_SERVICES
-	$servicePrefixHyphen$ -> trader-services
-	$authorisedServiceName$ -> HMRC-CUS-ORG
-	$authorisedIdentifierKey$ -> EORINumber
+    $packaged$ -> uk/gov/hmrc/newshiny
+	$package$ -> uk.gov.hmrc.newshiny
+	$serviceName$ -> New Shiny Frontend
+	$serviceNameCamel$ -> NewShinyFrontend
+	$serviceNameSnake$ -> NEW_SHINY_FRONTEND
+	$serviceNameHyphen$ -> new-shiny-frontend
+	$serviceUrlPrefix$ -> new-shiny-service
+	$authorisedServiceName$ -> HMRC-NEW-SHINY
+	$authorisedIdentifierKey$ -> FooNumber
+	$servicePrefix$ -> NewShiny
+	$servicePrefixNoSpaceLowercase$ -> newshiny
+	$servicePrefixSnake$ -> NEW_SHINY
+	$servicePrefixHyphen$ -> new-shiny
 	$serviceTargetPort$ -> 9379
 
 and produce the folders and files as shown below:
@@ -132,7 +132,7 @@ and produce the folders and files as shown below:
 	│   └── uk
 	│       └── gov
 	│           └── hmrc
-	│               └── traderservices
+	│               └── newshiny
 	│                   ├── connectors
 	│                   │   └── FrontendAuthConnector.scala
 	│                   │
@@ -143,15 +143,15 @@ and produce the folders and files as shown below:
 	│                   │   ├── DateFieldHelper.scala
 	│                   │   ├── FormFieldMappings.scala
 	│                   │   ├── LanguageSwitchController.scala
+	│                   │   ├── NewShinyJourneyController.scala
 	│                   │   ├── SessionController.scala
 	│                   │   ├── SignOutController.scala
 	│                   │   ├── Time12FieldHelper.scala
-	│                   │   ├── Time24FieldHelper.scala
-	│                   │   └── TraderServicesJourneyController.scala
+	│                   │   └── Time24FieldHelper.scala
 	│                   │
 	│                   ├── journeys
-	│                   │   ├── TraderServicesJourneyModel.scala
-	│                   │   └── TraderServicesJourneyStateFormats.scala
+	│                   │   ├── NewShinyJourneyModel.scala
+	│                   │   └── NewShinyJourneyStateFormats.scala
 	│                   │
 	│                   ├── models
 	│                   │   ├── DeclarationDetails.scala
@@ -175,7 +175,7 @@ and produce the folders and files as shown below:
 	│                   │   ├── AuditService.scala
 	│                   │   ├── JourneyCache.scala
 	│                   │   ├── MongoDBCachedJourneyService.scala
-	│                   │   └── TraderServicesJourneyService.scala
+	│                   │   └── NewShinyJourneyService.scala
 	│                   │
 	│                   ├── support
 	│                   │   └── CallOps.scala
@@ -231,13 +231,13 @@ and produce the folders and files as shown below:
 	│   └── uk
 	│       └── gov
 	│           └── hmrc
-	│               └── traderservices
+	│               └── newshiny
 	│                   ├── controllers
 	│                   │   ├── AccessibilityStatementControllerISpec.scala
 	│                   │   ├── AuthActionsISpec.scala
 	│                   │   ├── LanguageSwitchControllerISpec.scala
-	│                   │   ├── SessionControllerISpec.scala
-	│                   │   └── TraderServicesJourneyISpec.scala
+	│                   │   ├── NewShinyJourneyISpec.scala
+	│                   │   └── SessionControllerISpec.scala
 	│                   │
 	│                   ├── services
 	│                   │   └── MongoDBCachedJourneyServiceISpec.scala
@@ -245,7 +245,7 @@ and produce the folders and files as shown below:
 	│                   ├── stubs
 	│                   │   ├── AuthStubs.scala
 	│                   │   ├── DataStreamStubs.scala
-	│                   │   └── TraderServicesApiStubs.scala
+	│                   │   └── NewShinyApiStubs.scala
 	│                   │
 	│                   └── support
 	│                       ├── AppISpec.scala
@@ -262,6 +262,7 @@ and produce the folders and files as shown below:
 	│                       └── WireMockSupport.scala
 	│
 	├── LICENSE
+	├── logback.xml
 	├── project
 	│   ├── build.properties
 	│   ├── JavaScriptBuild.scala
@@ -275,15 +276,15 @@ and produce the folders and files as shown below:
 	    └── uk
 	        └── gov
 	            └── hmrc
-	                └── traderservices
+	                └── newshiny
 	                    ├── controllers
 	                    │   ├── DateFieldHelperSpec.scala
 	                    │   ├── Time12FieldHelperSpec.scala
 	                    │   └── Time24FieldHelperSpec.scala
 	                    │
 	                    ├── journey
-	                    │   ├── TraderServicesJourneyModelSpec.scala
-	                    │   └── TraderServicesJourneyStateFormatsSpec.scala
+	                    │   ├── NewShinyJourneyModelSpec.scala
+	                    │   └── NewShinyJourneyStateFormatsSpec.scala
 	                    │
 	                    ├── model
 	                    │   ├── DeclarationDetailsSpec.scala

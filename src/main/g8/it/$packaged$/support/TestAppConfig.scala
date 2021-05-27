@@ -15,7 +15,7 @@ case class TestAppConfig(
   override val baseExternalCallbackUrl: String = wireMockBaseUrl
 
   override val authBaseUrl: String = wireMockBaseUrl
-  override val $servicePrefixcamel$ApiBaseUrl: String = wireMockBaseUrl
+  override val $servicePrefixNoSpaceLowercase$ApiBaseUrl: String = wireMockBaseUrl
   override val upscanInitiateBaseUrl: String = wireMockBaseUrl
 
   override val createCaseApiPath: String = "/create-case"

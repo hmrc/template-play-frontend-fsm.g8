@@ -22,7 +22,7 @@ import scala.concurrent.ExecutionContext
 
 import uk.gov.hmrc.play.fsm.JourneyModel
 
-object $servicePrefixCamel$JourneyModel extends JourneyModel {
+object $servicePrefix$JourneyModel extends JourneyModel {
 
   sealed trait State
   sealed trait IsError
