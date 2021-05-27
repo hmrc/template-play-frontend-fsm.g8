@@ -131,7 +131,6 @@ object FormFieldMappings {
 
   def booleanMapping(fieldName: String, trueValue: String, falseValue: String): Mapping[Boolean] =
     optional(text)
-      .verifying(constraint[Option[String]](fieldName, "required", _.exists(s => s == trueValue || s == falseValue)))
       .transform[Boolean](_.contains(trueValue), b => if (b) Some(trueValue) else Some(falseValue))
 
   val exportRequestTypeMapping: Mapping[ExampleRequestType] = enumMapping[ExampleRequestType]("exportRequestType")
