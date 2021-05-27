@@ -74,8 +74,7 @@ the template will supply the following values for the placeholders:
 	$authorisedIdentifierKey$ -> FooNumber
 	$servicePrefix$ -> NewShiny
 	$servicePrefixNoSpaceLowercase$ -> newshiny
-	$servicePrefixSnake$ -> NEW_SHINY
-	$servicePrefixHyphen$ -> new-shiny
+	$servicePrefixNoSpaceUppercase$ -> NEWSHINY
 	$serviceTargetPort$ -> 9379
 
 and produce the folders and files as shown below:
@@ -244,8 +243,7 @@ and produce the folders and files as shown below:
 	│                   │
 	│                   ├── stubs
 	│                   │   ├── AuthStubs.scala
-	│                   │   ├── DataStreamStubs.scala
-	│                   │   └── NewShinyApiStubs.scala
+	│                   │   └── DataStreamStubs.scala
 	│                   │
 	│                   └── support
 	│                       ├── AppISpec.scala

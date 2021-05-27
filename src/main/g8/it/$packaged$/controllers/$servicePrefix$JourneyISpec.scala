@@ -6,7 +6,6 @@ import uk.gov.hmrc.crypto.{ApplicationCrypto, PlainText}
 import $package$.journeys.$servicePrefix$JourneyStateFormats
 import $package$.models._
 import $package$.services.{MongoDBCachedJourneyService, $servicePrefix$JourneyService}
-import $package$.stubs.$servicePrefix$ApiStubs
 import $package$.support.{ServerISpec, TestData, TestJourneyService}
 
 import java.time.LocalDate
@@ -14,7 +13,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.libs.ws.DefaultWSCookie
 import akka.actor.ActorSystem
 import $package$.repository.CacheRepository
-class $servicePrefix$JourneyISpec extends $servicePrefix$JourneyISpecSetup with $servicePrefix$ApiStubs {
+class $servicePrefix$JourneyISpec extends $servicePrefix$JourneyISpecSetup {
 
   import journey.model.State._
 
