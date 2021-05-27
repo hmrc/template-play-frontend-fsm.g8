@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package $package$.views.components
+package $package$.views
 
 import javax.inject.{Inject, Singleton}
+import $package$.views.html._
 
 @Singleton
-class html @Inject() (
-  val h1: $package$.views.html.components.h1,
-  val h2: $package$.views.html.components.h2,
-  val h3: $package$.views.html.components.h3,
-  val p: $package$.views.html.components.p,
-  val strong: $package$.views.html.components.strong,
-  val a: $package$.views.html.components.link,
-  val ul: $package$.views.html.components.bullets,
-  val ol: $package$.views.html.components.orderedList,
-  val button: $package$.views.html.components.button
+class Views @Inject() (
+  val startView: StartView
 )

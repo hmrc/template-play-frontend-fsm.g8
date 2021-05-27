@@ -39,7 +39,7 @@ class FrontendModule(val environment: Environment, val configuration: Configurat
 
     bind(classOf[CacheRepository]).to(classOf[JourneyCacheRepository])
 
-    bind(classOf[$servicePrefixCamel$JourneyServiceWithHeaderCarrier])
-      .to(classOf[MongoDBCached$servicePrefixCamel$JourneyService])
+    bind(classOf[$servicePrefix$JourneyServiceWithHeaderCarrier])
+      .to(classOf[MongoDBCached$servicePrefix$JourneyService])
   }
 }

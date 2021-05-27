@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package $package$.views.components
+package $package$.models
 
-import javax.inject.{Inject, Singleton}
+sealed trait ExampleEnum
 
-@Singleton
-class html @Inject() (
-  val h1: $package$.views.html.components.h1,
-  val h2: $package$.views.html.components.h2,
-  val h3: $package$.views.html.components.h3,
-  val p: $package$.views.html.components.p,
-  val strong: $package$.views.html.components.strong,
-  val a: $package$.views.html.components.link,
-  val ul: $package$.views.html.components.bullets,
-  val ol: $package$.views.html.components.orderedList,
-  val button: $package$.views.html.components.button
-)
+object ExampleEnum extends EnumerationFormats[ExampleEnum] {
+
+  case object A extends ExampleEnum
+  case object B extends ExampleEnum
+  case object C extends ExampleEnum
+  case object D1 extends ExampleEnum
+  case object D2 extends ExampleEnum
+  case object D3 extends ExampleEnum
+
+  val values = Set(A, B, C, D1, D2, D3)
+}

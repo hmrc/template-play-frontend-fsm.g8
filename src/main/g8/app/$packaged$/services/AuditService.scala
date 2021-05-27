@@ -27,32 +27,32 @@ import uk.gov.hmrc.play.audit.model.DataEvent
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Try
 
-object $servicePrefixCamel$FrontendEvent extends Enumeration {
-  val $servicePrefixCamel$FrontendSomethingHappened = Value
-  type $servicePrefixCamel$FrontendEvent = Value
+object $serviceNameCamel$Event extends Enumeration {
+  val $serviceNameCamel$SomethingHappened = Value
+  type $serviceNameCamel$Event = Value
 }
 
 @Singleton
 class AuditService @Inject() (val auditConnector: AuditConnector) {
 
-  import $servicePrefixCamel$FrontendEvent._
+  import $serviceNameCamel$Event._
 
   private[services] def auditEvent(
-    event: $servicePrefixCamel$FrontendEvent,
+    event: $serviceNameCamel$Event,
     transactionName: String,
     details: Seq[(String, Any)] = Seq.empty
   )(implicit hc: HeaderCarrier, request: Request[Any], ec: ExecutionContext): Future[Unit] =
     send(createEvent(event, transactionName, details: _*))
 
   private[services] def createEvent(
-    event: $servicePrefixCamel$FrontendEvent,
+    event: $serviceNameCamel$Event,
     transactionName: String,
     details: (String, Any)*
   )(implicit hc: HeaderCarrier, request: Request[Any], ec: ExecutionContext): DataEvent = {
 
     val detail = hc.toAuditDetails(details.map(pair => pair._1 -> pair._2.toString): _*)
     val tags = hc.toAuditTags(transactionName, request.path)
-    DataEvent(auditSource = "$servicePrefixHyphen$-frontend", auditType = event.toString, tags = tags, detail = detail)
+    DataEvent(auditSource = "$serviceNameHyphen$", auditType = event.toString, tags = tags, detail = detail)
   }
 
   private[services] def send(events: DataEvent*)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Unit] =

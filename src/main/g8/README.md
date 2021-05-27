@@ -14,7 +14,7 @@ HMRC Digital frontend microservice.
 
 ## Running the app locally
 
-    sm --start $servicePrefixSnake$_ALL
+    sm --start $servicePrefixNoSpaceUppercase$_ALL
     sm --stop $serviceNameSnake$ 
     sbt run
 

@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2021 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,21 +12,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package $package$.views.components
+@import $package$.models._
 
-import javax.inject.{Inject, Singleton}
-
-@Singleton
-class html @Inject() (
-  val h1: $package$.views.html.components.h1,
-  val h2: $package$.views.html.components.h2,
-  val h3: $package$.views.html.components.h3,
-  val p: $package$.views.html.components.p,
-  val strong: $package$.views.html.components.strong,
-  val a: $package$.views.html.components.link,
-  val ul: $package$.views.html.components.bullets,
-  val ol: $package$.views.html.components.orderedList,
-  val button: $package$.views.html.components.button
+@this(
+        govukLayout: $package$.views.html.templates.GovukLayoutWrapper,
+        html: $package$.views.components.html
 )
+
+@()(implicit request: Request[_], messages: Messages)
+
+@govukLayout(
+  pageTitle = pageTitle("view.start.title"),
+  backLink = None) {
+
+    @html.h1(messages("view.start.heading"))
+
+}

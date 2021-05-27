@@ -1,4 +1,4 @@
-service.name = Gwasanaethau Masnachwyr
+service.name = Send documents for a customs check
 
 # Sitewide Messages
 # ----------------------------------------------------------
@@ -56,21 +56,10 @@ error.month.invalid-format=Enter a month
 button.continue=Continue
 button.submit=Submit
 
-# Start view
-view.start.title=Hello World!
-
 # Global errors
-external.error.500.title=Service unavailable
-external.error.500.heading=Sorry, the service is unavailable
-external.error.500.message=Try again later.
-external.error.500.listParagraph=This could be for a number of reasons, including:
-external.error.500.list-item1=An external service error
-external.error.500.list-item2=Too many users on the service
-
-internal.error.500.title=Sorry, there is a problem with the service
-internal.error.500.heading=Sorry, there is a problem with the service
-internal.error.500.line1=Try again later.
-internal.error.500.line2=Any answers you provided may not have been saved. When the service is available, you might have to start again.
+global.error.500.title=Service unavailable
+global.error.500.heading=Sorry, the service is unavailable
+global.error.500.message=Try again later.
 
 # Banner
 # ----------------------------------------------------------

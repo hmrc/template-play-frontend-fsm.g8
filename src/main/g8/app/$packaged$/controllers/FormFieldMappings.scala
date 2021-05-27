@@ -16,15 +16,13 @@
 
 package $package$.controllers
 
-import java.time.{LocalDate, LocalTime}
-import play.api.data.Forms.{of, optional, text}
+import play.api.data.Forms.of
+import play.api.data.Forms.optional
+import play.api.data.Forms.text
 import play.api.data.Mapping
 import play.api.data.format.Formats._
 import play.api.data.validation._
 import $package$.models._
-import $package$.views.CommonUtilsHelper.Improvements
-
-import scala.util.Try
 
 object FormFieldMappings {
 
@@ -90,38 +88,6 @@ object FormFieldMappings {
       case None    => Valid
     }
 
-  val epuMapping: Mapping[EPU] = uppercaseNormalizedText
-    .verifying(
-      first(
-        nonEmpty("epu"),
-        constraint[String]("epu", "invalid-only-digits", _.forall(_.isDigit)),
-        haveLength("epu", 3),
-        constraint[String]("epu", "invalid-number", s => Try(s.toInt).fold(_ => true, _ <= 700))
-      )
-    )
-    .transform(s => EPU(s.toInt), _.value.format3d)
-
-  val entryNumberMapping: Mapping[EntryNumber] = uppercaseNormalizedText
-    .verifying(
-      first(
-        nonEmpty("entryNumber"),
-        constraint[String]("entryNumber", "invalid-only-digits-and-letters", _.forall(_.isLetterOrDigit)),
-        haveLength("entryNumber", 7),
-        constraint[String](
-          "entryNumber",
-          "invalid-ends-with-letter",
-          s => s.lastOption.forall(_.isLetter) || s.drop(6).headOption.forall(_.isLetter)
-        ),
-        constraint[String]("entryNumber", "invalid-letter-wrong-position", _.slice(1, 6).forall(_.isDigit))
-      )
-    )
-    .transform(EntryNumber.apply, _.value)
-
-  val entryDateMapping: Mapping[LocalDate] = DateFieldHelper
-    .dateFieldsMapping("entryDate")
-    .verifying(DateFieldHelper.dateIsBefore("entryDate.all", "invalid-value-future", identity))
-    .verifying(DateFieldHelper.dateIsAfter("entryDate.all", "invalid-value-past", _.minusMonths(6)))
-
   def enumMapping[A: EnumerationFormats](fieldName: String): Mapping[A] =
     optional(text)
       .verifying(constraint[Option[String]](fieldName, "required", _.isDefined))
@@ -133,164 +99,4 @@ object FormFieldMappings {
     optional(text)
       .transform[Boolean](_.contains(trueValue), b => if (b) Some(trueValue) else Some(falseValue))
 
-  val exportRequestTypeMapping: Mapping[ExampleRequestType] = enumMapping[ExampleRequestType]("exportRequestType")
-
-  val exportRouteTypeMapping: Mapping[ExampleRouteType] = enumMapping[ExampleRouteType]("exportRouteType")
-
-  val exportHasPriorityGoodsMapping: Mapping[Boolean] = booleanMapping("exportHasPriorityGoods", "yes", "no")
-
-  val importHasPriorityGoodsMapping: Mapping[Boolean] = booleanMapping("importHasPriorityGoods", "yes", "no")
-
-  val importHasALVSMapping: Mapping[Boolean] = booleanMapping("importHasALVS", "yes", "no")
-
-  val allowedSpecialNameCharacterSet = Set(' ', '/', '\\\\', '_', '-', '&', '+', '\\'', '.', '’')
-
-  val mandatoryVesselNameMapping: Mapping[Option[String]] = of[String]
-    .transform(_.trim.replaceAll("\\\\s{2,128}", " "), identity[String])
-    .verifying(
-      first(
-        constraint[String]("vesselName", "required", _.length > 0),
-        constraint[String](
-          "vesselName",
-          "invalid-characters",
-          name =>
-            name.exists(Character.isLetterOrDigit) &&
-              name.forall(c => Character.isLetterOrDigit(c) || allowedSpecialNameCharacterSet.contains(c))
-        ),
-        constraint[String]("vesselName", "invalid-length", _.length <= 128)
-      )
-    )
-    .transform(Option.apply, _.getOrElse(""))
-
-  val optionalVesselNameMapping: Mapping[Option[String]] = optional(
-    of[String]
-      .transform(_.trim.replaceAll("\\\\s{2,128}", " "), identity[String])
-      .verifying(
-        first(
-          constraint[String](
-            "vesselName",
-            "invalid-characters",
-            name =>
-              name.isEmpty || (name.exists(Character.isLetterOrDigit) &&
-                name.forall(c => Character.isLetterOrDigit(c) || allowedSpecialNameCharacterSet.contains(c)))
-          ),
-          constraint[String]("vesselName", "invalid-length", name => name.isEmpty || name.length <= 128)
-        )
-      )
-  ).transform({ case Some("") => None; case o => o }, identity[Option[String]])
-
-  val dateOfArrivalRangeConstraint = some(
-    DateFieldHelper.dateIsBetween("dateOfArrival.all", "invalid-value-range", _.minusMonths(6), _.plusMonths(6))
-  )
-
-  val mandatoryDateOfArrivalMapping: Mapping[Option[LocalDate]] =
-    DateFieldHelper
-      .dateFieldsMapping("dateOfArrival")
-      .transform(Option.apply, _.getOrElse(DateFieldHelper.emptyDate))
-
-  val mandatoryTimeOfArrivalMapping: Mapping[Option[LocalTime]] =
-    Time24FieldHelper
-      .timeFieldsMapping("timeOfArrival")
-      .transform(Option.apply, _.getOrElse(Time24FieldHelper.emptyTime))
-
-  val optionalDateOfArrivalMapping: Mapping[Option[LocalDate]] =
-    DateFieldHelper.optionalDateFieldsMapping("dateOfArrival")
-
-  val optionalTimeOfArrivalMapping: Mapping[Option[LocalTime]] =
-    Time24FieldHelper.optionalTimeFieldsMapping("timeOfArrival")
-
-  val importContactNameMapping: Mapping[Option[String]] = optional(
-    of[String]
-      .transform(_.trim.replaceAll("\\\\s{2,128}", " "), identity[String])
-      .verifying(
-        first(
-          constraint[String](
-            "contactName",
-            "invalid-characters",
-            name =>
-              name.isEmpty || (name.exists(Character.isLetterOrDigit) &&
-                name.forall(c => Character.isLetterOrDigit(c) || allowedSpecialNameCharacterSet.contains(c)))
-          ),
-          constraint[String]("contactName", "invalid-length-short", name => name.length >= 2),
-          constraint[String]("contactName", "invalid-length-long", name => name.length <= 128)
-        )
-      )
-  )
-
-  val importContactEmailMapping: Mapping[String] =
-    of[String].verifying(
-      first(
-        constraint[String]("contactEmail", "required", _.nonEmpty),
-        Constraints.emailAddress(errorMessage = "error.contactEmail"),
-        constraintNoErrorType[String]("contactEmail", _.matches(validDomain)),
-        constraint[String]("contactEmail", "invalid-length", email => email.length <= 128)
-      )
-    )
-
-  val importContactNumberMapping: Mapping[Option[String]] = optional(
-    of[String]
-      .transform[String](ContactFieldHelper.normaliseNumber, identity)
-      .verifying(
-        first(ContactFieldHelper.contactNumber())
-      )
-  )
-
-  val exportContactNameMapping: Mapping[Option[String]] = optional(
-    of[String]
-      .transform(_.trim.replaceAll("\\\\s{2,128}", " "), identity[String])
-      .verifying(
-        first(
-          constraint[String](
-            "contactName",
-            "invalid-characters",
-            name =>
-              name.isEmpty || (name.exists(Character.isLetterOrDigit) &&
-                name.forall(c => Character.isLetterOrDigit(c) || allowedSpecialNameCharacterSet.contains(c)))
-          ),
-          constraint[String]("contactName", "invalid-length-short", name => name.length >= 2),
-          constraint[String]("contactName", "invalid-length-long", name => name.length <= 128)
-        )
-      )
-  )
-
-  val exportContactEmailMapping: Mapping[String] =
-    of[String].verifying(
-      first(
-        constraint[String]("contactEmail", "required", _.nonEmpty),
-        Constraints.emailAddress(errorMessage = "error.contactEmail"),
-        constraintNoErrorType[String]("contactEmail", _.matches(validDomain)),
-        constraint[String]("contactEmail", "invalid-length", email => email.length <= 128)
-      )
-    )
-
-  val exportContactNumberMapping: Mapping[Option[String]] = optional(
-    of[String]
-      .transform[String](ContactFieldHelper.normaliseNumber, identity)
-      .verifying(
-        first(ContactFieldHelper.contactNumber())
-      )
-  )
-
-  val uploadAnotherFileMapping: Mapping[Boolean] = booleanMapping("uploadAnotherFile", "yes", "no")
-
-  val caseReferenceNumberMapping: Mapping[String] = of[String].verifying(
-    first(
-      constraint[String]("caseReferenceNumber", "required", _.nonEmpty),
-      constraint[String]("caseReferenceNumber", "invalid-value", _.length == 22)
-    )
-  )
-
-  val allowedResponseSpecialCharacters = " ()/+-*=^.;_&#@!?\\"'{}[]\\\\~|%£\$€"
-
-  def isAllowedResponseCharacter(c: Char): Boolean =
-    Character.isLetterOrDigit(c) || allowedResponseSpecialCharacters.contains(c)
-
-  val responseTextMapping: Mapping[String] = text
-    .verifying(
-      first(
-        nonEmpty("responseText"),
-        constraint[String]("responseText", "invalid-length", _.length <= 1000)
-      )
-    )
-    .transform(_.filter(isAllowedResponseCharacter), identity)
 }

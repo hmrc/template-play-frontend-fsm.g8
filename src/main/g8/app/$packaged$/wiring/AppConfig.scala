@@ -35,18 +35,9 @@ object AppConfig {
 trait AppConfig {
 
   val appName: String
-  val baseInternalCallbackUrl: String
   val baseExternalCallbackUrl: String
-
   val authBaseUrl: String
-  val $servicePrefixcamel$ApiBaseUrl: String
-  val upscanInitiateBaseUrl: String
-
-  val createCaseApiPath: String
-  val updateCaseApiPath: String
-
   val mongoSessionExpiration: Duration
-
   val authorisedServiceName: String
   val authorisedIdentifierKey: String
   val subscriptionJourneyUrl: String
@@ -87,29 +78,8 @@ trait AppConfig {
 class AppConfigImpl @Inject() (config: ServicesConfig) extends AppConfig {
 
   override val appName: String = config.getString("appName")
-
   override val baseExternalCallbackUrl: String = config.getString("urls.callback.external")
-  override val baseInternalCallbackUrl: String = config.getString("urls.callback.internal")
-
   override val authBaseUrl: String = config.baseUrl("auth")
-  override val $servicePrefixcamel$ApiBaseUrl: String = config.baseUrl("$servicePrefixHyphen$-api")
-  override val upscanInitiateBaseUrl: String = config.baseUrl("upscan-initiate")
-
-  override val createCaseApiPath: String =
-    config.getConfString(
-      "$servicePrefixHyphen$-api.paths.create-case",
-      throw new IllegalStateException(
-        "Missing configuration property microservice.services.$servicePrefixHyphen$-api.paths.create-case"
-      )
-    )
-
-  override val updateCaseApiPath: String =
-    config.getConfString(
-      "$servicePrefixHyphen$-api.paths.update-case",
-      throw new IllegalStateException(
-        "Missing configuration property microservice.services.$servicePrefixHyphen$-api.paths.update-case"
-      )
-    )
 
   override val mongoSessionExpiration: Duration = config.getDuration("mongodb.session.expiration")
 
