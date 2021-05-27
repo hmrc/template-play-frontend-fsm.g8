@@ -28,6 +28,5 @@ class html @Inject() (
   val a: $package$.views.html.components.link,
   val ul: $package$.views.html.components.bullets,
   val ol: $package$.views.html.components.orderedList,
-  val button: $package$.views.html.components.button,
-  val summaryList: $package$.views.html.components.summaryList
+  val button: $package$.views.html.components.button
 )

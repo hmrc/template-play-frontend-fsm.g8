@@ -14,13 +14,21 @@
  * limitations under the License.
  *@
 
-@this(govukWarningText: GovukWarningText)
+@import $package$.models.DeclarationDetails
+@import $package$.controllers.DateFieldHelper
+@import java.time.LocalDate
 
-@(content: Html)(implicit messages: Messages)
+@this(
+        govukLayout: $package$.views.html.templates.GovukLayoutWrapper,
+        html: $package$.views.components.html
+)
 
-    @govukWarningText(
-        WarningText(
-            iconFallbackText = messages("site.warning"),
-            content = HtmlContent(content)
-        )
-    )
+@()(implicit request: Request[_], messages: Messages)
+
+@govukLayout(
+  pageTitle = pageTitle("view.start.title"),
+  backLink = None) {
+
+    @html.h1(messages("view.start.heading"))
+
+}

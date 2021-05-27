@@ -30,7 +30,6 @@ import $package$.journeys.$servicePrefixCamel$JourneyModel.State._
 import $package$.models._
 import $package$.services.$servicePrefixCamel$JourneyServiceWithHeaderCarrier
 import $package$.wiring.AppConfig
-import $package$.views.CommonUtilsHelper.DateTimeUtilities
 
 import scala.concurrent.ExecutionContext
 
@@ -38,11 +37,10 @@ import scala.concurrent.ExecutionContext
 class $servicePrefixCamel$JourneyController @Inject() (
   appConfig: AppConfig,
   override val messagesApi: MessagesApi,
-  $servicePrefixcamel$ApiConnector: $servicePrefixCamel$ApiConnector,
   val authConnector: FrontendAuthConnector,
   val env: Environment,
   controllerComponents: MessagesControllerComponents,
-  views: $package$.views.$servicePrefixCamel$Views,
+  views: $package$.views.Views,
   override val journeyService: $servicePrefixCamel$JourneyServiceWithHeaderCarrier,
   override val actionBuilder: DefaultActionBuilder
 )(implicit val config: Configuration, ec: ExecutionContext)
@@ -63,8 +61,8 @@ class $servicePrefixCamel$JourneyController @Inject() (
   final val whenAuthorisedAsUser =
     actions.whenAuthorised(AsUser)
 
-  final val whenAuthorisedAsUserWithEori =
-    actions.whenAuthorisedWithRetrievals(AsUser)
+  /** Provide response when user have no required enrolment. */
+  override def toSubscriptionJourney(continueUrl: String): Result = ???
 
   /** Dummy action to use only when developing to fill loose-ends. */
   final val actionNotYetImplemented = Action(NotImplemented)
@@ -73,86 +71,10 @@ class $servicePrefixCamel$JourneyController @Inject() (
   final val workInProgresDeadEndCall =
     Call("GET", "/$serviceUrlPrefix$/work-in-progress")
 
-  // Redirection to the enrolment subscription journey
-  final def toSubscriptionJourney(continueUrl: String): Result =
-    Redirect(
-      appConfig.subscriptionJourneyUrl,
-      Map(
-        "continue" -> Seq(continueUrl)
-      )
-    )
+  // YOUR ACTIONS
 
-  // GET /
   final val showStart: Action[AnyContent] =
-    whenAuthorisedAsUser
-      .apply(Transitions.start)
-      .display
-      .andCleanBreadcrumbs()
-
-  // GET /new/declaration-details
-  final val showEnterDeclarationDetails: Action[AnyContent] =
-    whenAuthorisedAsUser
-      .show[State.EnterDeclarationDetails]
-      .orApply(Transitions.backToEnterDeclarationDetails)
-
-  // POST /new/declaration-details
-  final val submitDeclarationDetails: Action[AnyContent] =
-    whenAuthorisedAsUserWithEori
-      .bindForm(DeclarationDetailsForm)
-      .apply(Transitions.submittedDeclarationDetails)
-
-  // ----------------------- EXPORT QUESTIONS -----------------------
-
-  // GET /new/export/request-type
-  final val showAnswerExampleQuestionsRequestType: Action[AnyContent] =
-    whenAuthorisedAsUser
-      .show[State.AnswerExampleQuestionsRequestType]
-      .orApply(Transitions.backToAnswerExampleQuestionsRequestType)
-
-  // POST /new/export/request-type
-  final val submitExampleQuestionsRequestTypeAnswer: Action[AnyContent] =
-    whenAuthorisedAsUserWithEori
-      .bindForm(ExampleRequestTypeForm)
-      .apply(Transitions.submittedExampleQuestionsAnswerRequestType)
-
-  // GET /new/export/route-type
-  final val showAnswerExampleQuestionsRouteType: Action[AnyContent] =
-    whenAuthorisedAsUser
-      .show[State.AnswerExampleQuestionsRouteType]
-      .orApply(Transitions.backToAnswerExampleQuestionsRouteType)
-
-  // POST /new/export/route-type
-  final val submitExampleQuestionsRouteTypeAnswer: Action[AnyContent] =
-    whenAuthorisedAsUserWithEori
-      .bindForm(ExampleRouteTypeForm)
-      .apply(Transitions.submittedExampleQuestionsAnswerRouteType)
-
-  // GET /new/export/summary
-  final val showExampleQuestionsSummary: Action[AnyContent] =
-    whenAuthorisedAsUser
-      .show[State.ExampleQuestionsSummary]
-
-  // ----------------------- CONFIRMATION -----------------------
-
-  // POST /new/create-case
-  final def createCase: Action[AnyContent] =
-    whenAuthorisedAsUserWithEori
-      .applyWithRequest { implicit request =>
-        Transitions.createCase($servicePrefixcamel$ApiConnector.createCase(_))
-      }
-
-  // GET /new/confirmation
-  final def show$servicePrefixCamel$Confirmation: Action[AnyContent] =
-    whenAuthorisedAsUser
-      .show[State.$servicePrefixCamel$Confirmation]
-      .orRollback
-      .andCleanBreadcrumbs() // forget journey history
-
-  // GET /new/case-already-exists
-  final def showCaseAlreadyExists: Action[AnyContent] =
-    whenAuthorisedAsUser
-      .show[State.CaseAlreadyExists]
-      .orRollback
+    actions.show[Start.type]
 
   /**
     * Function from the `State` to the `Call` (route),
@@ -160,29 +82,8 @@ class $servicePrefixCamel$JourneyController @Inject() (
     */
   final override def getCallFor(state: State)(implicit request: Request[_]): Call =
     state match {
-      case Start =>
-        controller.showStart
-
-      case _: EnterDeclarationDetails =>
-        controller.showEnterDeclarationDetails
-
-      case _: AnswerExampleQuestionsRequestType =>
-        controller.showAnswerExampleQuestionsRequestType
-
-      case _: AnswerExampleQuestionsRouteType =>
-        controller.showAnswerExampleQuestionsRouteType
-
-      case _: ExampleQuestionsSummary =>
-        controller.showExampleQuestionsSummary
-
-      case _: $servicePrefixCamel$Confirmation =>
-        controller.show$servicePrefixCamel$Confirmation
-
-      case _: CaseAlreadyExists =>
-        controller.showCaseAlreadyExists
-
-      case _ =>
-        workInProgresDeadEndCall
+      case Start => controller.showStart
+      case _     => workInProgresDeadEndCall
 
     }
 
@@ -196,65 +97,8 @@ class $servicePrefixCamel$JourneyController @Inject() (
     request: Request[_]
   ): Result =
     state match {
-
-      case Start =>
-        Redirect(controller.showEnterDeclarationDetails)
-
-      case EnterDeclarationDetails(declarationDetailsOpt, _) =>
-        Ok(
-          views.declarationDetailsEntryView(
-            formWithErrors.or(DeclarationDetailsForm, declarationDetailsOpt),
-            controller.submitDeclarationDetails,
-            controller.showStart
-          )
-        )
-
-      case AnswerExampleQuestionsRequestType(model) =>
-        Ok(
-          views.exportQuestionsRequestTypeView(
-            formWithErrors.or(ExampleRequestTypeForm, model.exportQuestionsAnswers.requestType),
-            controller.submitExampleQuestionsRequestTypeAnswer,
-            controller.showEnterDeclarationDetails
-          )
-        )
-
-      case AnswerExampleQuestionsRouteType(model) =>
-        Ok(
-          views.exportQuestionsRouteTypeView(
-            formWithErrors.or(ExampleRouteTypeForm, model.exportQuestionsAnswers.routeType),
-            controller.submitExampleQuestionsRouteTypeAnswer,
-            controller.showAnswerExampleQuestionsRequestType
-          )
-        )
-
-      case ExampleQuestionsSummary(model) =>
-        Ok(
-          views.exportQuestionsSummaryView(
-            model.declarationDetails,
-            model.exportQuestionsAnswers,
-            controller.createCase,
-            controller.showAnswerExampleQuestionsRouteType
-          )
-        )
-
-      case $servicePrefixCamel$Confirmation(_, _, $servicePrefixCamel$Result(caseReferenceId, generatedAt)) =>
-        Ok(
-          views.createCaseConfirmationView(
-            caseReferenceId,
-            generatedAt.ddMMYYYYAtTimeFormat,
-            controller.showStart
-          )
-        )
-
-      case CaseAlreadyExists(_) =>
-        Ok(
-          views.caseAlreadyExistsView(
-            routes.$servicePrefixCamel$JourneyController.showStart
-          )
-        )
-
-      case _ => NotImplemented
-
+      case Start => Ok(views.startView())
+      case _     => NotImplemented
     }
 
   // ------------------------------------
@@ -282,23 +126,4 @@ class $servicePrefixCamel$JourneyController @Inject() (
     headerCarrier.withExtraHeaders(key -> value)
 }
 
-object $servicePrefixCamel$JourneyController {
-
-  import FormFieldMappings._
-
-  val DeclarationDetailsForm = Form[DeclarationDetails](
-    mapping(
-      "epu"         -> epuMapping,
-      "entryNumber" -> entryNumberMapping,
-      "entryDate"   -> entryDateMapping
-    )(DeclarationDetails.apply)(DeclarationDetails.unapply)
-  )
-
-  val ExampleRequestTypeForm = Form[ExampleRequestType](
-    mapping("requestType" -> exportRequestTypeMapping)(identity)(Option.apply)
-  )
-
-  val ExampleRouteTypeForm = Form[ExampleRouteType](
-    mapping("routeType" -> exportRouteTypeMapping)(identity)(Option.apply)
-  )
-}
+object $servicePrefixCamel$JourneyController {}

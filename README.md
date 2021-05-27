@@ -12,14 +12,14 @@ How to create a new project based on the template?
 * Decide your project name (the hardest part :))
 * Run the command
 
-    `sbt new hmrc/template-play-frontend-fsm.g8 --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
+    `sbt new hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
 
 or    
 
 * Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Run the command
 
-    `g8 hmrc/template-play-frontend-fsm.g8 --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
+    `g8 hmrc/template-play-frontend-fsm.g8 --branch minimal --serviceName="Trader Services Route One Frontend" --serviceUrlPrefix="send-documents-for-customs-check" --serviceTargetPort="9379" --authorisedIdentifierKey="EORINumber" --serviceTitle="Send Documents For Customs Check" --authorisedServiceName="HMRC-CUS-ORG" --servicePrefix="Trader Services" --package="uk.gov.hmrc.traderservices" -o trader-services-route-one-frontend`
     
 and then
     
@@ -74,7 +74,6 @@ the template will supply the following values for the placeholders:
 	$servicePrefixcamel$ -> traderServices
 	$servicePrefixSnake$ -> TRADER_SERVICES
 	$servicePrefixHyphen$ -> trader-services
-	$servicePrefixLowercase$ -> trader services
 	$authorisedServiceName$ -> HMRC-CUS-ORG
 	$authorisedIdentifierKey$ -> EORINumber
 	$serviceTargetPort$ -> 9379
@@ -135,16 +134,7 @@ and produce the folders and files as shown below:
 	│           └── hmrc
 	│               └── traderservices
 	│                   ├── connectors
-	│                   │   ├── ApiError.scala
-	│                   │   ├── AverageResponseTimer.scala
-	│                   │   ├── FrontendAuthConnector.scala
-	│                   │   ├── HttpAPIMonitor.scala
-	│                   │   ├── HttpErrorRateMeter.scala
-	│                   │   ├── ReadSuccessOrFailure.scala
-	│                   │   ├── Retries.scala
-	│                   │   ├── TraderServicesApiConnector.scala
-	│                   │   ├── TraderServicesCaseResponse.scala
-	│                   │   └── TraderServicesCreateCaseRequest.scala
+	│                   │   └── FrontendAuthConnector.scala
 	│                   │
 	│                   ├── controllers
 	│                   │   ├── AccessibilityStatementController.scala
@@ -192,67 +182,28 @@ and produce the folders and files as shown below:
 	│                   │
 	│                   ├── views
 	│                   │   ├── AccessibilityStatementView.scala.html
-	│                   │   ├── CaseAlreadyExistsView.scala.html
-	│                   │   ├── CheckboxItemsHelper.scala
-	│                   │   ├── CommonUtilsHelper.scala
 	│                   │   ├── components
-	│                   │   │   ├── autocomplete.scala.html
 	│                   │   │   ├── bullets.scala.html
 	│                   │   │   ├── button.scala.html
-	│                   │   │   ├── details.scala.html
-	│                   │   │   ├── errorSummary.scala.html
-	│                   │   │   ├── fieldset.scala.html
-	│                   │   │   ├── FooterLinks.scala
-	│                   │   │   ├── forms.scala
-	│                   │   │   ├── govukTimeInput.scala.html
 	│                   │   │   ├── h1.scala.html
-	│                   │   │   ├── h1NoMargin.scala.html
 	│                   │   │   ├── h2.scala.html
 	│                   │   │   ├── h3.scala.html
 	│                   │   │   ├── html.scala
-	│                   │   │   ├── inputCheckboxes.scala.html
-	│                   │   │   ├── inputCurrency.scala.html
-	│                   │   │   ├── inputDate.scala.html
-	│                   │   │   ├── inputHidden.scala.html
-	│                   │   │   ├── inputNumber.scala.html
-	│                   │   │   ├── inputNumberSubHeading.scala.html
-	│                   │   │   ├── inputPercentage.scala.html
-	│                   │   │   ├── inputRadio.scala.html
-	│                   │   │   ├── inputText.scala.html
-	│                   │   │   ├── inputTime.scala.html
 	│                   │   │   ├── languageSelection.scala.html
 	│                   │   │   ├── link.scala.html
-	│                   │   │   ├── multiFieldError.scala.html
-	│                   │   │   ├── multiLineSummary.scala.html
-	│                   │   │   ├── multiLineSummaryWithoutAction.scala.html
 	│                   │   │   ├── orderedList.scala.html
 	│                   │   │   ├── p.scala.html
-	│                   │   │   ├── package.scala
-	│                   │   │   ├── pageHeading.scala.html
-	│                   │   │   ├── panelIndent.scala.html
-	│                   │   │   ├── simpleInputText.scala.html
-	│                   │   │   ├── strong.scala.html
-	│                   │   │   ├── subheading.scala.html
-	│                   │   │   ├── subheadingP.scala.html
-	│                   │   │   ├── summaryList.scala.html
-	│                   │   │   ├── textarea.scala.html
-	│                   │   │   ├── warningText.scala.html
-	│                   │   │   ├── yesNoRadio.scala.html
-	│                   │   │   └── yesNoRadioSubHeading.scala.html
+	│                   │   │   └── strong.scala.html
 	│                   │   │
-	│                   │   ├── DateTimeFormatHelper.scala
-	│                   │   ├── DeclarationDetailsEntryView.scala.html
-	│                   │   ├── DeclarationDetailsHelper.scala
-	│                   │   ├── EnterCaseReferenceNumberView.scala.html
-	│                   │   ├── EnterResponseTextView.scala.html
-	│                   │   ├── ExampleQuestionsRequestTypeView.scala.html
-	│                   │   ├── ExampleQuestionsRouteTypeView.scala.html
-	│                   │   ├── ExampleQuestionsSummaryView.scala.html
-	│                   │   ├── ExampleQuestionsViewContext.scala
-	│                   │   ├── InternalErrorView.scala.html
+	│                   │   ├── helpers
+	│                   │   │   ├── CheckboxItemsHelper.scala
+	│                   │   │   ├── CommonUtilsHelper.scala
+	│                   │   │   ├── DateTimeFormatHelper.scala
+	│                   │   │   ├── RadioItemsHelper.scala
+	│                   │   │   └── ViewHelpers.scala
+	│                   │   │
 	│                   │   ├── PageNotFoundErrorView.scala.html
-	│                   │   ├── RadioItemsHelper.scala
-	│                   │   ├── SummaryListRowHelper.scala
+	│                   │   ├── StartView.scala.html
 	│                   │   ├── templates
 	│                   │   │   ├── ErrorTemplate.scala.html
 	│                   │   │   ├── GovukLayoutWrapper.scala.html
@@ -260,11 +211,7 @@ and produce the folders and files as shown below:
 	│                   │   │   └── GtmHeadSnippet.scala.html
 	│                   │   │
 	│                   │   ├── TimedOutView.scala.html
-	│                   │   ├── TraderServicesConfirmationView.scala.html
-	│                   │   ├── TraderServicesViews.scala
-	│                   │   ├── ViewHelpers.scala
-	│                   │   └── viewmodels
-	│                   │       └── TimeInput.scala
+	│                   │   └── Views.scala
 	│                   │
 	│                   └── wiring
 	│                       ├── AppConfig.scala
@@ -285,9 +232,6 @@ and produce the folders and files as shown below:
 	│       └── gov
 	│           └── hmrc
 	│               └── traderservices
-	│                   ├── connectors
-	│                   │   └── TraderServicesApiConnectorISpec.scala
-	│                   │
 	│                   ├── controllers
 	│                   │   ├── AccessibilityStatementControllerISpec.scala
 	│                   │   ├── AuthActionsISpec.scala
@@ -333,18 +277,13 @@ and produce the folders and files as shown below:
 	            └── hmrc
 	                └── traderservices
 	                    ├── controllers
-	                    │   ├── CommonUtilsHelperSpec.scala
-	                    │   ├── ContactFieldHelperSpec.scala
 	                    │   ├── DateFieldHelperSpec.scala
-	                    │   ├── DeclarationDetailsFormSpec.scala
-	                    │   ├── ExampleQuestionsFormSpec.scala
-	                    │   ├── FormFieldMappingsSpec.scala
 	                    │   ├── Time12FieldHelperSpec.scala
 	                    │   └── Time24FieldHelperSpec.scala
 	                    │
 	                    ├── journey
-	                    │   ├── CreateCaseJourneyModelSpec.scala
-	                    │   └── CreateCaseJourneyStateFormatsSpec.scala
+	                    │   ├── TraderServicesJourneyModelSpec.scala
+	                    │   └── TraderServicesJourneyStateFormatsSpec.scala
 	                    │
 	                    ├── model
 	                    │   ├── DeclarationDetailsSpec.scala

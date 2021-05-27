@@ -23,32 +23,14 @@ import uk.gov.hmrc.play.fsm.JsonStateFormats
 
 object $servicePrefixCamel$JourneyStateFormats extends JsonStateFormats[State] {
 
-  val enterDeclarationDetailsFormat = Json.format[EnterDeclarationDetails]
-  val answerExampleQuestionsRequestTypeFormat = Json.format[AnswerExampleQuestionsRequestType]
-  val answerExampleQuestionsRouteTypeFormat = Json.format[AnswerExampleQuestionsRouteType]
-  val exportQuestionsSummaryFormat = Json.format[ExampleQuestionsSummary]
-  val createCaseConfirmationFormat = Json.format[$servicePrefixCamel$Confirmation]
-  val caseAlreadyExistsFormat = Json.format[CaseAlreadyExists]
-
   override val serializeStateProperties: PartialFunction[State, JsValue] = {
-    case s: EnterDeclarationDetails           => enterDeclarationDetailsFormat.writes(s)
-    case s: AnswerExampleQuestionsRequestType => answerExampleQuestionsRequestTypeFormat.writes(s)
-    case s: AnswerExampleQuestionsRouteType   => answerExampleQuestionsRouteTypeFormat.writes(s)
-    case s: ExampleQuestionsSummary           => exportQuestionsSummaryFormat.writes(s)
-    case s: $servicePrefixCamel$Confirmation        => createCaseConfirmationFormat.writes(s)
-    case s: CaseAlreadyExists                 => caseAlreadyExistsFormat.writes(s)
+    case _ => JsNull
   }
 
   override def deserializeState(stateName: String, properties: JsValue): JsResult[State] =
     stateName match {
-      case "Start"                             => JsSuccess(Start)
-      case "EnterDeclarationDetails"           => enterDeclarationDetailsFormat.reads(properties)
-      case "AnswerExampleQuestionsRequestType" => answerExampleQuestionsRequestTypeFormat.reads(properties)
-      case "AnswerExampleQuestionsRouteType"   => answerExampleQuestionsRouteTypeFormat.reads(properties)
-      case "ExampleQuestionsSummary"           => exportQuestionsSummaryFormat.reads(properties)
-      case "$servicePrefixCamel$Confirmation"        => createCaseConfirmationFormat.reads(properties)
-      case "CaseAlreadyExists"                 => caseAlreadyExistsFormat.reads(properties)
-      case "WorkInProgressDeadEnd"             => JsSuccess(WorkInProgressDeadEnd)
-      case _                                   => JsError(s"Unknown state name \$stateName")
+      case "Start"                 => JsSuccess(Start)
+      case "WorkInProgressDeadEnd" => JsSuccess(WorkInProgressDeadEnd)
+      case _                       => JsError(s"Unknown state name \$stateName")
     }
 }

@@ -20,11 +20,6 @@ import javax.inject.{Inject, Singleton}
 import $package$.views.html._
 
 @Singleton
-class $servicePrefixCamel$Views @Inject() (
-  val declarationDetailsEntryView: DeclarationDetailsEntryView,
-  val exportQuestionsRequestTypeView: ExampleQuestionsRequestTypeView,
-  val exportQuestionsRouteTypeView: ExampleQuestionsRouteTypeView,
-  val exportQuestionsSummaryView: ExampleQuestionsSummaryView,
-  val createCaseConfirmationView: $servicePrefixCamel$ConfirmationView,
-  val caseAlreadyExistsView: CaseAlreadyExistsView
+class Views @Inject() (
+  val startView: StartView
 )
