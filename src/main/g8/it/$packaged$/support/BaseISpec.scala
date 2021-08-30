@@ -11,7 +11,7 @@ import play.twirl.api.HtmlFormat
 import $package$.stubs.{AuthStubs, DataStreamStubs}
 import $package$.wiring.AppConfig
 import uk.gov.hmrc.http.HeaderCarrier
-import uk.gov.hmrc.play.HeaderCarrierConverter
+import uk.gov.hmrc.play.http.HeaderCarrierConverter
 
 abstract class BaseISpec
     extends UnitSpec with WireMockSupport with AuthStubs with DataStreamStubs with MetricsTestSupport {
@@ -55,6 +55,6 @@ abstract class BaseISpec
     htmlEscapedMessage("error.browser.title.prefix") + " " + htmlEscapedPageTitle(key)
 
   implicit def hc(implicit request: FakeRequest[_]): HeaderCarrier =
-    HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
+    HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
 }

@@ -16,22 +16,23 @@ lazy val scoverageSettings = {
 }
 
 lazy val compileDeps = Seq(
-  "uk.gov.hmrc"                  %% "bootstrap-frontend-play-28" % "5.2.0",
-  "uk.gov.hmrc"                  %% "auth-client"                % "5.6.0-play-28",
-  "uk.gov.hmrc"                  %% "play-fsm"                   % "0.83.0-play-28",
-  "uk.gov.hmrc.mongo"            %% "hmrc-mongo-play-28"         % "0.50.0",
+  "uk.gov.hmrc"                  %% "bootstrap-frontend-play-28" % "5.12.0",
+  "uk.gov.hmrc"                  %% "auth-client"                % "5.7.0-play-28",
+  "uk.gov.hmrc"                  %% "play-fsm"                   % "0.85.0-play-28",
+  "uk.gov.hmrc.mongo"            %% "hmrc-mongo-play-28"         % "0.53.0",
   "uk.gov.hmrc"                  %% "json-encryption"            % "4.10.0-play-28",
-  "uk.gov.hmrc"                  %% "play-frontend-govuk"        % "0.71.0-play-28",
-  "uk.gov.hmrc"                  %% "play-frontend-hmrc"         % "0.60.0-play-28",
-  "com.googlecode.libphonenumber" % "libphonenumber"             % "8.12.22",
-  "com.sun.mail"                  % "javax.mail"                 % "1.6.2"
+  "uk.gov.hmrc"                  %% "play-frontend-govuk"        % "1.0.0-play-28",
+  "uk.gov.hmrc"                  %% "play-frontend-hmrc"         % "1.2.0-play-28",
+  "com.googlecode.libphonenumber" % "libphonenumber"             % "8.12.31",
+  "com.sun.mail"                  % "javax.mail"                 % "1.6.2",
+  "com.fasterxml.jackson.module" %% "jackson-module-scala"       % "2.12.5"
 )
 
 def testDeps(scope: String) =
   Seq(
-    "org.scalatest"          %% "scalatest"          % "3.2.8"  % scope,
+    "org.scalatest"          %% "scalatest"          % "3.2.9"  % scope,
     "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0"  % scope,
-    "com.github.tomakehurst"  % "wiremock-jre8"      % "2.27.2" % scope,
+    "com.github.tomakehurst"  % "wiremock-jre8"      % "2.30.1" % scope,
     "com.vladsch.flexmark"    % "flexmark-all"       % "0.36.8" % scope
   )
 
@@ -45,7 +46,6 @@ lazy val root = (project in file("."))
       "play.twirl.api.HtmlFormat",
       "uk.gov.hmrc.govukfrontend.views.html.components._",
       "uk.gov.hmrc.hmrcfrontend.views.html.{components => hmrcComponents}",
-      "uk.gov.hmrc.govukfrontend.views.html.helpers._",
       "$package$.views.html.components",
       "$package$.views.ViewHelpers._"
     ),
