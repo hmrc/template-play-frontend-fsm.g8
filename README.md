@@ -281,10 +281,13 @@ and produce the folders and files as shown below:
 	                    │
 	                    └── support
 	                        ├── CallOpsSpec.scala
+	                        ├── DummyContext.scala
 	                        ├── FormMappingMatchers.scala
 	                        ├── FormMatchers.scala
 	                        ├── FormValidator.scala
 	                        ├── InMemoryStore.scala
+	                        ├── JourneyModelMatchers.scala
+	                        ├── JourneyModelSpec.scala
 	                        ├── JsonFormatTest.scala
-	                        ├── StateMatchers.scala
+	                        ├── TestJourneyService.scala
 	                        └── UnitSpec.scala

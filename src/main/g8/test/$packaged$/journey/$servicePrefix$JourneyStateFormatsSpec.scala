@@ -16,13 +16,13 @@
 
 package $package$.journey
 
-import java.time.LocalDate
-import play.api.libs.json.{Format, JsResultException, Json}
+import play.api.libs.json.Format
+import play.api.libs.json.JsResultException
+import play.api.libs.json.Json
 import $package$.journeys.$servicePrefix$JourneyModel.State
 import $package$.journeys.$servicePrefix$JourneyStateFormats
-import $package$.models._
-import $package$.support.UnitSpec
 import $package$.support.JsonFormatTest
+import $package$.support.UnitSpec
 
 class $servicePrefix$JourneyStateFormatsSpec extends UnitSpec {
 

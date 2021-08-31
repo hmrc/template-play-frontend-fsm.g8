@@ -17,12 +17,15 @@
 package $package$.support
 
 import org.scalatest.matchers.{MatchResult, Matcher}
+import uk.gov.hmrc.play.fsm.JourneyModel
 
-trait StateMatchers[S] {
+trait JourneyModelMatchers {
 
-  def thenGo(state: S): Matcher[(S, List[S])] =
-    new Matcher[(S, List[S])] {
-      override def apply(result: (S, List[S])): MatchResult =
+  val model: JourneyModel
+
+  def thenGo(state: model.State): Matcher[(model.State, List[model.State])] =
+    new Matcher[(model.State, List[model.State])] {
+      override def apply(result: (model.State, List[model.State])): MatchResult =
         result match {
           case (thisState, _) if state != thisState =>
             MatchResult(false, s"State \$state has been expected but got state \$thisState", s"")
@@ -31,9 +34,11 @@ trait StateMatchers[S] {
         }
     }
 
-  def thenMatch(statePF: PartialFunction[S, Unit]): Matcher[(S, List[S])] =
-    new Matcher[(S, List[S])] {
-      override def apply(result: (S, List[S])): MatchResult =
+  def thenMatch(
+    statePF: PartialFunction[model.State, Unit]
+  ): Matcher[(model.State, List[model.State])] =
+    new Matcher[(model.State, List[model.State])] {
+      override def apply(result: (model.State, List[model.State])): MatchResult =
         result match {
           case (thisState, _) if !statePF.isDefinedAt(thisState) =>
             MatchResult(false, s"Matching state has been expected but got state \$thisState", s"")

@@ -14,22 +14,6 @@
  * limitations under the License.
  */
 
-package $package$.journey
+package $package$.support
 
-import $package$.journeys.$servicePrefix$JourneyModel
-import $package$.support._
-
-class $servicePrefix$JourneyModelSpec extends UnitSpec with JourneyModelSpec {
-
-  override val model = $servicePrefix$JourneyModel
-
-  import model.{State, Transitions}
-
-  "$servicePrefix$JourneyModel" when {
-    "at state Start" should {
-      "stay at Start when start" in {
-        given(State.Start) when Transitions.start should thenGo(State.Start)
-      }
-    }
-  }
-}
+case class DummyContext()
