@@ -16,4 +16,8 @@
 
 package $package$.support
 
-case class DummyContext()
+sealed trait DummyContext
+
+object DummyContext {
+  implicit val default: DummyContext = new DummyContext {}
+}

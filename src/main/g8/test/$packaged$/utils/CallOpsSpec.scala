@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package $package$.support
+package $package$.utils
 
 import java.io.File
 
 import com.typesafe.config._
 import play.api.{Configuration, Environment, Mode}
-import $package$.support.CallOps.localFriendlyUrl
+import $package$.utils.CallOps.localFriendlyUrl
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-class CallOpsSpec extends UnitSpec {
+class CallOpsSpec extends AnyWordSpec with Matchers {
 
   val testEnv = Environment(new File(""), classOf[CallOpsSpec].getClassLoader, Mode.Test)
   val prodEnv = Environment(new File(""), classOf[CallOpsSpec].getClassLoader, Mode.Prod)
@@ -33,22 +35,18 @@ class CallOpsSpec extends UnitSpec {
   "CallOps" should {
 
     "return the original url if it is in the test environment" in {
-
       localFriendlyUrl(testEnv, devConf)("A", "B") shouldBe "A"
     }
 
     "return url string with localhost and port if is in development environment" in {
-
       localFriendlyUrl(devEnv, devConf)("A", "B") shouldBe "http://BA"
     }
 
     "return the original url if it is in the production environment" in {
-
       localFriendlyUrl(prodEnv, prodConf)("A", "B") shouldBe "A"
     }
 
     "if url is not absolute then return the url regardless of environment" in {
-
       localFriendlyUrl(devEnv, devConf)("http://A", "B") shouldBe "http://A"
 
     }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package $package$.models
+package $package$.utils
 
 import play.api.libs.json._
 import scala.reflect.ClassTag

@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.i18n.Messages
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.RadioItem
-import $package$.models.EnumerationFormats
+import $package$.utils.EnumerationFormats
 
 trait RadioItemsHelper {
 

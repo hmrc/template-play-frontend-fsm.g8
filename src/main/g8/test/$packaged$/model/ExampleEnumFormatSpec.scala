@@ -16,11 +16,12 @@
 
 package $package$.model
 
-import $package$.support.UnitSpec
 import $package$.models._
 import $package$.support.JsonFormatTest
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-class ExampleEnumFormatSpec extends UnitSpec {
+class ExampleEnumFormatSpec extends AnyWordSpec with Matchers {
 
   "ExampleEnumFormats" should {
 

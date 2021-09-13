@@ -16,6 +16,8 @@
 
 package $package$.models
 
+import $package$.utils.EnumerationFormats
+
 sealed trait ExampleEnum
 
 object ExampleEnum extends EnumerationFormats[ExampleEnum] {

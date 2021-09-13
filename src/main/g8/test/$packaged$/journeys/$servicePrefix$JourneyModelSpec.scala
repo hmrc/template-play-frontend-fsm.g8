@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package $package$.journey
+package $package$.journeys
 
-import $package$.journeys.$servicePrefix$JourneyModel
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.BeforeAndAfterAll
+import org.scalatest.matchers.should.Matchers
+import $package$.models._
 import $package$.support._
 
-class $servicePrefix$JourneyModelSpec extends UnitSpec with JourneyModelSpec {
+class $servicePrefix$JourneyModelSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll with JourneyModelSpec {
 
   override val model = $servicePrefix$JourneyModel
 

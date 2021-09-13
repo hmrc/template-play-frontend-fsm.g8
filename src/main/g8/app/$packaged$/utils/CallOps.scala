@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package $package$.support
+package $package$.utils
 
 import java.net.URI
 

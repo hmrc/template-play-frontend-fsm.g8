@@ -24,10 +24,11 @@ import uk.gov.hmrc.play.fsm.PersistentJourneyService
 import scala.concurrent.{ExecutionContext, Future}
 import $package$.repository.CacheRepository
 import akka.actor.ActorSystem
+import play.api.libs.json.JsValue
 
 /**
   * Journey persistence service mixin,
-  * stores encrypted serialized state using SessionCache.
+  * stores encrypted serialized state using [[JourneyCache]].
   */
 trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyService[RequestContext] {
 
@@ -60,6 +61,9 @@ trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyServi
     override def getJourneyId(implicit requestContext: RequestContext): Option[String] =
       self.getJourneyId(requestContext)
   }
+
+  def encrypt(state: model.State, breadcrumbs: List[model.State]): JsValue =
+    encryptionFormat.writes(Protected(PersistentState(state, breadcrumbs)))
 
   final override def apply(
     transition: model.Transition

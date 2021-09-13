@@ -22,9 +22,10 @@ import play.api.libs.json.Json
 import $package$.journeys.$servicePrefix$JourneyModel.State
 import $package$.journeys.$servicePrefix$JourneyStateFormats
 import $package$.support.JsonFormatTest
-import $package$.support.UnitSpec
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-class $servicePrefix$JourneyStateFormatsSpec extends UnitSpec {
+class $servicePrefix$JourneyStateFormatsSpec extends AnyWordSpec with Matchers {
 
   implicit val formats: Format[State] = $servicePrefix$JourneyStateFormats.formats
   val generatedAt = java.time.LocalDateTime.of(2018, 12, 11, 10, 20, 30)

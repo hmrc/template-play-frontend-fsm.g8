@@ -19,10 +19,11 @@ package $package$.controllers
 import java.time.LocalDate
 
 import $package$.controllers.DateFieldHelper._
-import $package$.support.UnitSpec
 import $package$.support.FormMappingMatchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-class DateFieldHelperSpec extends UnitSpec with FormMappingMatchers {
+class DateFieldHelperSpec extends AnyWordSpec with Matchers with FormMappingMatchers {
 
   val `2020-04-21`: LocalDate = LocalDate.parse("2020-04-21")
 

@@ -19,14 +19,15 @@ package $package$.controllers
 import java.time.LocalTime
 
 import $package$.controllers.Time12FieldHelper._
-import $package$.support.UnitSpec
 import java.time.LocalTime
 import $package$.support.FormMappingMatchers
 import play.api.data.validation.Valid
 import play.api.data.validation.ValidationError
 import play.api.data.validation.Invalid
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-class Time12FieldHelperSpec extends UnitSpec with FormMappingMatchers {
+class Time12FieldHelperSpec extends AnyWordSpec with Matchers with FormMappingMatchers {
 
   "Time12FieldHelper" should {
 

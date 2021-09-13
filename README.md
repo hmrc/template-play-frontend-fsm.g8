@@ -153,11 +153,7 @@ and produce the folders and files as shown below:
 	│                   │   └── NewShinyJourneyStateFormats.scala
 	│                   │
 	│                   ├── models
-	│                   │   ├── EnumerationFormats.scala
-	│                   │   ├── ExampleEnum.scala
-	│                   │   ├── SealedTraitFormats.scala
-	│                   │   ├── SimpleDecimalFormat.scala
-	│                   │   └── SimpleStringFormat.scala
+	│                   │   └── ExampleEnum.scala
 	│                   │
 	│                   ├── repository
 	│                   │   ├── CacheRepository.scala
@@ -169,8 +165,13 @@ and produce the folders and files as shown below:
 	│                   │   ├── MongoDBCachedJourneyService.scala
 	│                   │   └── NewShinyJourneyService.scala
 	│                   │
-	│                   ├── support
-	│                   │   └── CallOps.scala
+	│                   ├── utils
+	│                   │   ├── CallOps.scala
+	│                   │   ├── EnumerationFormats.scala
+	│                   │   ├── OptionOps.scala
+	│                   │   ├── SealedTraitFormats.scala
+	│                   │   ├── SimpleDecimalFormat.scala
+	│                   │   └── SimpleStringFormat.scala
 	│                   │
 	│                   ├── views
 	│                   │   ├── AccessibilityStatementView.scala.html
@@ -272,22 +273,24 @@ and produce the folders and files as shown below:
 	                    │   ├── Time12FieldHelperSpec.scala
 	                    │   └── Time24FieldHelperSpec.scala
 	                    │
-	                    ├── journey
+	                    ├── journeys
 	                    │   ├── NewShinyJourneyModelSpec.scala
 	                    │   └── NewShinyJourneyStateFormatsSpec.scala
 	                    │
 	                    ├── model
 	                    │   └── ExampleEnumFormatSpec.scala
 	                    │
-	                    └── support
+	                    ├── support
+	                    │   ├── DummyContext.scala
+	                    │   ├── FormMappingMatchers.scala
+	                    │   ├── FormMatchers.scala
+	                    │   ├── FormValidator.scala
+	                    │   ├── InMemoryStore.scala
+	                    │   ├── JourneyModelSpec.scala
+	                    │   ├── JsonFormatTest.scala
+	                    │   └── TestJourneyService.scala
+	                    │
+	                    └── utils
 	                        ├── CallOpsSpec.scala
-	                        ├── DummyContext.scala
-	                        ├── FormMappingMatchers.scala
-	                        ├── FormMatchers.scala
-	                        ├── FormValidator.scala
-	                        ├── InMemoryStore.scala
-	                        ├── JourneyModelMatchers.scala
-	                        ├── JourneyModelSpec.scala
-	                        ├── JsonFormatTest.scala
-	                        ├── TestJourneyService.scala
-	                        └── UnitSpec.scala
+	                        ├── EnumerationFormatsSpec.scala
+	                        └── OptionOpsSpec.scala

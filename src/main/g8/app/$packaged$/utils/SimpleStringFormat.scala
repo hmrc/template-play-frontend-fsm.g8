@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package $package$.models
+package $package$.utils
 
-import play.api.libs.json.{Format, JsError, JsSuccess, Reads, Writes}
-import play.api.libs.json.JsNumber
+import play.api.libs.json.{Format, JsError, JsString, JsSuccess, Reads, Writes}
 
-object SimpleDecimalFormat {
+object SimpleStringFormat {
 
-  def apply[A](from: BigDecimal => A, to: A => BigDecimal): Format[A] =
+  def apply[A](fromString: String => A, toString: A => String): Format[A] =
     Format(
       Reads {
-        case JsNumber(value) => JsSuccess(from(value))
-        case json            => JsError(s"Expected json number but got \${json.getClass.getSimpleName}")
+        case JsString(value) => JsSuccess(fromString(value))
+        case json            => JsError(s"Expected json string but got \${json.getClass.getSimpleName}")
       },
-      Writes.apply(entity => JsNumber(to(entity)))
+      Writes.apply(entity => JsString(toString(entity)))
     )
 
 }

@@ -22,7 +22,7 @@ import play.api.data.Forms.text
 import play.api.data.Mapping
 import play.api.data.format.Formats._
 import play.api.data.validation._
-import $package$.models._
+import $package$.utils._
 
 object FormFieldMappings {
 

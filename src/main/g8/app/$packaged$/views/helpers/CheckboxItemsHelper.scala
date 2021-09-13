@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.i18n.Messages
 import uk.gov.hmrc.govukfrontend.views.viewmodels.checkboxes.CheckboxItem
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
-import $package$.models.EnumerationFormats
+import $package$.utils.EnumerationFormats
 
 trait CheckboxItemsHelper {
 

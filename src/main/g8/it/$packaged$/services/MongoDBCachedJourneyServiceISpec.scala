@@ -10,7 +10,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import uk.gov.hmrc.crypto.ApplicationCrypto
 import uk.gov.hmrc.play.fsm.PersistentJourneyService
 import scala.concurrent.Future
-import $package$.models.SimpleDecimalFormat
+import $package$.utils.SimpleDecimalFormat
 
 class MongoDBCachedJourneyServiceISpec extends MongoDBCachedJourneyServiceISpecSetup {
 
