@@ -36,40 +36,25 @@ import scala.concurrent.ExecutionContext
 @Singleton
 class $servicePrefix$JourneyController @Inject() (
   appConfig: AppConfig,
-  override val messagesApi: MessagesApi,
-  val authConnector: FrontendAuthConnector,
-  val env: Environment,
+  authConnector: FrontendAuthConnector,
+  environment: Environment,
+  configuration: Configuration,
   controllerComponents: MessagesControllerComponents,
   views: $package$.views.Views,
-  override val journeyService: $servicePrefix$JourneyServiceWithHeaderCarrier,
-  override val actionBuilder: DefaultActionBuilder
-)(implicit val config: Configuration, ec: ExecutionContext)
-    extends FrontendController(controllerComponents) with I18nSupport with AuthActions
-    with JourneyController[HeaderCarrier] with JourneyIdSupport[HeaderCarrier] {
+  myJourneyService: $servicePrefix$JourneyServiceWithHeaderCarrier
+) extends BaseJourneyController(
+      myJourneyService,
+      controllerComponents,
+      appConfig,
+      authConnector,
+      environment,
+      configuration
+    ) {
 
   final val controller = routes.$servicePrefix$JourneyController
 
+  import journeyService.model._
   import $servicePrefix$JourneyController._
-  import $package$.journeys.$servicePrefix$JourneyModel._
-
-  /** AsUser authorisation request */
-  final val AsUser: WithAuthorised[Option[String]] = { implicit request =>
-    authorisedWithEnrolment(appConfig.authorisedServiceName, appConfig.authorisedIdentifierKey)
-  }
-
-  /** Base authorized action builder */
-  final val whenAuthorisedAsUser =
-    actions.whenAuthorised(AsUser)
-
-  /** Provide response when user have no required enrolment. */
-  override def toSubscriptionJourney(continueUrl: String): Result = ???
-
-  /** Dummy action to use only when developing to fill loose-ends. */
-  final val actionNotYetImplemented = Action(NotImplemented)
-
-  // Dummy URL to use when developing the journey
-  final val workInProgresDeadEndCall =
-    Call("GET", "/$serviceUrlPrefix$/work-in-progress")
 
   // YOUR ACTIONS
 
@@ -100,30 +85,6 @@ class $servicePrefix$JourneyController @Inject() (
       case Start => Ok(views.startView())
       case _     => NotImplemented
     }
-
-  // ------------------------------------
-  // Retrieval of journeyId configuration
-  // ------------------------------------
-
-  private val journeyIdPathParamRegex = ".*?/journey/([A-Za-z0-9-]{36})/.*".r
-
-  final override def journeyId(implicit rh: RequestHeader): Option[String] = {
-    val journeyIdFromPath = rh.path match {
-      case journeyIdPathParamRegex(id) => Some(id)
-      case _                           => None
-    }
-
-    val idOpt = journeyIdFromPath
-      .orElse(rh.session.get(journeyService.journeyKey))
-
-    idOpt
-  }
-
-  final override implicit def context(implicit rh: RequestHeader): HeaderCarrier =
-    appendJourneyId(super.hc)
-
-  final override def amendContext(headerCarrier: HeaderCarrier)(key: String, value: String): HeaderCarrier =
-    headerCarrier.withExtraHeaders(key -> value)
 }
 
 object $servicePrefix$JourneyController {}

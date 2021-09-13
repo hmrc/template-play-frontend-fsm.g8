@@ -138,6 +138,7 @@ and produce the folders and files as shown below:
 	│                   ├── controllers
 	│                   │   ├── AccessibilityStatementController.scala
 	│                   │   ├── AuthActions.scala
+	│                   │   ├── BaseJourneyController.scala
 	│                   │   ├── ContactFieldHelper.scala
 	│                   │   ├── DateFieldHelper.scala
 	│                   │   ├── FormFieldMappings.scala
@@ -233,7 +234,8 @@ and produce the folders and files as shown below:
 	│                   │   └── SessionControllerISpec.scala
 	│                   │
 	│                   ├── services
-	│                   │   └── MongoDBCachedJourneyServiceISpec.scala
+	│                   │   ├── MongoDBCachedJourneyServiceISpec.scala
+	│                   │   └── MongoDBCachedPizzaTaxJourneyServiceSpec.scala
 	│                   │
 	│                   ├── stubs
 	│                   │   ├── AuthStubs.scala

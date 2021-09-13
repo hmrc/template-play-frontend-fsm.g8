@@ -16,10 +16,6 @@
 
 package $package$.journeys
 
-import $package$.models._
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext
-
 import uk.gov.hmrc.play.fsm.JourneyModel
 
 object $servicePrefix$JourneyModel extends JourneyModel {
