@@ -235,7 +235,7 @@ and produce the folders and files as shown below:
 	│                   │
 	│                   ├── services
 	│                   │   ├── MongoDBCachedJourneyServiceISpec.scala
-	│                   │   └── MongoDBCachedPizzaTaxJourneyServiceSpec.scala
+	│                   │   └── MongoDBCachedNewShinyJourneyServiceSpec.scala
 	│                   │
 	│                   ├── stubs
 	│                   │   ├── AuthStubs.scala
