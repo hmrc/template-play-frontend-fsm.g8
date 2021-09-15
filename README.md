@@ -283,6 +283,7 @@ and produce the folders and files as shown below:
 	                    │   └── ExampleEnumFormatSpec.scala
 	                    │
 	                    ├── support
+	                    │   ├── Diff.scala
 	                    │   ├── DummyContext.scala
 	                    │   ├── FormMappingMatchers.scala
 	                    │   ├── FormMatchers.scala
