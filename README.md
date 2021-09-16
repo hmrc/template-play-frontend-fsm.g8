@@ -85,18 +85,7 @@ and produce the folders and files as shown below:
 	├── app
 	│   ├── assets
 	│   │   ├── javascripts
-	│   │   │   ├── .eslintrc
-	│   │   │   ├── components
-	│   │   │   │   ├── component.ts
-	│   │   │   │   └── file-upload.ts
-	│   │   │   │
-	│   │   │   ├── index.ts
-	│   │   │   ├── init.ts
-	│   │   │   ├── legacy
-	│   │   │   │   └── research-banner.js
-	│   │   │   │
-	│   │   │   ├── load-components.ts
-	│   │   │   └── tsconfig.json
+	│   │   │   └── index.ts
 	│   │   │
 	│   │   ├── karma.conf.js
 	│   │   ├── package-lock.json
@@ -123,9 +112,7 @@ and produce the folders and files as shown below:
 	│   │   │   ├── print.scss
 	│   │   │   └── upload-loading.scss
 	│   │   │
-	│   │   ├── webpack.config.js
-	│   │   ├── webpack.dev.config.js
-	│   │   └── webpack.prod.config.js
+	│   │   └── webpack.config.js
 	│   │
 	│   ├── FrontendModule.scala
 	│   └── uk
@@ -258,10 +245,9 @@ and produce the folders and files as shown below:
 	├── logback.xml
 	├── project
 	│   ├── build.properties
-	│   ├── JavaScriptBuild.scala
-	│   ├── Npm.scala
 	│   ├── plugins.sbt
-	│   └── Webpack.scala
+	│   ├── SbtNpm.scala
+	│   └── SbtWebpack.scala
 	│
 	├── README.md
 	├── repository.yaml
