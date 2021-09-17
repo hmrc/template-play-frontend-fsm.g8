@@ -1,10 +1,9 @@
 {
-  "name": "pizza-tax-frontend",
-  "repository": "https://github.com/hmrc/pizza-tax-frontend",
+  "name": "$serviceNameHyphen$",
+  "repository": "https://github.com/hmrc/$serviceNameHyphen$",
   "version": "1.0.0",
   "description": "Frontend components",
   "scripts": {
-    "build": "npm test",
     "test": "node_modules/karma/bin/karma start --single-run",
     "test-watch": "node_modules/karma/bin/karma start"
   },

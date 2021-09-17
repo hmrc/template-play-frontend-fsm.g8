@@ -85,7 +85,17 @@ and produce the folders and files as shown below:
 	├── app
 	│   ├── assets
 	│   │   ├── javascripts
-	│   │   │   └── index.ts
+	│   │   │   ├── .eslintrc
+	│   │   │   ├── components
+	│   │   │   │   └── component.ts
+	│   │   │   │
+	│   │   │   ├── index.ts
+	│   │   │   ├── init.ts
+	│   │   │   ├── legacy
+	│   │   │   │   └── research-banner.js
+	│   │   │   │
+	│   │   │   ├── load-components.ts
+	│   │   │   └── tsconfig.json
 	│   │   │
 	│   │   ├── karma.conf.js
 	│   │   ├── package-lock.json
