@@ -16,6 +16,8 @@ import scala.io.AnsiColor
 
 /**
   * Runs `webpack` command in assets.
+  * Project's build has to define `entries` and `outputFileName` settings.
+  * Supports `skip` setting.
   */
 object SbtWebpack extends AutoPlugin {
 
@@ -35,7 +37,7 @@ object SbtWebpack extends AutoPlugin {
         "The entry point pseudo-paths. If the path starts with `assets:` it will be resolved in assests source directory, if the path starts with `webjar:` it will be resolved in the webjars/lib target directory."
       )
       val outputFileName =
-        SettingKey[String]("outputFileName", "The name of the webpack output file, default to application.min.js")
+        SettingKey[String]("outputFileName", "The name of the webpack output file.")
     }
   }
 
@@ -47,18 +49,15 @@ object SbtWebpack extends AutoPlugin {
   override def projectSettings: Seq[Setting[_]] =
     inConfig(Assets)(
       Seq(
-        WebpackKeys.binary in WebpackKeys.webpack := (Assets / sourceDirectory).value / "node_modules" / ".bin" / "webpack",
-        WebpackKeys.configFile in WebpackKeys.webpack := (Assets / sourceDirectory).value / "webpack.config.js",
-        WebpackKeys.sourceDirs in WebpackKeys.webpack := Seq((Assets / sourceDirectory).value),
+        WebpackKeys.binary := (Assets / sourceDirectory).value / "node_modules" / ".bin" / "webpack",
+        WebpackKeys.configFile := (Assets / sourceDirectory).value / "webpack.config.js",
+        WebpackKeys.sourceDirs := Seq((Assets / sourceDirectory).value),
         WebpackKeys.nodeModulesPath := new File("./node_modules"),
-        WebpackKeys.webpack in Assets := task
-          .dependsOn(WebKeys.webModules in Assets)
-          //.dependsOn(NpmKeys.npmInstall in Assets)
+        WebpackKeys.webpack := task
+          .dependsOn(Assets / WebKeys.webModules)
+          .dependsOn(NpmKeys.npmInstall in Assets)
           .value,
-        // Because sbt-webpack might compile JS and output into the same file.
-        // Therefore, we need to deduplicate the files by choosing the one in the target directory.
-        // Otherwise, the "duplicate mappings" error would occur.
-        excludeFilter in WebpackKeys.webpack := HiddenFileFilter ||
+        WebpackKeys.webpack / excludeFilter := HiddenFileFilter ||
           new FileFilter {
             override def accept(file: File): Boolean = {
               val path = file.getAbsolutePath()
@@ -66,18 +65,23 @@ object SbtWebpack extends AutoPlugin {
               path.contains("/build/")
             }
           },
-        includeFilter in WebpackKeys.webpack := "*.js" || "*.ts",
-        resourceManaged in WebpackKeys.webpack := webTarget.value / "webpack" / "build",
-        managedResourceDirectories in Assets += (resourceManaged in WebpackKeys.webpack in Assets).value,
-        resourceGenerators in Assets += WebpackKeys.webpack in Assets,
-        deduplicators in Assets += {
-          val targetDir = (resourceManaged in WebpackKeys.webpack in Assets).value
+        WebpackKeys.webpack / includeFilter := "*.js" || "*.ts",
+        WebpackKeys.webpack / resourceManaged := webTarget.value / "webpack" / "build",
+        managedResourceDirectories += (Assets / WebpackKeys.webpack / resourceManaged).value,
+        resourceGenerators += Assets / WebpackKeys.webpack,
+        // Because sbt-webpack might compile JS and output into the same file.
+        // Therefore, we need to deduplicate the files by choosing the one in the target directory.
+        // Otherwise, the "duplicate mappings" error would occur.
+        deduplicators += {
+          val targetDir = (Assets / WebpackKeys.webpack / resourceManaged).value
           val targetDirAbsolutePath = targetDir.getAbsolutePath
 
           { files: Seq[File] => files.find(_.getAbsolutePath.startsWith(targetDirAbsolutePath)) }
         },
         packager.Keys.dist := (packager.Keys.dist dependsOn WebpackKeys.webpack).value
       )
+    ) ++ Seq(
+      Global / WebpackKeys.webpack / sbt.Keys.skip := false
     )
 
   final def readAndClose(file: File): String =
@@ -89,9 +93,11 @@ object SbtWebpack extends AutoPlugin {
 
   lazy val task = Def.task {
 
+    val skip = (WebpackKeys.webpack / sbt.Keys.skip).value
+    val logger: ManagedLogger = (streams in Assets).value.log
     val baseDir: File = (sourceDirectory in Assets).value
     val targetDir: File = (resourceManaged in WebpackKeys.webpack in Assets).value
-    val logger: ManagedLogger = (streams in Assets).value.log
+
     val nodeModulesLocation: File = (WebpackKeys.nodeModulesPath in WebpackKeys.webpack).value
     val webpackSourceDirs: Seq[File] = (WebpackKeys.sourceDirs in WebpackKeys.webpack).value
     val webpackReporter: Reporter = (reporter in Assets).value
@@ -143,7 +149,7 @@ object SbtWebpack extends AutoPlugin {
       modifiedSources =>
         val startInstant = System.currentTimeMillis
 
-        if (modifiedSources.nonEmpty) {
+        if (!skip && modifiedSources.nonEmpty) {
           logger.info(s"""
                          |[sbt-webpack] Detected \${modifiedSources.size} changed files:
                          |[sbt-webpack]\\t\${modifiedSources.map(f => f.relativeTo(projectRoot).getOrElse(f).toString()).mkString("\\n[sbt-webpack]\\t")}
@@ -231,7 +237,10 @@ object SbtWebpack extends AutoPlugin {
 
           (opResults ++ unrelatedOpResults, createdFiles)
         } else {
-          logger.info(s"[sbt-webpack] No changes to re-compile")
+          if (skip)
+            logger.info(s"[sbt-webpack] Skiping webpack")
+          else
+            logger.info(s"[sbt-webpack] No changes to re-compile")
           (Map.empty, Seq.empty)
         }
 
