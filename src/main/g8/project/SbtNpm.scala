@@ -59,7 +59,7 @@ object SbtNpm extends AutoPlugin {
             0
           } else {
             logger.info(
-              s"[sbt-npm] Running clean install of node modules in  \${nodeModulesDir.relativeTo(projectRoot).getOrElse(nodeModulesDir)}"
+              s"[sbt-npm] Running clean install of node modules in \${nodeModulesDir.relativeTo(projectRoot).getOrElse(nodeModulesDir)}"
             )
             npmProcess("npm ci failed")(packageJsonDirectory.value, "ci")
           }

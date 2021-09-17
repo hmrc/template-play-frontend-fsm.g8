@@ -64,7 +64,8 @@ lazy val root = (project in file("."))
       "assets:javascripts/index.ts",
       "webjar:lib/govuk-frontend/govuk/all.js",
       "webjar:lib/hmrc-frontend/hmrc/all.js"
-    )
+    ),
+    TestAssets / WebpackKeys.webpack / skip := true
   )
   .configs(IntegrationTest)
   .settings(
@@ -85,5 +86,3 @@ def oneForkedJvmPerTest(tests: Seq[TestDefinition]) =
   tests.map { test =>
     new Group(test.name, Seq(test), SubProcess(ForkOptions().withRunJVMOptions(Vector(s"-Dtest.name=\${test.name}"))))
   }
-
-ThisBuild / Test / WebpackKeys.webpack / skip := true
