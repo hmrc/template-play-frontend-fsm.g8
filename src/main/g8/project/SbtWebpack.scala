@@ -62,7 +62,7 @@ object SbtWebpack extends AutoPlugin {
     WebpackKeys.nodeModulesPath := new File("./node_modules"),
     WebpackKeys.webpack := task
       .dependsOn(Assets / WebKeys.webModules)
-      .dependsOn(NpmKeys.npmInstall in Assets)
+      .dependsOn(NpmKeys.npmInstall)
       .value,
     WebpackKeys.webpack / excludeFilter := HiddenFileFilter ||
       new FileFilter {
@@ -76,13 +76,13 @@ object SbtWebpack extends AutoPlugin {
     WebpackKeys.webpack / resourceManaged := webTarget.value / "webpack" / "build",
     WebpackKeys.webpack / sbt.Keys.skip := false,
     packager.Keys.dist := (packager.Keys.dist dependsOn WebpackKeys.webpack).value,
-    managedResourceDirectories += (Assets / WebpackKeys.webpack / resourceManaged).value,
-    resourceGenerators += Assets / WebpackKeys.webpack,
+    managedResourceDirectories += (WebpackKeys.webpack / resourceManaged).value,
+    resourceGenerators += WebpackKeys.webpack,
     // Because sbt-webpack might compile JS and output into the same file.
     // Therefore, we need to deduplicate the files by choosing the one in the target directory.
     // Otherwise, the "duplicate mappings" error would occur.
     deduplicators += {
-      val targetDir = (Assets / WebpackKeys.webpack / resourceManaged).value
+      val targetDir = (WebpackKeys.webpack / resourceManaged).value
       val targetDirAbsolutePath = targetDir.getAbsolutePath
 
       { files: Seq[File] => files.find(_.getAbsolutePath.startsWith(targetDirAbsolutePath)) }
@@ -160,7 +160,7 @@ object SbtWebpack extends AutoPlugin {
         if (!skip && modifiedSources.nonEmpty) {
           logger.info(s"""
                          |[sbt-webpack] Detected \${modifiedSources.size} changed files:
-                         |[sbt-webpack]\\t\${modifiedSources.map(f => f.relativeTo(projectRoot).getOrElse(f).toString()).mkString("\\n[sbt-webpack]\\t")}
+                         |[sbt-webpack] - \${modifiedSources.map(f => f.relativeTo(projectRoot).getOrElse(f).toString()).mkString("\\n[sbt-webpack] - ")}
            """.stripMargin.trim)
 
           val compiler = new Compiler(
@@ -333,7 +333,7 @@ object SbtWebpack extends AutoPlugin {
         logger.info(
           processedFiles
             .map(file => file.relativeTo(projectRoot).getOrElse(file))
-            .mkString("[sbt-webpack] Processed files:\\n[sbt-webpack]\\t", "\\n[sbt-webpack]\\t", "\\n")
+            .mkString("[sbt-webpack] Processed files:\\n[sbt-webpack] - ", "\\n[sbt-webpack] - ", "\\n")
         )
 
         CompilationResult(
