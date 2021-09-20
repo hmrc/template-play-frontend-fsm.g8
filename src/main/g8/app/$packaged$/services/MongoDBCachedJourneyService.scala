@@ -16,15 +16,20 @@
 
 package $package$.services
 
-import play.api.libs.json.{Format, Json}
-import uk.gov.hmrc.crypto.json.{JsonDecryptor, JsonEncryptor}
-import uk.gov.hmrc.crypto.{ApplicationCrypto, CompositeSymmetricCrypto, Protected}
-import uk.gov.hmrc.play.fsm.PersistentJourneyService
-
-import scala.concurrent.{ExecutionContext, Future}
-import $package$.repository.CacheRepository
 import akka.actor.ActorSystem
+import play.api.libs.json.Format
 import play.api.libs.json.JsValue
+import play.api.libs.json.Json
+import uk.gov.hmrc.crypto.ApplicationCrypto
+import uk.gov.hmrc.crypto.CompositeSymmetricCrypto
+import uk.gov.hmrc.crypto.Protected
+import uk.gov.hmrc.crypto.json.JsonDecryptor
+import uk.gov.hmrc.crypto.json.JsonEncryptor
+import $package$.repository.CacheRepository
+import uk.gov.hmrc.play.fsm._
+
+import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
 import scala.io.AnsiColor
 
 /**
@@ -41,6 +46,8 @@ trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyServi
   val traceFSM: Boolean = false
 
   private val self = this
+
+  import PlayFsmUtils.identityOf
 
   case class PersistentState(state: model.State, breadcrumbs: List[model.State])
 
@@ -95,7 +102,7 @@ trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyServi
           println(s"\${AnsiColor.CYAN}Current state: \${AnsiColor.RESET}\${stateAndBreadcrumbs._1}")
           println(
             s"\${AnsiColor.BLUE}Breadcrumbs: \${AnsiColor.RESET}\${stateAndBreadcrumbs._2
-              .map(nameOf)}"
+              .map(identityOf)}"
           )
         }
         stateAndBreadcrumbs
@@ -124,7 +131,7 @@ trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyServi
           println(s"\${AnsiColor.CYAN}Current state: \${AnsiColor.RESET}\${stateAndBreadcrumbs._1}")
           println(
             s"\${AnsiColor.BLUE}Breadcrumbs: \${AnsiColor.RESET}\${stateAndBreadcrumbs._2
-              .map(nameOf)}"
+              .map(identityOf)}"
           )
         }
         stateAndBreadcrumbs
@@ -133,16 +140,5 @@ trait MongoDBCachedJourneyService[RequestContext] extends PersistentJourneyServi
 
   final override def clear(implicit requestContext: RequestContext, ec: ExecutionContext): Future[Unit] =
     cache.clear()
-
-  private def nameOf(state: model.State): String = {
-    val className = state.getClass.getName
-    val lastDot = className.lastIndexOf('.')
-    val typeName = {
-      val s = if (lastDot < 0) className else className.substring(lastDot + 1)
-      if (s.last == '\$') s.init else s
-    }
-    val lastDollar = typeName.lastIndexOf('\$')
-    if (lastDollar < 0) typeName else typeName.substring(lastDollar + 1)
-  }
 
 }

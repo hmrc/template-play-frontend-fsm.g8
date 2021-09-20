@@ -16,20 +16,20 @@
 
 package $package$.support
 
+import org.scalactic.source
+import org.scalatest.BeforeAndAfterAll
+import org.scalatest.Informing
 import org.scalatest.matchers.MatchResult
 import org.scalatest.matchers.Matcher
 import org.scalatest.matchers.should.Matchers
-import uk.gov.hmrc.play.fsm.JourneyModel
+import uk.gov.hmrc.play.fsm._
 
 import scala.concurrent.Await
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
 import scala.concurrent.duration._
-import scala.reflect.ClassTag
-import org.scalactic.source
-import org.scalatest.BeforeAndAfterAll
-import org.scalatest.Informing
 import scala.io.AnsiColor
+import scala.reflect.ClassTag
 
 /**
   * Abstract base of FSM journey specifications.
@@ -60,7 +60,9 @@ trait JourneyModelSpec extends TestJourneyService[DummyContext] {
   val model: JourneyModel
 
   implicit val defaultTimeout: FiniteDuration = 5 seconds
+
   import scala.concurrent.ExecutionContext.Implicits.global
+  import PlayFsmUtils.identityOf
 
   def await[A](future: Future[A])(implicit timeout: Duration): A =
     Await.result(future, timeout)
@@ -143,20 +145,20 @@ trait JourneyModelSpec extends TestJourneyService[DummyContext] {
             if (state != result.initialState && thisState == result.initialState)
               MatchResult(
                 false,
-                s"New state \${AnsiColor.CYAN}\${nameOf(state)}\${AnsiColor.RESET} has been expected but the transition didn't happen.",
+                s"New state \${AnsiColor.CYAN}\${identityOf(state)}\${AnsiColor.RESET} has been expected but the transition didn't happen.",
                 s""
               )
             else if (state.getClass() == thisState.getClass()) {
               val diff = Diff(thisState, state)
               MatchResult(
                 false,
-                s"Obtained state \${AnsiColor.CYAN}\${nameOf(state)}\${AnsiColor.RESET} content differs from the expected:\\n\$diff}",
+                s"Obtained state \${AnsiColor.CYAN}\${identityOf(state)}\${AnsiColor.RESET} content differs from the expected:\\n\$diff}",
                 s""
               )
             } else
               MatchResult(
                 false,
-                s"State \${AnsiColor.CYAN}\${nameOf(state)}\${AnsiColor.RESET} has been expected but got state \${AnsiColor.CYAN}\${nameOf(thisState)}\${AnsiColor.RESET}",
+                s"State \${AnsiColor.CYAN}\${identityOf(state)}\${AnsiColor.RESET} has been expected but got state \${AnsiColor.CYAN}\${identityOf(thisState)}\${AnsiColor.RESET}",
                 s""
               )
 
@@ -237,17 +239,6 @@ trait JourneyModelSpec extends TestJourneyService[DummyContext] {
   // Delete the temp file
   override def afterAll() {
     info(s"Test suite executed \${getCounter()} state transitions in total.")
-  }
-
-  private def nameOf(state: model.State): String = {
-    val className = state.getClass.getName
-    val lastDot = className.lastIndexOf('.')
-    val typeName = {
-      val s = if (lastDot < 0) className else className.substring(lastDot + 1)
-      if (s.last == '\$') s.init else s
-    }
-    val lastDollar = typeName.lastIndexOf('\$')
-    if (lastDollar < 0) typeName else typeName.substring(lastDollar + 1)
   }
 
 }
