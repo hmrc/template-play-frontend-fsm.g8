@@ -20,7 +20,7 @@ trait AuthStubs {
 
   case class Enrolment(serviceName: String, identifierName: String, identifierValue: String)
 
-  def givenAuthorisedForEnrolment[A](enrolment: Enrolment): AuthStubs = {
+  def givenAuthorisedForEnrolment(enrolment: Enrolment): AuthStubs = {
     stubFor(
       post(urlEqualTo("/auth/authorise"))
         .atPriority(1)
@@ -32,7 +32,7 @@ trait AuthStubs {
                |    { "identifiers":[], "state":"Activated", "enrolment": "\${enrolment.serviceName}" },
                |    { "authProviders": ["GovernmentGateway"] }
                |  ],
-               |  "retrieve":["authorisedEnrolments"]
+               |  "retrieve":["optionalCredentials","authorisedEnrolments"]
                |}
            """.stripMargin,
             true,
@@ -44,6 +44,7 @@ trait AuthStubs {
             .withStatus(200)
             .withBody(s"""
                          |{
+                         |"optionalCredentials": {"providerId": "12345-credId", "providerType": "GovernmentGateway"},
                          |"authorisedEnrolments": [
                          |  { "key":"\${enrolment.serviceName}", "identifiers": [
                          |    {"key":"\${enrolment.identifierName}", "value": "\${enrolment.identifierValue}"}
@@ -157,7 +158,19 @@ trait AuthStubs {
     this
   }
 
+  def givenDummySubscriptionUrl: AuthStubs = {
+    stubFor(
+      get(urlEqualTo("/dummy-subscription-url")).willReturn(
+        aResponse().withStatus(200)
+      )
+    )
+    this
+  }
+
   def verifyAuthoriseAttempt(): Unit =
     verify(1, postRequestedFor(urlEqualTo("/auth/authorise")))
+
+  def verifySubscriptionAttempt(): Unit =
+    verify(1, getRequestedFor(urlEqualTo("/dummy-subscription-url")))
 
 }

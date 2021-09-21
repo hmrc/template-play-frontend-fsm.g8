@@ -52,8 +52,8 @@ abstract class BaseJourneyController[S <: JourneyService[HeaderCarrier]](
     NotImplemented
 
   /** AsUser authorisation request */
-  final val AsUser: WithAuthorised[Option[String]] = { implicit request =>
-    authorisedWithEnrolment(appConfig.authorisedServiceName, appConfig.authorisedIdentifierKey)
+  final val AsUser: WithAuthorised[Option[String]] = { implicit request => body =>
+    authorisedWithEnrolment(appConfig.authorisedServiceName, appConfig.authorisedIdentifierKey)(x => body(x._2))
   }
 
   /** Base authorized action builder */
