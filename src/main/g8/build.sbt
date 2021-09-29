@@ -7,7 +7,7 @@ lazy val scoverageSettings = {
   Seq(
     // Semicolon-separated list of regexes matching classes to exclude
     ScoverageKeys.coverageExcludedPackages := """uk\\.gov\\.hmrc\\.BuildInfo;.*\\.Routes;.*\\.RoutesPrefix;.*Filters?;MicroserviceAuditConnector;Module;GraphiteStartUp;.*\\.Reverse[^.]*""",
-    ScoverageKeys.coverageMinimum := 80.00,
+    ScoverageKeys.coverageMinimumStmtTotal := 80.00,
     ScoverageKeys.coverageFailOnMinimum := false,
     ScoverageKeys.coverageHighlighting := true,
     parallelExecution in Test := false
@@ -60,12 +60,7 @@ lazy val root = (project in file("."))
     majorVersion := 0,
     javaOptions in Test += "-Djava.locale.providers=CLDR,JRE",
     WebpackKeys.outputFileName in WebpackKeys.webpack := "javascripts/application.min.js",
-    WebpackKeys.entries in WebpackKeys.webpack := Seq(
-      "assets:javascripts/index.ts",
-      "webjar:lib/govuk-frontend/govuk/all.js",
-      "webjar:lib/hmrc-frontend/hmrc/all.js"
-    ),
-    TestAssets / WebpackKeys.webpack / skip := true
+    WebpackKeys.entries in WebpackKeys.webpack := Seq("assets:javascripts/index.ts")
   )
   .configs(IntegrationTest)
   .settings(

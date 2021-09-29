@@ -1,10 +1,9 @@
 import { Component } from './components/component';
-//import {FileUpload} from './components/file-upload';
 
 import './legacy/research-banner';
 
 export default function loadComponents(): void {
-  //loadComponent(FileUpload, '.file-upload');
+  // load components here
 }
 
 function loadComponent(component: new (container: HTMLElement) => Component, selector: string): void {
